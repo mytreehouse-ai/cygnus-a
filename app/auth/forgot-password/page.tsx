@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { AuthFormTitle } from "@/components/pages/auth/form-title";
 
 // Define the schema for the forgot password form with a user-friendly error message for the email field.
 const formSchema = z.object({
@@ -46,15 +47,11 @@ const ForgotPasswordPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md space-y-6 rounded bg-white p-8">
-        <div className="space-y-2.5">
-          <h1 className="text-2xl font-bold leading-10 text-gray-900">
-            Forgot password?
-          </h1>
-          <p className="text-sm leading-snug text-gray-500">
-            All good, Enter your account’s email address and we’ll send you a
-            link to reset your password.
-          </p>
-        </div>
+        <AuthFormTitle
+          mainHeading="Forgot password?"
+          subHeading="All good, Enter your account’s email address and we’ll send you a
+            link to reset your password."
+        />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             <FormField

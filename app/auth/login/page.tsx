@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
+import { AuthFormTitle } from "@/components/pages/auth/form-title";
 import { cn } from "@/lib/utils";
 
 // Define the schema for the login form with user-friendly error messages.
@@ -46,14 +47,10 @@ const LoginPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md space-y-6 rounded bg-white p-8">
-        <div className="space-y-2.5">
-          <h1 className="text-2xl font-bold leading-10 text-gray-900">
-            Welcome Back!
-          </h1>
-          <p className="text-sm leading-snug text-gray-500">
-            Fill in your login details to access your account
-          </p>
-        </div>
+        <AuthFormTitle
+          mainHeading="Welcome Back!"
+          subHeading="Fill in your login details to access your account"
+        />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
