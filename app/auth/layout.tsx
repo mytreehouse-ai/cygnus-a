@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
             alt="Side image for auth"
             fill={true}
             priority={true}
-            sizes="(max-width: 800px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 700px"
           />
         </div>
       </div>
