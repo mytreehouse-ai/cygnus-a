@@ -6,6 +6,15 @@ const dockerBuild =
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: dockerBuild ? "standalone" : undefined,
+  redirects: async () => {
+    return [
+      {
+        source: "/",
+        destination: "/dashboard",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
