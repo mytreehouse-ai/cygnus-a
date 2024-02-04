@@ -64,7 +64,7 @@ const LoginPage = () => {
                           ? "border-red-400 bg-red-50 placeholder:text-red-500"
                           : "",
                       )}
-                      placeholder="Email Address"
+                      placeholder="Username"
                       {...field}
                     />
                   </FormControl>
