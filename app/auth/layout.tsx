@@ -12,6 +12,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
             src="/side_auth_design.svg"
             alt="Side image for auth"
             fill
+            sizes="100vw"
             priority
           />
         </div>
