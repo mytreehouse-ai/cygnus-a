@@ -11,8 +11,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
             className="object-cover"
             src="/side_auth_design.svg"
             alt="Side image for auth"
-            fill
-            priority
+            fill={true}
+            priority={true}
+            sizes="(max-width: 800px) 100vw, 50vw"
           />
         </div>
       </div>
