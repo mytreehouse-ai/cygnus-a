@@ -3,9 +3,11 @@ import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { z } from "zod";
 
-async function getUser(email: string): Promise<{user_id: string} | undefined> {
+async function getUser(
+  email: string,
+): Promise<{ user_id: string } | undefined> {
   try {
-    return {user_id: "1"}
+    return { user_id: "1" };
   } catch (error) {
     console.error("Failed to fetch user:", error);
     throw new Error("Failed to fetch user.");
