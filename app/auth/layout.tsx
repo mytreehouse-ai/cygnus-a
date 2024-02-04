@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { ReactNode } from "react";
 
-import { imageKitLoader } from "@/lib/utils";
 import { ImageKitLoader } from "@/components/imagekit";
 
 const Layout = ({ children }: { children: ReactNode }) => {
