@@ -19,7 +19,6 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { AuthFormTitle } from "@/components/pages/auth/form-title";
 import { cn } from "@/lib/utils";
 
-// Define the schema for the login form with user-friendly error messages.
 const formSchema = z.object({
   username: z.string().min(4, {
     message: "Username must be at least 4 characters long.",

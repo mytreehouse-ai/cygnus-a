@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { AuthFormTitle } from "@/components/pages/auth/form-title";
 
-// Define the schema for the forgot password form with a user-friendly error message for the email field.
 const formSchema = z.object({
   email: z
     .string()
