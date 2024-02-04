@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 import ReactQueryProvider from "@/components/react-query-provider";
@@ -24,6 +25,7 @@ export default function RootLayout({
         <body className={cn(inter.className, "min-h-screen")}>
           {children}
           <ReactQueryDevtools initialIsOpen={false} />
+          <SpeedInsights />
         </body>
       </html>
     </ReactQueryProvider>
