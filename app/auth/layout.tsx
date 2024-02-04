@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { ImageKitLoader } from "@/components/imagekit";
+import { ImageKitLoader } from "@/components/imagekit-loader";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
