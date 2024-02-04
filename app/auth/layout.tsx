@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ReactNode } from "react";
 
 import { imageKitLoader } from "@/lib/utils";
+import { ImageKitLoader } from "@/components/imagekit";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -9,14 +10,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <div>{children}</div>
       <div>
         <div className="relative h-full w-full">
-          <Image
+          <ImageKitLoader
             className="object-cover"
             src="public/side_auth_design.svg"
-            loader={imageKitLoader}
             alt="Side image for auth"
-            fill={true}
-            priority={true}
-            sizes="(max-width: 768px) 100vw, 700px"
           />
         </div>
       </div>
