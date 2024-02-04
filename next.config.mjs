@@ -5,6 +5,7 @@ const dockerBuild =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   output: dockerBuild ? "standalone" : undefined,
   redirects: async () => {
     return [
@@ -14,6 +15,16 @@ const nextConfig = {
         permanent: true,
       },
     ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ik.imagekit.io",
+        port: "",
+        pathname: "/public/**",
+      },
+    ],
   },
 };
 
