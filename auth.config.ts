@@ -1,6 +1,18 @@
 import type { NextAuthConfig } from "next-auth";
 
+import { env } from "@/env.mjs";
+import { User } from "./types";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      picture?: string;
+    } & Omit<User, "id">;
+  }
+}
+
 export const authConfig = {
+  debug: env.NODE_ENV === "development",
   pages: {
     signIn: "/auth/login",
   },

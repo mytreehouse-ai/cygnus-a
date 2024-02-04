@@ -1,6 +1,6 @@
 export function login() {}
 
-export function resetPassword() {}
+export function forgotPassword() {}
 
 export function checkResetPasswordToken() {}
 
