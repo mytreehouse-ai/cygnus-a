@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { cn } from "@/lib/utils";
 
@@ -79,7 +78,7 @@ const ChangePasswordPage = () => {
                           ? "border-red-400 bg-red-50 placeholder:text-red-500"
                           : "",
                       )}
-                      placeholder="Password"
+                      placeholder="New Password"
                       {...field}
                     />
                   </FormControl>
