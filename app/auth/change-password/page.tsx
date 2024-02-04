@@ -78,7 +78,7 @@ const ChangePasswordPage = () => {
                           ? "border-red-400 bg-red-50 placeholder:text-red-500"
                           : "",
                       )}
-                      placeholder="New Password"
+                      placeholder="New password"
                       {...field}
                     />
                   </FormControl>
@@ -98,7 +98,7 @@ const ChangePasswordPage = () => {
                           ? "border-red-400 bg-red-50 placeholder:text-red-500"
                           : "",
                       )}
-                      placeholder="Confirm Password"
+                      placeholder="Confirm New password"
                       {...field}
                     />
                   </FormControl>
