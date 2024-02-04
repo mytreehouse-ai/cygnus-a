@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -95,9 +96,11 @@ const LoginPage = () => {
             />
             <div className="flex flex-col space-y-10">
               <div className="self-end">
-                <Button className="m-0 h-0 p-0" type="button" variant="link">
-                  Forgot Password?
-                </Button>
+                <Link href="/auth/forgot-password">
+                  <Button className="m-0 h-0 p-0" type="button" variant="link">
+                    Forgot Password?
+                  </Button>
+                </Link>
               </div>
               <Button className="w-full" size="lg" type="submit">
                 Log in
