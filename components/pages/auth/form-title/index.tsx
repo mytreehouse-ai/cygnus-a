@@ -8,7 +8,7 @@ interface AuthFormTitleProps {
   subHeading: string;
 }
 
-export const AuthFormTitle: React.FC<AuthFormTitleProps> = ({
+const AuthFormTitle: React.FC<AuthFormTitleProps> = ({
   centerHeading,
   mainHeading,
   subHeading,
@@ -34,3 +34,5 @@ export const AuthFormTitle: React.FC<AuthFormTitleProps> = ({
     </div>
   );
 };
+
+export default AuthFormTitle;

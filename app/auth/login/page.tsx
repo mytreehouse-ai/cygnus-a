@@ -16,8 +16,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
-import { AuthFormTitle } from "@/components/pages/auth/form-title";
 import { cn } from "@/lib/utils";
+
+import AuthFormTitle from "@/components/pages/auth/form-title";
 
 const formSchema = z.object({
   username: z.string().min(4, {
