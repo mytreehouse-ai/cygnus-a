@@ -14,16 +14,18 @@ export const FormSubmitSuccessMessage: React.FC<
   FormSubmitSuccessMessageProps
 > = ({ email }) => {
   return (
-    <>
+    <div className="space-y-10">
       <AuthFormTitle
         mainHeading="Email on the way!"
         subHeading={`We sent you password reset instructions to ${email}. If it doesn't show up soon, check your spam folder. We sent it from the email address noreply@address.here`}
       />
-      <Link href="/auth/login">
-        <Button className="w-full" size="lg" type="button">
-          Return to login
-        </Button>
-      </Link>
-    </>
+      <div>
+        <Link href="/auth/login">
+          <Button className="w-full" size="lg" type="button">
+            Return to login
+          </Button>
+        </Link>
+      </div>
+    </div>
   );
 };
