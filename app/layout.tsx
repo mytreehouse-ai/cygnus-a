@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 import ReactQueryProvider from "@/components/react-query-provider";
@@ -26,6 +27,7 @@ export default function RootLayout({
           {children}
           <ReactQueryDevtools initialIsOpen={false} />
           <SpeedInsights />
+          <Analytics />
         </body>
       </html>
     </ReactQueryProvider>
