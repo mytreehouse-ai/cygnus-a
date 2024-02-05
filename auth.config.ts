@@ -1,6 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
 
-import { env } from "@/env.mjs";
 import { User } from "@/types";
 
 declare module "next-auth" {
@@ -10,7 +9,6 @@ declare module "next-auth" {
 }
 
 export const authConfig = {
-  debug: env.NODE_ENV !== "development",
   pages: {
     signIn: "/auth/login",
   },

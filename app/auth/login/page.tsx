@@ -39,13 +39,15 @@ const LoginPage = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    handleCredentialsLogin({
+    const shet = await handleCredentialsLogin({
       username: values.username,
       password: values.password,
     });
+
+    console.log(shet);
   }
 
   return (
