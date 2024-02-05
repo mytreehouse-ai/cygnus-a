@@ -19,6 +19,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { cn } from "@/lib/utils";
 
 import AuthFormTitle from "@/components/pages/auth/form-title";
+import { handleCredentialsLogin } from "./login";
 
 const formSchema = z.object({
   username: z.string().min(4, {
@@ -41,7 +42,10 @@ const LoginPage = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    handleCredentialsLogin({
+      username: values.username,
+      password: values.password,
+    });
   }
 
   return (

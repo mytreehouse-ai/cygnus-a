@@ -1,8 +1,9 @@
+import { env } from "@/env.mjs";
 import axios from "axios";
 
 // Create an Axios instance
 const apiClient = axios.create({
-  baseURL: "/api", // Assuming the API is hosted at the same base URL
+  baseURL: env.NEXT_PUBLIC_ARTEMIS_BASEAPI_URL,
 });
 
 // Add a request interceptor
@@ -10,10 +11,13 @@ apiClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     // For example, you can set the auth token here if it's needed for every request
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+
+    // const token = localStorage.getItem("authToken");
+
+    // if (token) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
+
     return config;
   },
   function (error) {
@@ -27,6 +31,7 @@ apiClient.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+
     return response;
   },
   function (error) {
@@ -35,6 +40,7 @@ apiClient.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Handle unauthorized access, e.g., redirect to login or refresh the token
     }
+
     return Promise.reject(error);
   },
 );
