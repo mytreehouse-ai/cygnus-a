@@ -3,11 +3,9 @@ import { redirect } from "next/navigation";
 
 import { FormSubmitSuccessMessage } from "@/components/pages/auth/forgot-password/form-submit-success-message";
 
-const ForgotPasswordSuccessPage = ({
-  params,
+const ForgotPasswordSuccessPage = async ({
   searchParams,
 }: {
-  params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
   const queryParams = searchParams as { email?: string };
@@ -15,6 +13,8 @@ const ForgotPasswordSuccessPage = ({
   if (!queryParams?.email) {
     redirect("/auth/login");
   }
+
+  // TODO: Check if the account really exist
 
   return (
     <div className="flex min-h-screen items-center justify-center">

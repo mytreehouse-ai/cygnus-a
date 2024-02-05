@@ -16,8 +16,9 @@ export const FormSubmitSuccessMessage: React.FC<
   return (
     <div className="space-y-10">
       <AuthFormTitle
+        centerHeading
         mainHeading="Email on the way!"
-        subHeading={`We sent you password reset instructions to ${email}. If it doesn't show up soon, check your spam folder. We sent it from the email address noreply@address.here`}
+        subHeading={`We've sent password reset instructions to ${email}. If you don't receive an email shortly, please check your spam folder or verify that the email entered is associated with an active account. The email was sent from noreply@address.here.`}
       />
       <div>
         <Link href="/auth/login">
