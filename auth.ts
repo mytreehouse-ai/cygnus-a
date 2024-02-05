@@ -3,8 +3,8 @@ import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 
 import { login, me } from "@/lib/api-endpoints";
-import { authConfig } from "./auth.config";
-import { AuthToken } from "./types";
+import { authConfig } from "@/auth.config";
+import { AuthToken } from "@/types";
 
 export const {
   handlers: { GET, POST },
