@@ -29,7 +29,7 @@ export const {
             return null;
           }
 
-          const authTokens = authenticate.data as AuthToken;
+          const authTokens: AuthToken = authenticate.data;
 
           const user = await me(authTokens.access);
 
