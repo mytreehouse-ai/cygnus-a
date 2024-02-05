@@ -17,7 +17,6 @@ export async function handleCredentialsLogin(credentials: {
       if (error.cause?.err instanceof Error) {
         return error.cause.err.message;
       }
-
       switch (error.type) {
         case "CredentialsSignin":
           return "Invalid credentials";
