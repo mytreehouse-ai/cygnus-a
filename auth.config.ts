@@ -1,7 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 
 import { env } from "@/env.mjs";
-import { User } from "./types";
+import { User } from "@/types";
 
 declare module "next-auth" {
   interface Session {
