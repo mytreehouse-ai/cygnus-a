@@ -1,7 +1,7 @@
 import React from "react";
 
-import { ChangePasswordForm } from "@/components/pages/auth/change-password/change-password-form";
-import { AuthFormTitle } from "@/components/pages/auth/form-title";
+import AuthFormTitle from "@/components/pages/auth/form-title";
+import ChangePasswordForm from "@/components/pages/auth/change-password";
 
 const ChangePasswordPage = async () => {
   // TODO: Make a server call here to check if reset password token is valid

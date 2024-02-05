@@ -4,15 +4,17 @@ import React from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { AuthFormTitle } from "../form-title";
+import AuthFormTitle from "../../form-title";
 
-interface FormSubmitSuccessMessageProps {
+interface ForgotPasswordErrorMessageProps {
   email: string;
+  code: string;
 }
 
-export const FormSubmitSuccessMessage: React.FC<
-  FormSubmitSuccessMessageProps
-> = ({ email }) => {
+const ForgotPasswordErrorMessage: React.FC<ForgotPasswordErrorMessageProps> = ({
+  email,
+  code,
+}) => {
   return (
     <div className="space-y-10">
       <AuthFormTitle
@@ -30,3 +32,5 @@ export const FormSubmitSuccessMessage: React.FC<
     </div>
   );
 };
+
+export default ForgotPasswordErrorMessage;
