@@ -5,14 +5,12 @@ import { User } from "./types";
 
 declare module "next-auth" {
   interface Session {
-    user: {
-      picture?: string;
-    } & Omit<User, "id">;
+    user: User;
   }
 }
 
 export const authConfig = {
-  debug: env.NODE_ENV === "development",
+  debug: env.NODE_ENV !== "development",
   pages: {
     signIn: "/auth/login",
   },
@@ -22,9 +20,11 @@ export const authConfig = {
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
 
       if (isOnDashboard) {
-        if (isLoggedIn) return true;
+        if (isLoggedIn) {
+          return true;
+        }
 
-        return false; // Redirect unauthenticated users to login page
+        return false;
       } else if (isLoggedIn) {
         return Response.redirect(new URL("/dashboard", nextUrl));
       }
@@ -32,5 +32,5 @@ export const authConfig = {
       return true;
     },
   },
-  providers: [], // Add providers with an empty array for now
+  providers: [],
 } satisfies NextAuthConfig;

@@ -2,18 +2,9 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 
+import { login, me } from "@/lib/api-endpoints";
 import { authConfig } from "./auth.config";
-
-async function getUser(
-  email: string,
-): Promise<{ user_id: string } | undefined> {
-  try {
-    return { user_id: "1" };
-  } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
-  }
-}
+import { AuthToken } from "./types";
 
 export const {
   handlers: { GET, POST },
@@ -26,14 +17,27 @@ export const {
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
+          .object({ username: z.string().min(4), password: z.string().min(6) })
           .safeParse(credentials);
 
         if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
+          const { username, password } = parsedCredentials.data;
 
-          if (!user) return null;
+          const authenticate = await login(username, password);
+
+          if (authenticate.status !== 200) {
+            return null;
+          }
+
+          const authTokens = authenticate.data as AuthToken;
+
+          const user = await me(authTokens.access);
+
+          if (user.status !== 200) {
+            return null;
+          }
+
+          return user.data;
         }
 
         return null;
