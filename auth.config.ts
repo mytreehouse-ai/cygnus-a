@@ -12,6 +12,7 @@ export const authConfig = {
   pages: {
     signIn: "/auth/login",
   },
+  session: { strategy: "jwt" },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
