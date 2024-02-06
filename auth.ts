@@ -30,7 +30,6 @@ export const {
           }
 
           const authTokens: AuthToken = authenticate.data;
-
           const user = await me(authTokens.access);
 
           if (user.status !== 200) {

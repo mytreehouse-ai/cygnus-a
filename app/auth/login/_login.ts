@@ -15,7 +15,7 @@ export async function handleCredentialsLogin(credentials: {
   } catch (error) {
     if (error instanceof AuthError) {
       if (error.cause?.err instanceof Error) {
-        return error.cause.err.message;
+        throw Error("Unauthorized", { cause: error.cause });
       }
       switch (error.type) {
         case "CredentialsSignin":

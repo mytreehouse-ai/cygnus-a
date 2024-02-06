@@ -5,7 +5,6 @@ const dockerBuild =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   output: dockerBuild ? "standalone" : undefined,
   redirects: async () => {
     return [
