@@ -21,15 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ReactQueryProvider>
-      <html lang="en">
-        <body className={cn(inter.className, "min-h-screen")}>
+    <html lang="en">
+      <body className={cn(inter.className, "min-h-screen")}>
+        <ReactQueryProvider>
           {children}
           <ReactQueryDevtools initialIsOpen={false} />
-          <SpeedInsights />
-          <Analytics />
-        </body>
-      </html>
-    </ReactQueryProvider>
+        </ReactQueryProvider>
+        <SpeedInsights />
+        <Analytics />
+      </body>
+    </html>
   );
 }
