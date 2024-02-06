@@ -57,16 +57,7 @@ const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={onSubmit}
-        action={(formData) => {
-          return handleCredentialsLogin({
-            username: formData.get("username") as string,
-            password: formData.get("password") as string,
-          });
-        }}
-        className="space-y-4"
-      >
+      <form onSubmit={onSubmit} className="space-y-4">
         <FormField
           control={form.control}
           name="username"
