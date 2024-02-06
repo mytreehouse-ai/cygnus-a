@@ -1,10 +1,12 @@
-"use client";
+import { auth } from "@/auth";
+import LogoutButton from "../auth/logout";
 
-import { Button } from "@/components/ui/button";
-import { handleSignOut } from "./_sign-out";
+const DashboardPage = async () => {
+  const xxx = await auth();
 
-const DashboardPage = () => {
-  return <Button onClick={() => void handleSignOut()}>Sign out</Button>;
+  console.log(xxx);
+
+  return <LogoutButton />;
 };
 
 export default DashboardPage;
