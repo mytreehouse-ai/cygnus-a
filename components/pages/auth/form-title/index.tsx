@@ -8,11 +8,11 @@ interface AuthFormTitleProps {
   subHeading: string;
 }
 
-const AuthFormTitle: React.FC<AuthFormTitleProps> = ({
+function AuthFormTitle({
   centerHeading,
   mainHeading,
   subHeading,
-}) => {
+}: AuthFormTitleProps) {
   return (
     <div className="space-y-2.5">
       <h1
@@ -33,6 +33,6 @@ const AuthFormTitle: React.FC<AuthFormTitleProps> = ({
       </p>
     </div>
   );
-};
+}
 
 export default AuthFormTitle;

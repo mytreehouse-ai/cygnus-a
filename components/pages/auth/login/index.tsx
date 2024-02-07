@@ -29,7 +29,7 @@ const formSchema = z.object({
   }),
 });
 
-const LoginForm = () => {
+function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -111,6 +111,6 @@ const LoginForm = () => {
       </form>
     </Form>
   );
-};
+}
 
 export default LoginForm;
