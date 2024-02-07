@@ -11,10 +11,10 @@ interface ForgotPasswordErrorMessageProps {
   code: string;
 }
 
-const ForgotPasswordErrorMessage: React.FC<ForgotPasswordErrorMessageProps> = ({
+function ForgotPasswordErrorMessage({
   email,
   code,
-}) => {
+}: ForgotPasswordErrorMessageProps) {
   return (
     <div className="space-y-10">
       <AuthFormTitle
@@ -31,6 +31,6 @@ const ForgotPasswordErrorMessage: React.FC<ForgotPasswordErrorMessageProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default ForgotPasswordErrorMessage;

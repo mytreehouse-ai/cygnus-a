@@ -28,7 +28,7 @@ const formSchema = z.object({
     }),
 });
 
-const ForgotPasswordForm = () => {
+function ForgotPasswordForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -81,6 +81,6 @@ const ForgotPasswordForm = () => {
       </form>
     </Form>
   );
-};
+}
 
 export default ForgotPasswordForm;

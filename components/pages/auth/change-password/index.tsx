@@ -36,7 +36,7 @@ const formSchema = z
     }
   });
 
-const ChangePasswordForm = () => {
+function ChangePasswordForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -110,6 +110,6 @@ const ChangePasswordForm = () => {
       </form>
     </Form>
   );
-};
+}
 
 export default ChangePasswordForm;
