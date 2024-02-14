@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { login, me } from "@/lib/api-endpoints";
 import { authConfig } from "@/auth.config";
-import { AuthToken } from "@/types";
+import { IAuthToken } from "@/types";
 
 export const {
   handlers: { GET, POST },
@@ -31,7 +31,7 @@ export const {
           throw new Error("Failed to authenticate user.");
         }
 
-        const authTokens: AuthToken = authenticate.data;
+        const authTokens: IAuthToken = authenticate.data;
         const user = await me(authTokens.access);
 
         if (user.status !== 200) {
