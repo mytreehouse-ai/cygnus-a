@@ -9,7 +9,7 @@ To maintain a high standard of code quality and ensure the project is easy to na
 - **hooks**: Custom React hooks.
 - **services** or **api**: API call logic.
 - **types**: TypeScript type definitions.
-- ****tests****: Unit and integration tests.
+- \***\*tests\*\***: Unit and integration tests.
 - **public** or **assets**: Static assets like images, stylesheets, and fonts.
 
 ### Naming Conventions
@@ -36,5 +36,9 @@ To maintain a high standard of code quality and ensure the project is easy to na
 ### Documentation
 
 - Keep the project documentation in the `docs` directory or enhance the `README.md` with detailed information about setup, architecture, and contribution guidelines.
+
+### Function Declaration
+
+- Limit the use of arrow functions in favor of traditional function declarations when defining component lifecycle methods, utilities, and services to improve readability and standardize the codebase.
 
 By following these guidelines, we can ensure our project remains organized, secure, and easy to work on for all contributors.
