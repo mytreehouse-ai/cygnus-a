@@ -1,3 +1,3 @@
-export interface Profile {
+export interface IProfile {
   id: string;
 }
