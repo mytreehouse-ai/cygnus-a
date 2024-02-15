@@ -1,4 +1,4 @@
-import { IProfile } from "./profile.type";
+import { IProfile } from "./profile";
 
 export interface IUser {
   id: number;

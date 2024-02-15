@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ImageKitLoaderParams } from "@/types";
+import { IImageKitLoaderParams } from "@/types";
 
 /**
  * Combines class names using clsx and merges them with tailwind-merge.
@@ -16,10 +16,10 @@ export function cn(...inputs: ClassValue[]): string {
 /**
  * Constructs a URL for loading images with ImageKit with specified parameters.
  *
- * @param {ImageKitLoaderParams} params - The parameters for the image loader.
+ * @param {IImageKitLoaderParams} params - The parameters for the image loader.
  * @returns {string} The constructed ImageKit URL.
  */
-export function imageKitLoader(params: ImageKitLoaderParams): string {
+export function imageKitLoader(params: IImageKitLoaderParams): string {
   let { src, width, quality } = params;
 
   // Remove leading slash from the source path if present
