@@ -29,7 +29,7 @@ function PropertyCard({
             layout="fill"
             objectFit="contain"
           />
-				</div>
+        </div>
         <CardTitle></CardTitle>
       </CardHeader>
     </Card>
