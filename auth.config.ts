@@ -1,10 +1,10 @@
 import type { NextAuthConfig } from "next-auth";
 
-import { User } from "@/types";
+import { IUser } from "@/types";
 
 declare module "next-auth" {
   interface Session {
-    user: User;
+    user: IUser;
   }
 }
 

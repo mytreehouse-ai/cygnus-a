@@ -1,7 +1,7 @@
-import { User } from "./user.type";
-import { Profile } from "./profile.type";
-import { Login } from "./login.type";
-import { ImageKitLoaderParams } from "./imagekit-params.type";
-import { AuthToken } from "./auth-token.type";
+import { IUser } from "./user";
+import { IProfile } from "./profile";
+import { ILogin } from "./login";
+import { IImageKitLoaderParams } from "./imagekit-params";
+import { IAuthToken } from "./auth-token";
 
-export type { User, Profile, Login, ImageKitLoaderParams, AuthToken };
+export type { IUser, IProfile, ILogin, IImageKitLoaderParams, IAuthToken };

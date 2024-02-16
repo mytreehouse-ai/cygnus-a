@@ -1,6 +1,6 @@
-import { Profile } from "./profile.type";
+import { IProfile } from "./profile";
 
-export interface User {
+export interface IUser {
   id: number;
   email: string;
   first_name: string;
@@ -9,5 +9,5 @@ export interface User {
   is_superuser: boolean;
   groups: string[];
   permissions: string[];
-  profile: Profile;
+  profile: IProfile;
 }
