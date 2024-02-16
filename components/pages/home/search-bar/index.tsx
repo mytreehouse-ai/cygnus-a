@@ -7,7 +7,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
 } from "@/components/ui/form";
 import {
   Command,
@@ -23,7 +22,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -60,14 +59,14 @@ const location = [
   },
 ];
 
-const SearchBar = () => {
+function SearchBar() {
   const [propertyTypeIsOpen, setPropertyTypeIsOpen] = useState(false);
   const [locationIsOpen, setLocationIsOpen] = useState(false);
   const form = useForm();
 
-  const onSubmit = () => {
+  function onSubmit() {
     console.log();
-  };
+  }
 
   return (
     <Tabs defaultValue="for-rent">
@@ -243,6 +242,5 @@ const SearchBar = () => {
       </Card>
     </Tabs>
   );
-};
-
+}
 export default SearchBar;
