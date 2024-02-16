@@ -74,11 +74,11 @@ ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Copy the environment variable validation script and make it executable
-# COPY validate_env_vars.sh .
-# RUN chmod +x validate_env_vars.sh
+COPY validate_env_vars.sh .
+RUN chmod +x validate_env_vars.sh
 
 # Run the environment variable validation script
-# RUN ./validate_env_vars.sh
+RUN ./validate_env_vars.sh
 
 # Create a non-root "nodejs" group and user for running the application
 RUN addgroup --system --gid 1001 nodejs \
