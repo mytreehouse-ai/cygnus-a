@@ -68,13 +68,13 @@ function SearchBar() {
       <TabsList className="h-0 p-0 ">
         <TabsTrigger
           value="for-rent"
-          className="rounded-b-none rounded-br-none rounded-tr-none bg-[#E2E8F0] px-6 text-neutral-900 focus:bg-fuchsia-300 data-[state=active]:bg-[#059669] data-[state=active]:text-white"
+          className="rounded-b-none rounded-br-none rounded-tr-none bg-slate-200 px-6 text-neutral-900 focus:bg-fuchsia-300 data-[state=active]:bg-emerald-700 data-[state=active]:text-white"
         >
           For Rent
         </TabsTrigger>
         <TabsTrigger
           value="for-sale"
-          className="rounded-b-none rounded-bl-none rounded-tl-none bg-[#E2E8F0] px-6 text-neutral-900 focus:bg-fuchsia-300 data-[state=active]:bg-[#059669] data-[state=active]:text-white"
+          className="rounded-b-none rounded-bl-none rounded-tl-none bg-slate-200 px-6 text-neutral-900 focus:bg-fuchsia-300 data-[state=active]:bg-emerald-700 data-[state=active]:text-white"
         >
           For Sale
         </TabsTrigger>
