@@ -227,7 +227,8 @@ function SearchBar() {
 
             <Button
               type="submit"
-              className="inline-flex w-full gap-x-2 bg-emerald-600 text-xs font-normal hover:bg-emerald-600/90"
+              size="lg"
+              className="inline-flex w-full gap-x-2 bg-emerald-600 text-sm font-normal hover:bg-emerald-600/90"
             >
               Find Listing
               <Search className="h-4 w-4" />
