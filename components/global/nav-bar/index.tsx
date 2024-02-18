@@ -63,7 +63,11 @@ const Navbar = () => {
         <SheetContent side="top">
           <div className="mt-4 flex flex-col gap-y-6">
             {menus.map((item) => (
-              <Link key={item.id} href={item.url}>
+              <Link
+                key={item.id}
+                href={item.url}
+                className={cn(pathname === item.url && "text-emerald-600")}
+              >
                 {item.name}
               </Link>
             ))}
