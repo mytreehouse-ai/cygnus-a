@@ -33,16 +33,16 @@ function PropertyCard({
           <Image
             src={img}
             alt={`${propertyName} image`}
-            layout="fill"
-            objectFit="cover"
-            className="absolute left-0 top-2 rounded-lg"
+            fill
+            style={{ objectFit: "cover" }}
+            placeholder="empty"
           />
           <Badge className="absolute left-0 top-0 m-2 rounded-md bg-orange-400">
             {type === "for-rent" ? "For Rent" : "For Sale"}
           </Badge>
         </div>
         <CardTitle className="truncate text-lg ">
-          <h2 className="tracking-wide">{propertyName}</h2>
+          <p className="tracking-wide">{propertyName}</p>
           <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
             <MapPin className="h-4 w-4" />
             <span>{location}</span>
