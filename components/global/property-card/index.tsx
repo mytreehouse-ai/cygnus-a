@@ -15,7 +15,7 @@ interface PropertyCardProps {
   location: string;
   price: number;
   sqm: number;
-  type: "for-rent" | "for-sale";
+  type: string;
 }
 
 function PropertyCard({
