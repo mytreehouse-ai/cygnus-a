@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
 import { TreeDeciduous, Menu } from "lucide-react";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const menus = [
   {
@@ -28,6 +32,8 @@ const menus = [
 ];
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   return (
     <nav className=" flex items-center justify-between px-6 py-4">
       <div className="flex w-full items-center justify-between">
@@ -35,7 +41,11 @@ const Navbar = () => {
         <div className=" hidden items-center gap-x-8 md:inline-flex">
           <div className="space-x-8 font-semibold tracking-wide">
             {menus.map((item) => (
-              <Link key={item.id} href={item.url}>
+              <Link
+                key={item.id}
+                href={item.url}
+                className={cn(pathname === item.url && "text-emerald-600")}
+              >
                 {item.name}
               </Link>
             ))}
