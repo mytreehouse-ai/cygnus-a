@@ -1,20 +1,11 @@
-import SearchBar from "@/components/pages/home/search-bar";
-import PropertyCard from "@/components/pages/home/property-card";
+import SearchBar from "@/components/global/search-bar";
+import PropertyCard from "@/components/global/property-card";
+import Home from "@/components/pages/home";
 
-export default function Home() {
+export default function page() {
   return (
     <>
-      <div className="bg-emerald-50 p-4">
-        <SearchBar />
-        {/* <PropertyCard
-          img="/property-image.png"
-          location="Paseo de Roxas, Makati"
-          price={146000}
-          sqm={304}
-          propertyName="Furnished Condominium Unit"
-          propertyType="Condominium"
-        /> */}
-      </div>
+      <Home />
     </>
   );
 }
