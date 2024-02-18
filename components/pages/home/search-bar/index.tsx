@@ -56,12 +56,10 @@ const location = [
 ];
 
 function SearchBar() {
-  const [propertyTypeIsOpen, setPropertyTypeIsOpen] = useState(false);
-  const [locationIsOpen, setLocationIsOpen] = useState(false);
   const form = useForm();
 
   function onSubmit() {
-    console.log();
+    console.log(form.getValues());
   }
 
   return (
@@ -94,74 +92,7 @@ function SearchBar() {
               placeholder="Property Type"
             />
 
-            <FormField
-              control={form.control}
-              name="location"
-              render={({ field }) => (
-                <FormItem className="flex flex-col ">
-                  <Popover
-                    open={locationIsOpen}
-                    onOpenChange={setLocationIsOpen}
-                  >
-                    <PopoverTrigger
-                      asChild
-                      className="bg-none shadow-none hover:bg-none focus:bg-none active:bg-none"
-                    >
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          className={cn(
-                            "w-full justify-between text-sm",
-                            !field.value &&
-                              " font-normal text-neutral-500 shadow-none",
-                          )}
-                        >
-                          {field.value
-                            ? location.find(
-                                (language) => language.value === field.value,
-                              )?.label
-                            : "Location"}
-                          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-
-                    <PopoverContent className="w-full p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search location"
-                          className="h-9 w-screen"
-                        />
-                        <CommandEmpty>No location found</CommandEmpty>
-                        <CommandGroup className="px-4">
-                          {location.map((language) => (
-                            <CommandItem
-                              value={language.label}
-                              key={language.value}
-                              onSelect={() => {
-                                form.setValue("location", language.value);
-                                setLocationIsOpen(false);
-                              }}
-                            >
-                              {language.label}
-                              <CheckIcon
-                                className={cn(
-                                  "ml-auto h-4 w-4",
-                                  language.value === field.value
-                                    ? "opacity-100"
-                                    : "opacity-0",
-                                )}
-                              />
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
-                </FormItem>
-              )}
-            />
+            <Select data={location} name="location" placeholder="Location" />
 
             <Button
               type="submit"

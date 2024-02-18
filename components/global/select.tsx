@@ -224,17 +224,17 @@ const Select: React.FC<SelectProps> = ({
       state: OptionProps<unknown, boolean, GroupBase<unknown>>,
     ) => ({
       ...provided,
-      background: state.isFocused ? "#d1fae5" : "#FFFFFF",
+      background: state.isFocused ? "#f3f4f6" : "#FFFFFF",
       color: state.isFocused ? "#272E35" : "#272E35",
       marginTop: "3px",
       borderRadius: "0.25rem",
       "&:hover": {
         cursor: "pointer",
-        background: "#ecfdf5",
+        background: "#f3f4f6",
       },
       "&:active": {
         color: "#272E35",
-        background: "#FFDDC2",
+        background: "#f3f4f6",
       },
     }),
   };
