@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -61,6 +63,9 @@ const Select: React.FC<SelectProps> = ({
   disabled,
   onChange,
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const id = Date.now().toString();
+
   const {
     control,
     getValues,
@@ -72,6 +77,8 @@ const Select: React.FC<SelectProps> = ({
       console.info(errors);
     }
   }, [errors]);
+
+  useEffect(() => setIsMounted(true), []);
 
   const formValue = getValues(name) as ReactSelectValueType;
 
@@ -239,7 +246,7 @@ const Select: React.FC<SelectProps> = ({
     }),
   };
 
-  return (
+  return isMounted ? (
     <div className="w-full ">
       <label
         className={cn(
@@ -250,6 +257,8 @@ const Select: React.FC<SelectProps> = ({
         {label}
       </label>
       <AsyncSelect
+        id={id}
+        instanceId="select-box"
         key={field.name}
         ref={field.ref}
         name={field.name}
@@ -299,7 +308,7 @@ const Select: React.FC<SelectProps> = ({
         styles={selectStyle}
       />
     </div>
-  );
+  ) : null;
 };
 
 export function isMultiValue<T>(
