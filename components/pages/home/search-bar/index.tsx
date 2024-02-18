@@ -59,11 +59,15 @@ function SearchBar() {
   const form = useForm();
 
   function onSubmit() {
+    form.setValue("type", " for-rent");
     console.log(form.getValues());
   }
 
   return (
-    <Tabs defaultValue="for-rent">
+    <Tabs
+      defaultValue="for-rent"
+      onValueChange={(e) => form.setValue("type", e)}
+    >
       <TabsList className="h-0 p-0 ">
         <TabsTrigger
           value="for-rent"

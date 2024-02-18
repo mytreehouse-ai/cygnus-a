@@ -6,6 +6,7 @@ import { MapPin } from "lucide-react";
 import { Shrink, Building } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { formatCurrency } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface PropertyCardProps {
   img: string;
@@ -36,8 +37,14 @@ function PropertyCard({
             fill
             style={{ objectFit: "cover" }}
             placeholder="empty"
+            className="rounded-lg"
           />
-          <Badge className="absolute left-0 top-0 m-2 rounded-md bg-orange-400">
+          <Badge
+            className={cn(
+              "absolute left-0 top-0 m-2 rounded-md",
+              type === "for-rent" ? "bg-orange-400" : "bg-red-500",
+            )}
+          >
             {type === "for-rent" ? "For Rent" : "For Sale"}
           </Badge>
         </div>
