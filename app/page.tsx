@@ -6,14 +6,15 @@ export default function Home() {
     <>
       <div className="bg-emerald-50 p-4">
         <SearchBar />
-        {/* <PropertyCard
+        <PropertyCard
           img="/property-image.png"
           location="Paseo de Roxas, Makati"
           price={146000}
           sqm={304}
           propertyName="Furnished Condominium Unit"
           propertyType="Condominium"
-        /> */}
+          type="for-rent"
+        />
       </div>
     </>
   );

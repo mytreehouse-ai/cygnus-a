@@ -1,6 +1,11 @@
 import React from "react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { MapPin } from "lucide-react";
+import { Shrink, Building } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { formatCurrency } from "@/lib/utils";
 
 interface PropertyCardProps {
   img: string;
@@ -9,6 +14,7 @@ interface PropertyCardProps {
   location: string;
   price: number;
   sqm: number;
+  type: "for-rent" | "for-sale";
 }
 
 function PropertyCard({
@@ -18,19 +24,46 @@ function PropertyCard({
   propertyName,
   propertyType,
   sqm,
+  type,
 }: PropertyCardProps) {
   return (
-    <Card className="shadow-sm">
+    <Card className="rounded-xl p-1 shadow-none">
       <CardHeader className="p-2">
-        <div className="w-full p-4">
+        <div className="relative h-0 w-full" style={{ paddingTop: "56.25%" }}>
           <Image
             src={img}
-            alt="property-image"
+            alt={`${propertyName} image`}
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
+            className="absolute left-0 top-2 rounded-lg"
           />
+          <Badge className="absolute left-0 top-0 m-2 rounded-md bg-orange-400">
+            {type === "for-rent" ? "For Rent" : "For Sale"}
+          </Badge>
         </div>
-        <CardTitle></CardTitle>
+        <CardTitle className="truncate text-lg ">
+          <h2 className="tracking-wide">{propertyName}</h2>
+          <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
+            <MapPin className="h-4 w-4" />
+            <span>{location}</span>
+          </p>
+        </CardTitle>
+        <CardContent className="p-0">
+          <div className="my-1 flex gap-x-2">
+            <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
+              <Shrink className="h-4 w-4" />
+              <span>{sqm}</span>
+            </p>
+            <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
+              <Building className="h-4 w-4" />
+              <span>{propertyType}</span>
+            </p>
+          </div>
+          <Separator className="my-4" />
+          <h3 className="text-lg font-bold text-emerald-600">
+            {formatCurrency(price ?? 0)}
+          </h3>
+        </CardContent>
       </CardHeader>
     </Card>
   );
