@@ -23,6 +23,7 @@ import { CheckIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import Select from "@/components/global/select";
 
 const propertyTypes = [
   {
@@ -87,73 +88,10 @@ function SearchBar() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="mt-4 w-full space-y-2"
           >
-            <FormField
-              control={form.control}
-              name="language"
-              render={({ field }) => (
-                <FormItem className="flex flex-col ">
-                  <Popover
-                    open={propertyTypeIsOpen}
-                    onOpenChange={setPropertyTypeIsOpen}
-                  >
-                    <PopoverTrigger
-                      asChild
-                      className="bg-none shadow-none hover:bg-none focus:bg-none active:bg-none"
-                    >
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          className={cn(
-                            "w-full justify-between text-sm",
-                            !field.value &&
-                              " font-normal text-neutral-500 shadow-none",
-                          )}
-                        >
-                          {field.value
-                            ? propertyTypes.find(
-                                (language) => language.value === field.value,
-                              )?.label
-                            : "Property Type"}
-                          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-
-                    <PopoverContent className="w-full p-0">
-                      <Command>
-                        <CommandInput
-                          placeholder="Search property type"
-                          className="h-9 w-screen"
-                        />
-                        <CommandEmpty>No property type found</CommandEmpty>
-                        <CommandGroup className="px-4">
-                          {propertyTypes.map((language) => (
-                            <CommandItem
-                              value={language.label}
-                              key={language.value}
-                              onSelect={() => {
-                                form.setValue("language", language.value);
-                                setPropertyTypeIsOpen(false);
-                              }}
-                            >
-                              {language.label}
-                              <CheckIcon
-                                className={cn(
-                                  "ml-auto h-4 w-4",
-                                  language.value === field.value
-                                    ? "opacity-100"
-                                    : "opacity-0",
-                                )}
-                              />
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
-                </FormItem>
-              )}
+            <Select
+              data={propertyTypes}
+              name="property-types"
+              placeholder="Property Type"
             />
 
             <FormField
