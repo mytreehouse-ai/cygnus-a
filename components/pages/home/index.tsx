@@ -51,7 +51,7 @@ const Home = () => {
         <p className="py-2 text-sm text-slate-500">
           Find your dream property with our listing
         </p>
-        <ul className="mt-10 space-y-6">
+        <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0">
           {propertyCardsData.map((property) => (
             <li key={property.propertyName}>
               <PropertyCard

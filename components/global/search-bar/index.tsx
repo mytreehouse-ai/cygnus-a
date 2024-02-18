@@ -88,7 +88,7 @@ function SearchBar() {
           <form
             name="bot-question-form"
             onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-4 w-full space-y-2"
+            className="mt-4 w-full space-y-2 md:mt-0 md:flex md:items-center md:space-x-2 md:space-y-0"
           >
             <Select
               data={propertyTypes}
@@ -100,7 +100,7 @@ function SearchBar() {
 
             <Button
               type="submit"
-              size="lg"
+              size="sm"
               className="inline-flex w-full gap-x-2 bg-emerald-600 text-sm font-normal hover:bg-emerald-600/90"
             >
               Find Listing
