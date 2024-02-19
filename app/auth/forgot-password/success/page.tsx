@@ -1,7 +1,7 @@
 import React from "react";
 import { redirect } from "next/navigation";
 
-import ForgotPasswordSuccessMessage from "@/components/pages/auth/forgot-password/message/success";
+import ForgotPasswordSuccessMessage from "@/components/auth/forgot-password/message/success";
 
 const ForgotPasswordSuccessPage = async ({
   searchParams,

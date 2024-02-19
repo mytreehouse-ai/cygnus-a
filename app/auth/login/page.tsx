@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import AuthFormTitle from "@/components/pages/auth/form-title";
-import LoginForm from "@/components/pages/auth/login";
+import AuthFormTitle from "@/components/auth/form-title";
+import LoginForm from "@/components/auth/login";
 
 const LoginPage = () => {
   return (

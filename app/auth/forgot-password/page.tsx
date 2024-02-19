@@ -1,7 +1,7 @@
 import React from "react";
 
-import AuthFormTitle from "@/components/pages/auth/form-title";
-import ForgotPasswordForm from "@/components/pages/auth/forgot-password";
+import AuthFormTitle from "@/components/auth/form-title";
+import ForgotPasswordForm from "@/components/auth/forgot-password";
 
 const ForgotPasswordPage = () => {
   return (
