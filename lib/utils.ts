@@ -47,7 +47,3 @@ export function imageKitLoader(params: IImageKitLoaderParams): string {
   // Construct and return the full ImageKit URL
   return `${urlEndpoint}/${src}?tr=${parametersString}`;
 }
-
-export function formatCurrency(amount: number, currencyCode: string = 'USD', locale: string = 'en-US'): string {
-  return new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode }).format(amount);
-}
