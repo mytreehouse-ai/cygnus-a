@@ -14,7 +14,7 @@ import { imageKitLoader } from "@/lib/utils";
  * @property {number} [width] - The width of the image (required if responsive is false).
  * @property {number} [height] - The height of the image (required if responsive is false).
  */
-export type TImageKitLoaderProps = {
+type TImageKitLoaderProps = {
   className?: string;
   src: string;
   alt: string;
