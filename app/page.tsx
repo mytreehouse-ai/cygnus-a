@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "@/components/search-bar";
 import PropertyCard from "@/components/property-card";
 import Image from "next/image";
+import { ImageKitLoader } from "@/components/imagekit-loader";
 
 const propertyCardsData = [
   {
@@ -50,11 +51,13 @@ const Home = () => {
         </div>
 
         <div className="hidden lg:block">
-          <Image
-            src={"/homepage-img.png"}
-            alt={`homepage image`}
-            width={500}
+          <ImageKitLoader
+            responsive={false}
+            className="h-[500px] w-[500px]"
+            src={"public/homepage-header-img.png"}
+            alt={`homepage header image`}
             height={500}
+            width={500}
           />
         </div>
       </section>
