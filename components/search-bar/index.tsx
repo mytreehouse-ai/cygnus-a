@@ -3,27 +3,11 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
 import { useForm } from "react-hook-form";
 import { Search } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { CheckIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
-import Select from "@/components/global/select";
+import ReactSelect from "@/components/react-cselect";
 
 const propertyTypes = [
   {
@@ -90,13 +74,17 @@ function SearchBar() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="mt-4 w-full space-y-2 md:mt-0 md:flex md:items-center md:space-x-2 md:space-y-0"
           >
-            <Select
+            <ReactSelect
               data={propertyTypes}
               name="property-types"
               placeholder="Property Type"
             />
 
-            <Select data={location} name="location" placeholder="Location" />
+            <ReactSelect
+              data={location}
+              name="location"
+              placeholder="Location"
+            />
 
             <Button
               type="submit"

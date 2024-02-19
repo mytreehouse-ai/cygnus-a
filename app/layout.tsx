@@ -8,7 +8,7 @@ import "./globals.css";
 import ReactQueryProvider from "@/components/react-query-provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/global/nav-bar";
+import Navbar from "@/components/nav-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 

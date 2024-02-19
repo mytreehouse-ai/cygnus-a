@@ -51,7 +51,7 @@ interface SelectProps
   ) => void;
 }
 
-const Select: React.FC<SelectProps> = ({
+const ReactSelect: React.FC<SelectProps> = ({
   label,
   labelClassName,
   name,
@@ -317,4 +317,4 @@ export function isMultiValue<T>(
   return Array.isArray(arg);
 }
 
-export default Select;
+export default ReactSelect;
