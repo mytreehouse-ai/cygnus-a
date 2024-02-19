@@ -11,11 +11,13 @@ export interface ImageKitLoaderProps
   alt: string;
 }
 
-export const ImageKitLoader: React.FC<ImageKitLoaderProps> = ({
-  className,
-  src,
-  alt,
-}) => {
+/**
+ * Renders an Image component with properties for use with ImageKit.
+ * @param {ImageKitLoaderProps} props - The properties passed to the Image component.
+ * @returns {JSX.Element} The Image component configured for ImageKit.
+ */
+export function ImageKitLoader(props: ImageKitLoaderProps): JSX.Element {
+  const { className, src, alt } = props;
   return (
     <Image
       className={className}
@@ -27,4 +29,4 @@ export const ImageKitLoader: React.FC<ImageKitLoaderProps> = ({
       sizes="(max-width: 768px) 100vw, 700px"
     />
   );
-};
+}
