@@ -23,14 +23,15 @@ type TNoneResponsive = {
   width: number; // The width of the image in pixels.
   height: number; // The height of the image in pixels.
 };
+
 /**
- * Defines the properties for the ImageKitLoader component.
- * @property {string} [className] - Optional CSS class to apply to the image.
- * @property {string} src - The source URL of the image.
- * @property {string} alt - The alternative text for the image.
- * @property {boolean} responsive - Flag to indicate if the image should be responsive.
- * @property {number} [width] - The width of the image (required if responsive is false).
- * @property {number} [height] - The height of the image (required if responsive is false).
+ * Type definition for the properties accepted by the ImageKitLoader component.
+ * This type combines common properties with either responsive or non-responsive image properties.
+ *
+ * @property {string} [className] - An optional CSS class for styling the image.
+ * @property {string} src - The source URL of the image to be displayed.
+ * @property {string} alt - A descriptive alternative text for the image, enhancing accessibility.
+ * @property {TResponsive | TNoneResponsive} - Union type that includes either responsive or non-responsive image properties.
  */
 type TImageKitLoaderProps = {
   className?: string;
