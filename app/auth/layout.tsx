@@ -9,6 +9,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <div>
         <div className="relative h-full w-full">
           <ImageKitLoader
+            responsive={true}
             className="object-cover"
             src="public/side_auth_design.svg"
             alt="Side image for auth"
