@@ -70,7 +70,7 @@ function SearchBar() {
       <Card className="mt-1 rounded-tl-none border-none p-4 shadow-none">
         <Form {...form}>
           <form
-            name="bot-question-form"
+            name="search-property-form"
             onSubmit={form.handleSubmit(onSubmit)}
             className="mt-4 w-full space-y-2 md:mt-0 md:flex md:items-center md:space-x-2 md:space-y-0"
           >
