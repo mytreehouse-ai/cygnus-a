@@ -13,13 +13,31 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
 import { Search, Map } from "lucide-react";
+import { createSearchParams } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const SearchFilter = () => {
-  const propertySearchFilterForm = useForm();
+  const searchParams = useSearchParams();
+
+  const propertySearchFilterForm = useForm({
+    values: {
+      search: searchParams?.has("search") ? searchParams.get("search") : "",
+    },
+  });
+
+  const router = useRouter();
 
   const onSubmit = () => {
-    propertySearchFilterForm.setValue("type", " for-rent");
-    console.log(propertySearchFilterForm.getValues());
+    const searchValue = propertySearchFilterForm.watch();
+    const searchParams = createSearchParams(searchValue);
+
+    if (searchParams && searchParams.size) {
+      router.replace(window.location.pathname + "?" + searchParams.toString(), {
+        scroll: false,
+      });
+    }
+    console.log(searchValue);
   };
 
   return (
