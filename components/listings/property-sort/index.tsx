@@ -28,9 +28,9 @@ const PropertySort = () => {
       <form
         name="search-property-form"
         onSubmit={propertySortForm.handleSubmit(onSubmit)}
-        className="mt-4 w-full space-y-2 md:mt-0 md:flex md:items-center md:space-x-2 md:space-y-0"
+        className="md:w-1/2"
       >
-        <div className="w-1/2">
+        <div className="w-1/2 md:float-end">
           <ReactSelect
             data={sortingOptions}
             name="sorting-options"
