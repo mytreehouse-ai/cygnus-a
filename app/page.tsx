@@ -4,7 +4,7 @@ import PropertyCard from "@/components/property-card";
 import Image from "next/image";
 import { ImageKitLoader } from "@/components/imagekit-loader";
 
-const propertyCardsData = [
+export const propertyCardsData = [
   {
     img: "/path/to/image1.jpg",
     propertyName: "Sunny Apartment",
