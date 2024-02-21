@@ -22,34 +22,35 @@ export function cn(...inputs: ClassValue[]): string {
 export function imageKitLoader(params: IImageKitLoaderParams): string {
   let { src, width, quality } = params;
 
-  // Remove leading slash from the source path if present
   if (src.startsWith("/")) {
     src = src.substring(1);
   }
 
-  // Initialize the parameters array with width
   const parameters = [`w-${width}`];
 
-  // Add quality to the parameters if provided
   if (quality) {
     parameters.push(`q-${quality}`);
   }
 
-  // Join parameters into a single string
   const parametersString = parameters.join(",");
 
-  // Define the ImageKit endpoint, ensuring no trailing slash
   let urlEndpoint = "https://ik.imagekit.io/veaeev6wu";
   if (urlEndpoint.endsWith("/")) {
     urlEndpoint = urlEndpoint.slice(0, -1);
   }
 
-  // Construct and return the full ImageKit URL
   return `${urlEndpoint}/${src}?tr=${parametersString}`;
 }
 
-export function formatCurrency(amount: number, currencyCode: string = 'USD', locale: string = 'en-US'): string {
-  return new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode }).format(amount);
+export function formatCurrency(
+  amount: number,
+  currencyCode: string = "USD",
+  locale: string = "en-US",
+): string {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currencyCode,
+  }).format(amount);
 }
 
 export function createSearchParams(queryParams: Record<string, any>) {
