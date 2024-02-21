@@ -125,31 +125,28 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
 
   return (
     <Drawer open={open} onClose={onClose}>
-      <DrawerContent className="p-4">
+      <DrawerContent className="flex items-center justify-center py-4">
         <Form {...propertyFilterForms}>
           <form
             name="search-property-form"
             onSubmit={propertyFilterForms.handleSubmit(onSubmit)}
-            className="mt-12 w-full space-y-2 md:flex md:items-center md:justify-stretch md:gap-x-2 md:space-y-0"
+            className="mt-8 space-y-2"
           >
             <ReactSelect
               data={propertyTypes}
               name="property-types"
               placeholder="Property Type"
             />
-
             <ReactSelect
               data={location}
               name="location"
               placeholder="Location"
             />
-
             <ReactSelect
               data={[]}
               name="listing-types"
               placeholder="Listing Type"
             />
-
             <div className="flex gap-x-2">
               <FormField
                 control={propertyFilterForms.control}
@@ -158,9 +155,9 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
                   <FormItem className="w-auto md:w-full">
                     <FormControl>
                       <Input
-                        placeholder="Bedroom"
+                        placeholder="No. Bedroom"
                         {...field}
-                        value={field.value ?? ""}
+                        value={field.value}
                         className="w-full rounded-lg text-sm md:w-full"
                       />
                     </FormControl>
@@ -174,9 +171,9 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
                   <FormItem className="w-auto md:w-full">
                     <FormControl>
                       <Input
-                        placeholder="Bathroom"
+                        placeholder="No. Bathroom"
                         {...field}
-                        value={field.value ?? ""}
+                        value={field.value}
                         className="w-full rounded-lg text-sm md:w-full"
                       />
                     </FormControl>
