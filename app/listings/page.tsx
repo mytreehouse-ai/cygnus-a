@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { propertyCardsData } from "../page";
 import PropertyCard from "@/components/property-card";
 import PropertySort from "@/components/listings/property-sort";
-import { createSearchParams } from "@/lib/utils";
+import Pagination from "@/components/global/pagination";
 
 const Listings = () => {
   return (
@@ -39,6 +39,7 @@ const Listings = () => {
           ))}
         </ul>
       </section>
+      <Pagination className="mt-4 flex justify-start px-4" />
     </main>
   );
 };

@@ -3,7 +3,7 @@
 import React from "react";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import ReactSelect from "@/components/react-cselect";
+import ReactSelect from "@/components/global/react-select";
 
 const sortingOptions = [
   {
