@@ -25,6 +25,7 @@ import type { IModal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/components/search-bar";
 import { location } from "@/components/search-bar";
+import { MultiSlider } from "@/components/global/multi-slider";
 
 const SearchFilter = () => {
   const searchParams = useSearchParams();
@@ -183,14 +184,54 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
                 )}
               />
             </div>
+
+            <div className="mt-2">
+              <label
+                htmlFor="max_price"
+                className=" leading-nonepeer-disabled:cursor-not-allowed  font-medium peer-disabled:opacity-70"
+              >
+                Price
+              </label>
+              <MultiSlider
+                max={1_000_000_000}
+                min={0}
+                step={1}
+                withoutLabel={true}
+                minStepsBetweenThumbs={100_000_000}
+                onValueChange={(values) => {
+                  console.log(values);
+                }}
+                className="mt-2"
+              />
+            </div>
+
+            <div className="mt-2">
+              <label
+                htmlFor="max_price"
+                className=" leading-nonepeer-disabled:cursor-not-allowed  font-medium peer-disabled:opacity-70"
+              >
+                Size
+              </label>
+              <MultiSlider
+                max={1_000_000_000}
+                min={0}
+                step={1}
+                withoutLabel={true}
+                minStepsBetweenThumbs={100_000_000}
+                onValueChange={(values) => {
+                  console.log(values);
+                }}
+                className="mt-2"
+              />
+            </div>
+            <Button className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1">
+              Apply Filters
+            </Button>
+            <Button className="order-3 w-full rounded-lg" variant="outline">
+              Reset
+            </Button>
           </form>
         </Form>
-        {/* <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
   );
