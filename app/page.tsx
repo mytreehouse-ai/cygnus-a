@@ -1,7 +1,6 @@
 import React from "react";
 import SearchBar from "@/components/search-bar";
 import PropertyCard from "@/components/property-card";
-import Image from "next/image";
 import { ImageKitLoader } from "@/components/global/imagekit-loader";
 
 export const propertyCardsData = [
@@ -49,7 +48,6 @@ const Home = () => {
           </h2>
           <SearchBar />
         </div>
-
         <div className="hidden lg:block">
           <ImageKitLoader
             responsive={false}
