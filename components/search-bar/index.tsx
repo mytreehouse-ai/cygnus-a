@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Search } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import ReactSelect from "@/components/react-cselect";
+import ReactSelect from "@/components/global/react-select";
 
 const propertyTypes = [
   {

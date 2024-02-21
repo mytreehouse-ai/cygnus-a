@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../ui/separator";
 
 const menus = [
   {
