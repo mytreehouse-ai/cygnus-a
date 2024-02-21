@@ -9,7 +9,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import ReactSelect from "@/components/global/react-select";
 
-const propertyTypes = [
+export const propertyTypes = [
   {
     label: "Condominium",
     value: "condominium",
@@ -24,7 +24,7 @@ const propertyTypes = [
   },
 ];
 
-const location = [
+export const location = [
   {
     label: "Makati City",
     value: "makati-city",
