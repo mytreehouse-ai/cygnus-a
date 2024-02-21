@@ -3,10 +3,16 @@
 import React from "react";
 import { TreeDeciduous, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { Separator } from "../ui/separator";
 
 const menus = [
   {
@@ -67,8 +73,11 @@ function Navbar() {
         <SheetTrigger>
           <Menu className="md:hidden" />
         </SheetTrigger>
-        <SheetContent side="top">
-          <div className="mt-4 flex flex-col gap-y-6">
+        <SheetContent side="right">
+          <SheetHeader>
+            <TreeDeciduous className="text-emerald-500" />
+          </SheetHeader>
+          <div className="mt-8 flex flex-col gap-y-6">
             {menus.map((item) => (
               <Link
                 key={item.id}
@@ -79,6 +88,10 @@ function Navbar() {
               </Link>
             ))}
           </div>
+          <Separator className="my-4" />
+          <Button size={"sm"} className="w-full bg-emerald-600 font-normal">
+            Add Listing
+          </Button>
         </SheetContent>
       </Sheet>
     </nav>
