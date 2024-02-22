@@ -11,7 +11,7 @@ import Pagination from "@/components/global/pagination";
  * It displays property listings, allowing users to filter through them using the SearchFilter component,
  * sort them with the PropertySort component, and navigate through pages with the Pagination component.
  */
-const Listings = () => {
+function Listings() {
   return (
     <main className="pb-4 pt-2">
       <SearchFilter />
@@ -46,6 +46,6 @@ const Listings = () => {
       <Pagination className="mt-4 flex justify-start px-4" />
     </main>
   );
-};
+}
 
 export default Listings;
