@@ -35,10 +35,10 @@ export const propertyCardsData = [
 
 const Home = () => {
   return (
-    <main className="mx-auto ">
-      <section className=" bg-emerald-50 px-6 py-14 lg:flex lg:justify-between lg:px-12 lg:pb-0">
-        <div className=" lg:w-1/2">
-          <h1 className=" text-4xl font-bold md:text-6xl">
+    <main className="mx-auto">
+      <section className="bg-emerald-50 px-6 py-14 lg:flex lg:justify-between lg:px-12 lg:pb-0">
+        <div className="lg:w-1/2">
+          <h1 className="text-4xl font-bold md:text-6xl">
             Your Competitive Edge In Today&apos;s{" "}
             <span className="text-emerald-600">Real Estate Market.</span>
           </h1>

@@ -37,18 +37,11 @@ const menus = [
   },
 ];
 
-/**
- * Renders the navigation bar component.
- * This component utilizes the `usePathname` hook to determine the current path and dynamically style the navigation links.
- * It displays a list of navigation links defined in the `menus` array and a button to add a new listing.
- * For smaller screens, it provides a collapsible menu for navigation links.
- * @returns {JSX.Element} The Navbar component.
- */
 function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4">
+    <nav className="flex items-center justify-between px-6 py-4 shadow-sm">
       <div className="flex w-full items-center justify-between">
         <TreeDeciduous className="text-emerald-500" />
         <div className="hidden items-center gap-x-8 md:inline-flex">
