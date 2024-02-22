@@ -19,7 +19,6 @@ const Listings = () => {
               There are currently 10000 properties.
             </p>
           </div>
-
           <PropertySort />
         </div>
 
