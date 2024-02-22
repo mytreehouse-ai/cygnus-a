@@ -44,7 +44,7 @@ export function imageKitLoader(params: IImageKitLoaderParams): string {
 
 export function formatCurrency(
   amount: number,
-  currencyCode: string = "USD",
+  currencyCode: string = "PHP",
   locale: string = "en-US",
 ): string {
   return new Intl.NumberFormat(locale, {
