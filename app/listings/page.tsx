@@ -1,5 +1,5 @@
 import React from "react";
-import SearchFilter from "@/components/listings/search-filter";
+import { Search } from "@/components/listings/search-filter";
 import { Separator } from "@/components/ui/separator";
 import { propertyCardsData } from "@/app/page";
 import PropertyCard from "@/components/property-card";
@@ -14,7 +14,7 @@ import Pagination from "@/components/global/pagination";
 function Listings() {
   return (
     <main className="pb-4 pt-2">
-      <SearchFilter />
+      <Search />
       <Separator className="my-6" />
       <section className="mt-8 px-4">
         <div className="md:flex md:w-full md:justify-between">

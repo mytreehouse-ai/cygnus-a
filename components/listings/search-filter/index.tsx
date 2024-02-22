@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
-import { Search, Map } from "lucide-react";
+import { Search as SearchIcon, Map } from "lucide-react";
 import { createSearchParams } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
@@ -27,7 +27,7 @@ import { propertyTypes } from "@/components/search-bar";
 import { location } from "@/components/search-bar";
 import { MultiSlider } from "@/components/global/multi-slider";
 
-const SearchFilter = () => {
+function SearchFilter() {
   const searchParams = useSearchParams();
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
 
@@ -39,7 +39,7 @@ const SearchFilter = () => {
 
   const router = useRouter();
 
-  const onSubmit = () => {
+  function onSubmit() {
     const searchValue = propertySearchFilterForm.watch();
     const searchParams = createSearchParams(searchValue);
 
@@ -48,11 +48,11 @@ const SearchFilter = () => {
         scroll: false,
       });
     }
-  };
+  }
 
-  const handleFilterButtonClick = () => {
+  function handleFilterButtonClick() {
     setFilterDrawerIsOpen(true);
-  };
+  }
 
   return (
     <div className="px-4">
@@ -87,7 +87,7 @@ const SearchFilter = () => {
               <SlidersHorizontal className="h-4 w-4 text-slate-500" />
             </Button>
             <Button className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1">
-              <Search className="h-4 w-4" />
+              <SearchIcon className="h-4 w-4" />
             </Button>
             <Button className="order-3 w-full rounded-lg" variant="outline">
               <Map className="h-4 w-4 text-slate-500" />
@@ -101,9 +101,7 @@ const SearchFilter = () => {
       />
     </div>
   );
-};
-
-export default SearchFilter;
+}
 
 interface FilterDrawerProps extends IModal {}
 
@@ -233,3 +231,11 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
     </Drawer>
   );
 };
+
+export function Search() {
+  return (
+    <Suspense>
+      <SearchFilter />
+    </Suspense>
+  );
+}
