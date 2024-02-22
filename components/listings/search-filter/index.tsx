@@ -70,6 +70,20 @@ function SearchFilter() {
               </FormItem>
             )}
           />
+
+          <ReactSelect
+            data={propertyTypes}
+            name="property-types"
+            placeholder="Property Type"
+            className="hidden md:block"
+          />
+
+          <ReactSelect
+            data={location}
+            name="location"
+            placeholder="Location"
+            className="hidden lg:block"
+          />
           <div className="flex justify-evenly gap-x-2">
             <Button
               className="order-1 w-full rounded-lg md:order-2"
@@ -122,17 +136,19 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
           <form
             name="search-property-form"
             onSubmit={propertyFilterForms.handleSubmit(onSubmit)}
-            className="mt-8 space-y-3"
+            className="lg: my-8 mt-8 space-y-3"
           >
             <ReactSelect
               data={propertyTypes}
               name="property-types"
               placeholder="Property Type"
+              className="md:hidden"
             />
             <ReactSelect
               data={location}
               name="location"
               placeholder="Location"
+              className="lg:hidden"
             />
             <ReactSelect
               data={[]}
