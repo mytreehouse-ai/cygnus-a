@@ -232,9 +232,10 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
   );
 };
 
+// TODO: Create a loader for this search component
 export function Search() {
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading search...</div>}>
       <SearchFilter />
     </Suspense>
   );
