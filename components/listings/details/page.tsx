@@ -38,8 +38,9 @@ const propertyDetails = {
 const PropertyDetails = () => {
   return (
     <>
-      <main className="min-h-screen space-y-6 px-4 pb-4 pt-10">
-        <section className="space-y-1">
+      {/* <main className="min-h-screen space-y-6 px-4 pb-4 pt-10"> */}
+      <main className="grid-rows-auto grid-cols-auto grid min-h-screen gap-6 px-4 pb-4 pt-10 md:grid-cols-2">
+        <section className="space-y-1 md:col-span-2">
           <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>
           <Badge className={cn(" rounded-md bg-orange-400")}>For Rent</Badge>
           <p className="flex items-center gap-x-2 py-2 text-sm text-slate-500">
@@ -49,7 +50,7 @@ const PropertyDetails = () => {
           <h3 className="text-3xl font-bold text-emerald-600">$146,000</h3>
         </section>
 
-        <section className="grid-rows-auto  grid grid-cols-2 gap-2">
+        <section className="grid-rows-auto grid grid-cols-2 gap-2 ">
           <div className="relative col-span-2 h-auto w-full max-w-[500px]">
             <Image
               src="/dummy-img.png"
