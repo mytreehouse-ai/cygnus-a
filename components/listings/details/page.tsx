@@ -38,10 +38,14 @@ const propertyDetails = {
 const PropertyDetails = () => {
   return (
     <>
-      <main className="grid-rows-auto grid-cols-auto grid min-h-screen gap-6 px-4 pb-4 pt-10 md:grid-cols-2">
-        <section className="space-y-1 md:col-span-2">
-          <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>
-          <Badge className={cn(" rounded-md bg-orange-400")}>For Rent</Badge>
+      {/* <main > */}
+      <main className=" grid-cols-auto grid-rows grid min-h-screen grid-flow-row  gap-6 px-4 pb-4 pt-10 md:grid-cols-4 ">
+        <section className="space-y-1 md:col-span-3 ">
+          <div className="md:flex md:items-center md:gap-x-2">
+            <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>
+            <Badge className={cn(" rounded-md bg-orange-400 ")}>For Rent</Badge>
+          </div>
+
           <p className="flex items-center gap-x-2 py-2 text-sm text-slate-500">
             <MapPin className="h-4 w-4 text-slate-500" />
             <span> Paseo de Roxas, Makati</span>
@@ -49,32 +53,33 @@ const PropertyDetails = () => {
           <h3 className="text-3xl font-bold text-emerald-600">$146,000</h3>
         </section>
 
-        <section className="grid-rows-auto grid grid-cols-2 gap-2 ">
-          <div className="relative col-span-2 h-auto w-full max-w-[500px]">
+        {/* className="grid grid-cols-2 gap-2" */}
+        <section className="grid grid-cols-2 gap-2 md:col-span-2 lg:col-span-3">
+          <div className="relative col-span-2 w-full">
             <Image
               src="/dummy-img.png"
               alt="homepage header image"
               layout="responsive"
               width={500}
               height={500}
-              className="object-cover"
+              className="object-contain"
             />
           </div>
-          <div className="relative h-auto w-full max-w-[500px]">
+          <div className="relative w-full">
             <Image
               src="/dummy-img.png"
               alt="homepage header image"
-              layout="responsive"
+              // layout="responsive"
               width={500}
               height={500}
               className="object-cover"
             />
           </div>
-          <div className="relative h-auto w-full max-w-[500px]">
+          <div className="relative w-full">
             <Image
               src="/dummy-img.png"
               alt="homepage header image"
-              layout="responsive"
+              // layout="responsive"
               width={500}
               height={500}
               className="object-cover"
@@ -82,7 +87,7 @@ const PropertyDetails = () => {
           </div>
         </section>
 
-        <section>
+        <section className="md:col-span-2 lg:col-span-1">
           <Card className="border-none shadow">
             <CardHeader>
               <CardTitle className="text-lg text-gray-950">Overview</CardTitle>
@@ -122,8 +127,8 @@ const PropertyDetails = () => {
                   </dd>
                 </div>
 
-                <div className="flex justify-between text-sm text-slate-500">
-                  <dt className="inline-flex items-center gap-x-2">
+                <div className="flex items-center justify-between text-sm text-slate-500">
+                  <dt className="inline-flex items-center gap-x-2 ">
                     <Flag className="h-4 w-4" /> <span>Turn Over Status</span>
                   </dt>
                   <dd className="font-bold">
@@ -168,8 +173,8 @@ const PropertyDetails = () => {
           </Card>
         </section>
 
-        <section>
-          <Card className="border-none shadow">
+        <section id="desc" className="md:col-span-2 lg:col-span-3">
+          <Card className="border-none shadow ">
             <CardHeader>
               <CardTitle className="text-lg text-gray-950">
                 Description
@@ -186,7 +191,8 @@ const PropertyDetails = () => {
           </Card>
         </section>
 
-        <section>
+        {/* md:row-start-4 */}
+        <section className="md:col-span-2 md:row-start-4 lg:col-span-3">
           <Card className="border-none shadow">
             <CardHeader>
               <CardTitle className="inline-flex items-center gap-x-2 text-lg text-gray-950">
@@ -219,8 +225,8 @@ const ContactUs = () => {
   };
 
   return (
-    <section>
-      <Card className="border bg-neutral-50 shadow-sm">
+    <section className="md:col-span-2 lg:col-start-4 lg:row-span-2">
+      <Card className="border bg-neutral-50 shadow-sm ">
         <CardHeader>
           <CardTitle className="inline-flex items-center gap-x-2 text-lg text-gray-950">
             Contact Us Now!
