@@ -8,20 +8,24 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
+import { ImageKitLoader } from "../global/imagekit-loader";
 
 const ContactUs = () => {
   return (
     <main className="">
-      <div className="bg-emerald-50 px-4 pb-4 pt-10 md:px-6">
-        <h1 className="text-4xl font-bold md:text-5xl">
-          We&apos;d love to
-          <span className="text-emerald-600"> hear from you</span>
-        </h1>
-        <h2 className="pb-10 pt-4 text-gray-950 md:text-base">
-          Get in touch with our Licensed Appraisers whenever you need them. The
-          form on the right is your gateway to an in-depth property value
-          discussion.
-        </h2>
+      <div className="bg-emerald-50 px-4 pb-4 pt-10 md:px-6 lg:flex lg:gap-6  lg:pb-0">
+        <div className="lg:w-3/4">
+          <h1 className="text-4xl font-bold md:text-5xl">
+            We&apos;d love to
+            <span className="text-emerald-600"> hear from you</span>
+          </h1>
+          <h2 className="pb-10 pt-4 text-gray-950 md:text-base">
+            Get in touch with our Licensed Appraisers whenever you need them.
+            The form on the right is your gateway to an in-depth property value
+            discussion.
+          </h2>
+        </div>
+        <div className="hidden h-56 w-2/5 rounded-t-full lg:block lg:border"></div>
       </div>
       <div className="px-4 pb-4 pt-10 text-center md:pt-12">
         <h3 className="text-4xl font-bold md:text-3xl ">Contact Form</h3>
@@ -31,6 +35,14 @@ const ContactUs = () => {
         </p>
         <ContactForm />
       </div>
+      {/* <div className="relative h-96 w-screen">
+        <ImageKitLoader
+          responsive={true}
+          className="absolute object-fill"
+          src="public/upper-building-footer.svg"
+          alt="Side image for auth"
+        />
+      </div> */}
     </main>
   );
 };
@@ -45,7 +57,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Card className="mt-6 border-none shadow-none md:border md:shadow-sm">
+    <Card className="mt-6 border-none shadow-none md:mx-auto md:w-3/4 md:border md:shadow-sm lg:w-1/2 lg:shadow-md">
       <CardContent>
         <Form {...contactUsForm}>
           <form
@@ -73,45 +85,47 @@ const ContactForm = () => {
               )}
             />
 
-            <FormField
-              control={contactUsForm.control}
-              name="bathroom"
-              render={({ field }) => (
-                <FormItem className="w-auto md:w-full">
-                  <FormControl>
-                    <div className="space-y-1 text-start">
-                      <FormLabel>Email</FormLabel>
-                      <Input
-                        placeholder="Enter email address"
-                        {...field}
-                        value={field.value}
-                        className="w-full rounded-lg text-sm md:w-full"
-                      />
-                    </div>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+            <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+              <FormField
+                control={contactUsForm.control}
+                name="bathroom"
+                render={({ field }) => (
+                  <FormItem className="w-auto md:w-full">
+                    <FormControl>
+                      <div className="space-y-1 text-start">
+                        <FormLabel>Email</FormLabel>
+                        <Input
+                          placeholder="Enter email address"
+                          {...field}
+                          value={field.value}
+                          className="w-full rounded-lg text-sm md:w-full"
+                        />
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={contactUsForm.control}
-              name="bathroom"
-              render={({ field }) => (
-                <FormItem className="w-auto md:w-full">
-                  <FormControl>
-                    <div className="space-y-1 text-start">
-                      <FormLabel>Phone</FormLabel>
-                      <Input
-                        placeholder="Enter Your Contact Number"
-                        {...field}
-                        value={field.value}
-                        className="w-full rounded-lg text-sm md:w-full"
-                      />
-                    </div>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={contactUsForm.control}
+                name="bathroom"
+                render={({ field }) => (
+                  <FormItem className="w-auto md:w-full">
+                    <FormControl>
+                      <div className="space-y-1 text-start">
+                        <FormLabel>Phone</FormLabel>
+                        <Input
+                          placeholder="Enter Your Contact Number"
+                          {...field}
+                          value={field.value}
+                          className="w-full rounded-lg text-sm md:w-full"
+                        />
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={contactUsForm.control}
