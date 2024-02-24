@@ -38,7 +38,6 @@ const propertyDetails = {
 const PropertyDetails = () => {
   return (
     <>
-      {/* <main className="min-h-screen space-y-6 px-4 pb-4 pt-10"> */}
       <main className="grid-rows-auto grid-cols-auto grid min-h-screen gap-6 px-4 pb-4 pt-10 md:grid-cols-2">
         <section className="space-y-1 md:col-span-2">
           <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>

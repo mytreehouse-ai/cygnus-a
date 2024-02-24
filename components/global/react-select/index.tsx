@@ -155,6 +155,10 @@ const ReactSelect: React.FC<SelectProps> = ({
     );
   };
 
+  const Control = (props: ControlProps) => {
+    return <components.Control {...props} className="py-[2.6px]" />;
+  };
+
   const asyncLoadOptions = (
     inputValue: string,
     callback: (params: any) => void,
@@ -252,7 +256,7 @@ const ReactSelect: React.FC<SelectProps> = ({
     <div className={cn("w-full ", className)}>
       <label
         className={cn(
-          "mb-1 block text-sm font-medium  text-gray-900",
+          " block text-sm font-medium  text-gray-900",
           labelClassName,
         )}
       >
@@ -269,6 +273,7 @@ const ReactSelect: React.FC<SelectProps> = ({
           DropdownIndicator,
           Option,
           MultiValueContainer,
+          Control,
         }}
         defaultValue={defaultValue}
         defaultOptions={data}
