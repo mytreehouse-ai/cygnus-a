@@ -9,6 +9,7 @@ import ReactQueryProvider from "@/components/react-query-provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/global/nav-bar";
+import Footer from "@/components/global/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           <SessionProvider>
             <Navbar />
             {children}
+            <Footer />
           </SessionProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </ReactQueryProvider>
