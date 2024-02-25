@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Fragment } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import {
@@ -18,6 +18,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Shrink, Expand } from "lucide-react";
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -37,7 +39,7 @@ const propertyDetails = {
 
 const PropertyDetails = () => {
   return (
-    <>
+    <Fragment>
       {/* <main > */}
       <main className=" grid-cols-auto grid-rows grid min-h-screen grid-flow-row  gap-6 px-4 pb-4 pt-10 md:grid-cols-4 ">
         <section className="space-y-1 md:col-span-3 ">
@@ -182,10 +184,12 @@ const PropertyDetails = () => {
               <Separator className="bg-slate-200" />
             </CardHeader>
             <CardContent>
-              <article className="text-sm text-slate-500">
-                2 bedroom fully furnished loft type Long term lease only 50K per
-                month 2 mos deposit 2 mos advance.10 pdcCondominium property for
-                rent in Ususan, Taguig, Metro Manila
+              <article className="prose lg:prose-sm">
+                <Markdown remarkPlugins={[remarkGfm]}>
+                  **2 bedroom fully furnished loft type** Long term lease only
+                  50K per month 2 mos deposit 2 mos advance. 10 pdc Condominium
+                  property for rent in Ususan, Taguig, Metro Manila
+                </Markdown>
               </article>
             </CardContent>
           </Card>
@@ -211,7 +215,7 @@ const PropertyDetails = () => {
 
         <ContactUs />
       </main>
-    </>
+    </Fragment>
   );
 };
 
