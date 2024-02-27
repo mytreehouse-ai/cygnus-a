@@ -45,6 +45,7 @@ interface SelectProps
   closeOnSelect?: boolean;
   data: OptionData[];
   disabled?: boolean;
+  className?: string;
   onChange?: (
     option: ReactSelectOnChangeOption,
     oldOptionValue?: ReactSelectValueType,
@@ -62,6 +63,7 @@ const ReactSelect: React.FC<SelectProps> = ({
   placeholder,
   disabled,
   onChange,
+  className,
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const id = Date.now().toString();
@@ -151,6 +153,10 @@ const ReactSelect: React.FC<SelectProps> = ({
         <components.MultiValueContainer {...props} />
       </div>
     );
+  };
+
+  const Control = (props: ControlProps) => {
+    return <components.Control {...props} className="py-[2.6px]" />;
   };
 
   const asyncLoadOptions = (
@@ -247,10 +253,10 @@ const ReactSelect: React.FC<SelectProps> = ({
   };
 
   return isMounted ? (
-    <div className="w-full ">
+    <div className={cn("w-full ", className)}>
       <label
         className={cn(
-          "mb-1 block text-sm font-medium  text-gray-900",
+          " block text-sm font-medium  text-gray-900",
           labelClassName,
         )}
       >
@@ -267,6 +273,7 @@ const ReactSelect: React.FC<SelectProps> = ({
           DropdownIndicator,
           Option,
           MultiValueContainer,
+          Control,
         }}
         defaultValue={defaultValue}
         defaultOptions={data}

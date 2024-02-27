@@ -10,22 +10,14 @@ import { Search as SearchIcon, Map } from "lucide-react";
 import { createSearchParams } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useState } from "react";
 import type { IModal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/components/search-bar";
 import { location } from "@/components/search-bar";
 import { MultiSlider } from "@/components/global/multi-slider";
+import { formatCurrency } from "@/lib/utils";
 
 function SearchFilter() {
   const searchParams = useSearchParams();
@@ -78,6 +70,20 @@ function SearchFilter() {
               </FormItem>
             )}
           />
+
+          <ReactSelect
+            data={propertyTypes}
+            name="property-types"
+            placeholder="Property Type"
+            className="hidden md:block"
+          />
+
+          <ReactSelect
+            data={location}
+            name="location"
+            placeholder="Location"
+            className="hidden lg:block"
+          />
           <div className="flex justify-evenly gap-x-2">
             <Button
               className="order-1 w-full rounded-lg md:order-2"
@@ -106,6 +112,8 @@ function SearchFilter() {
 interface FilterDrawerProps extends IModal {}
 
 const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
+  const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
+  const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
 
   const propertyFilterForms = useForm();
@@ -128,17 +136,19 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
           <form
             name="search-property-form"
             onSubmit={propertyFilterForms.handleSubmit(onSubmit)}
-            className="mt-8 space-y-2"
+            className="lg: my-8 mt-8 space-y-3"
           >
             <ReactSelect
               data={propertyTypes}
               name="property-types"
               placeholder="Property Type"
+              className="md:hidden"
             />
             <ReactSelect
               data={location}
               name="location"
               placeholder="Location"
+              className="lg:hidden"
             />
             <ReactSelect
               data={[]}
@@ -180,12 +190,16 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
               />
             </div>
 
-            <div className="mt-2">
+            <div>
               <label
                 htmlFor="max_price"
-                className=" leading-nonepeer-disabled:cursor-not-allowed  font-medium peer-disabled:opacity-70"
+                className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
               >
-                Price
+                <span>Price</span>
+                <span className="text-sm text-slate-500">
+                  {formatCurrency(priceRange[0])} -{" "}
+                  {formatCurrency(priceRange[1])}
+                </span>
               </label>
               <MultiSlider
                 max={1_000_000_000}
@@ -194,7 +208,7 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
                 withoutLabel={true}
                 minStepsBetweenThumbs={100_000_000}
                 onValueChange={(values) => {
-                  console.log(values);
+                  setPriceRange(values);
                 }}
                 className="mt-2"
               />
@@ -203,18 +217,21 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
             <div className="mt-2">
               <label
                 htmlFor="max_price"
-                className=" leading-nonepeer-disabled:cursor-not-allowed  font-medium peer-disabled:opacity-70"
+                className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
               >
-                Size
+                <span>Size</span>
+                <span className="text-sm text-slate-500">
+                  {sqm[0]} - {sqm[1]} sqm
+                </span>
               </label>
               <MultiSlider
-                max={1_000_000_000}
+                max={10000}
                 min={0}
                 step={1}
                 withoutLabel={true}
-                minStepsBetweenThumbs={100_000_000}
+                minStepsBetweenThumbs={1}
                 onValueChange={(values) => {
-                  console.log(values);
+                  setSqm(values);
                 }}
                 className="mt-2"
               />
