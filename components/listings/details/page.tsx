@@ -37,7 +37,7 @@ const propertyDetails = {
   listingUrl: "www.example.com",
 };
 
-const PropertyDetails = () => {
+function PropertyDetails() {
   return (
     <Fragment>
       {/* <main > */}
@@ -65,26 +65,6 @@ const PropertyDetails = () => {
               width={500}
               height={500}
               className="object-contain"
-            />
-          </div>
-          <div className="relative w-full">
-            <Image
-              src="/dummy-img.png"
-              alt="homepage header image"
-              // layout="responsive"
-              width={500}
-              height={500}
-              className="object-cover"
-            />
-          </div>
-          <div className="relative w-full">
-            <Image
-              src="/dummy-img.png"
-              alt="homepage header image"
-              // layout="responsive"
-              width={500}
-              height={500}
-              className="object-cover"
             />
           </div>
         </section>
@@ -217,7 +197,7 @@ const PropertyDetails = () => {
       </main>
     </Fragment>
   );
-};
+}
 
 export default PropertyDetails;
 
