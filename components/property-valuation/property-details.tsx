@@ -46,10 +46,6 @@ const PropertyDetails: React.FC = () => {
 
   return (
     <Form {...form}>
-      <h2 className="w-full text-lg font-bold text-neutral-800">
-        Tell us about your property
-      </h2>
-
       <form
         name="propertyDetailsForm"
         onSubmit={form.handleSubmit(onSubmit)}
