@@ -19,12 +19,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import ValuationStepper from "@/hooks/useStepperStore";
-import { propertyValuationFormSchema } from ".";
+import { propertyValuationFormSchema } from "@/schema/valuation";
 import useValuationFormStore from "@/hooks/useValuationFormStore";
 import { propertyTypes } from "@/static_data/property-types";
 import { yearBuilt } from "@/static_data/year-built";
 import { listingDuration } from "@/static_data/listing-duration";
-// import { CityCombobox } from "@/components/ui/citycombobox";
+import ReactSelect from "../global/react-select";
 
 const PropertyDetails: React.FC = () => {
   const { currentStepIndex, setCurrentStepIndex, steps } = ValuationStepper();
@@ -55,28 +55,11 @@ const PropertyDetails: React.FC = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-4 space-y-4"
       >
-        <FormField
-          control={form.control}
+        <ReactSelect
+          data={propertyTypes}
           name="propertyType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Property type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Property type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {propertyTypes.map((pt) => (
-                    <SelectItem key={pt.value} value={pt.value}>
-                      {pt.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
+          placeholder="fs"
+          label="Property type"
         />
 
         <FormField
@@ -96,89 +79,64 @@ const PropertyDetails: React.FC = () => {
           )}
         />
 
+        <ReactSelect
+          data={[
+            {
+              value: "Makati",
+              label: "Makati",
+            },
+            {
+              value: "Taguig",
+              label: "Taguig",
+            },
+          ]}
+          name="location"
+          placeholder="fs"
+          label="Location"
+        />
+
         <FormField
           control={form.control}
-          name="location"
+          name="sqm"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Location</FormLabel>
-              {/* <CityCombobox
-                onCityChange={field.onChange}
-                cityValue={field.value}
-              /> */}
+              <FormLabel>Sqm </FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} value={field.value ?? ""} />
+              </FormControl>
             </FormItem>
           )}
         />
 
-        <div className="w-full md:flex md:gap-x-6">
-          <FormField
-            control={form.control}
-            name="sqm"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Sqm</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Sqm"
-                    type="number"
-                    min="1"
-                    {...field}
-                    value={field.value ?? ""}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="yearBuilt"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Year built</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Year built" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {yearBuilt.map((data) => (
-                      <SelectItem key={data.value} value={data.value}>
-                        {data.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
-        </div>
+        <ReactSelect
+          data={[
+            {
+              value: "2019",
+              label: "2019",
+            },
+            {
+              value: "2020",
+              label: "2020",
+            },
+          ]}
+          name="yearBuilt"
+          placeholder="AF"
+          label="Year built"
+        />
+
         <FormField
           control={form.control}
           name="whenAreyouLookingToSell"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>When are you looking to sell?</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Listing urgency" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {listingDuration.map((data) => (
-                    <SelectItem key={data.value} value={data.value}>
-                      {data.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <FormLabel>When are you looking to sell? </FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} value={field.value ?? ""} />
+              </FormControl>
             </FormItem>
           )}
         />
+
         <Button className="w-full" type="submit">
           Next
         </Button>

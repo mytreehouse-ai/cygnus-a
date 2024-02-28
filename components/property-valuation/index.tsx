@@ -4,32 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import ValuationStepper from "@/hooks/useStepperStore";
 import PropertyDetails from "./property-details";
+import PersonalDetails from "./personal-details";
+
 // import PersonalDetails from "./personaldetails";
 // import ValuationResults from "./valuationresults";
 
 const componentsMap = {
   Property: PropertyDetails,
-  // Personal: PersonalDetails,
+  Personal: PersonalDetails,
   // Results: ValuationResults,
 };
-
-export const propertyValuationFormSchema = z.object({
-  propertyType: z.string().nonempty(),
-  address: z.string().nonempty(),
-  location: z.string().uuid(),
-  sqm: z.preprocess((val) => Number(val), z.number().positive()),
-  yearBuilt: z.string().nonempty(),
-  whenAreyouLookingToSell: z.string().nonempty(),
-});
-
-export const personalDetailsFormSchema = z.object({
-  lastName: z.string().nonempty(),
-  firstName: z.string().nonempty(),
-  phoneNumber: z.string().nonempty(),
-  emailAddress: z.string().email().nonempty(),
-  termsAndConditions: z.boolean().refine((val) => val === true),
-  offers: z.boolean().optional(),
-});
 
 const PropertyValuation: React.FC = () => {
   const { steps, currentStepIndex, markStepAsComplete } = ValuationStepper();

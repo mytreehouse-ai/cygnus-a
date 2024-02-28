@@ -1,9 +1,6 @@
 import { create } from "zustand";
 import { z } from "zod";
-import {
-  propertyValuationFormSchema,
-  personalDetailsFormSchema,
-} from "@/components/property/valuation";
+import { propertyValuationFormSchema, personalDetailsFormSchema } from "@/schema/valuation";
 
 type PropertyFormType = z.infer<typeof propertyValuationFormSchema>;
 type PersonalFormType = z.infer<typeof personalDetailsFormSchema>;

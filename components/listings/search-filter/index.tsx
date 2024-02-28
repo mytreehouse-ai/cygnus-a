@@ -84,6 +84,7 @@ function SearchFilter() {
             placeholder="Location"
             className="hidden lg:block"
           />
+
           <div className="flex justify-evenly gap-x-2">
             <Button
               className="order-1 w-full rounded-lg md:order-2"
