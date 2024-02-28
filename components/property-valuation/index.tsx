@@ -5,14 +5,12 @@ import { Progress } from "@/components/ui/progress";
 import ValuationStepper from "@/hooks/useStepperStore";
 import PropertyDetails from "./property-details";
 import PersonalDetails from "./personal-details";
-
-// import PersonalDetails from "./personaldetails";
-// import ValuationResults from "./valuationresults";
+import ValuationResult from "./valuation-result";
 
 const componentsMap = {
   Property: PropertyDetails,
   Personal: PersonalDetails,
-  // Results: ValuationResults,
+  Results: ValuationResult,
 };
 
 const PropertyValuation: React.FC = () => {
@@ -24,7 +22,7 @@ const PropertyValuation: React.FC = () => {
     ] || null;
 
   return (
-    <Card className="relative mx-auto w-full min-w-[320px] max-w-[1000px] overflow-y-auto rounded-xl md:min-w-[480px] md:rounded-xl">
+    <Card className="relative mx-auto w-full min-w-[320px] max-w-[1000px] overflow-y-auto rounded-xl border-none shadow-none md:min-w-[480px] md:rounded-xl">
       <div className="sticky left-0 top-0 z-10 flex h-20 w-full items-center justify-center bg-white px-6">
         <Progress
           value={
