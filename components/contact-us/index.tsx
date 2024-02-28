@@ -12,7 +12,7 @@ import { ImageKitLoader } from "../global/imagekit-loader";
 
 const ContactUs = () => {
   return (
-    <main className="">
+    <main>
       <div className="bg-emerald-50 px-4 pb-4 pt-10 md:px-6 lg:flex lg:gap-6  lg:pb-0">
         <div className="lg:w-3/4">
           <h1 className="text-4xl font-bold md:text-5xl">
