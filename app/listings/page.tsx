@@ -5,6 +5,7 @@ import { propertyCardsData } from "@/app/page";
 import PropertyCard from "@/components/property-card";
 import PropertySort from "@/components/listings/property-sort";
 import Pagination from "@/components/global/pagination";
+import Properties from "@/components/listings/properties";
 
 /**
  * The Listings component renders a list of property cards with search and pagination functionality.
@@ -27,22 +28,7 @@ function Listings() {
             </div>
             <PropertySort />
           </div>
-
-          <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0">
-            {propertyCardsData.map((property) => (
-              <li key={property.propertyName}>
-                <PropertyCard
-                  img="/property-image.png"
-                  location={property.location}
-                  price={property.price}
-                  sqm={property.sqm}
-                  propertyName="Furnished Condominium Unit"
-                  propertyType="Condominium"
-                  type={property.type}
-                />
-              </li>
-            ))}
-          </ul>
+          <Properties properties={propertyCardsData} />
         </section>
       </div>
       <Pagination className="mt-4 flex justify-start px-4" />
