@@ -18,19 +18,29 @@ interface PaginationProps {
 
 const Pagination = ({ className }: PaginationProps) => {
   return (
-    <PaginationComponent className={cn(className)}>
+    <PaginationComponent
+      className={cn(className, "text-slate-500 hover:text-slate-600")}
+    >
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious
+            className="bg-slate-200 hover:bg-slate-300"
+            href="#"
+          />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
+          <PaginationLink className="bg-slate-200 hover:bg-slate-300 " href="#">
+            1
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationEllipsis />
+          <PaginationEllipsis className="h-10 rounded-md bg-slate-200  hover:bg-slate-300" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext
+            className="bg-slate-200 hover:bg-slate-300"
+            href="#"
+          />
         </PaginationItem>
       </PaginationContent>
     </PaginationComponent>
