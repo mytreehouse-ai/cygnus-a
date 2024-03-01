@@ -7,15 +7,10 @@ import { Shrink, Building } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import type { IProperty } from "@/types/property";
 
-interface PropertyCardProps {
-  img: string;
-  propertyName: string;
-  propertyType: string;
-  location: string;
-  price: number;
-  sqm: number;
-  type: string;
+interface PropertyCardProps extends IProperty {
+  onClick?: () => void;
 }
 
 function PropertyCard({
@@ -26,9 +21,13 @@ function PropertyCard({
   propertyType,
   sqm,
   type,
+  onClick,
 }: PropertyCardProps) {
   return (
-    <Card className="rounded-xl p-1 shadow-none">
+    <Card
+      className="rounded-xl p-1 shadow-none hover:cursor-pointer"
+      onClick={onClick}
+    >
       <CardHeader className="p-2">
         <div className="relative h-0 w-full" style={{ paddingTop: "56.25%" }}>
           <Image

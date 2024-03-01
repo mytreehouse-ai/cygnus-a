@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { TreeDeciduous, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +38,7 @@ const menus = [
 ];
 
 function Navbar() {
+  const [sheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -62,7 +63,7 @@ function Navbar() {
         </div>
       </div>
 
-      <Sheet>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger>
           <Menu className="md:hidden" />
         </SheetTrigger>
@@ -76,6 +77,7 @@ function Navbar() {
                 key={item.id}
                 href={item.url}
                 className={cn(pathname === item.url && "text-emerald-600")}
+                onClick={() => setSheetOpen(false)}
               >
                 {item.name}
               </Link>
