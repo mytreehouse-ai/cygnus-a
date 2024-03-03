@@ -35,14 +35,6 @@ const ContactUs = () => {
         </p>
         <ContactForm />
       </div>
-      {/* <div className="relative h-96 w-screen">
-        <ImageKitLoader
-          responsive={true}
-          className="absolute object-fill"
-          src="public/upper-building-footer.svg"
-          alt="Side image for auth"
-        />
-      </div> */}
     </main>
   );
 };
