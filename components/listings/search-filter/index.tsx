@@ -18,22 +18,34 @@ import { propertyTypes } from "@/static_data/property-types";
 import { location } from "@/components/search-bar";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
+import { number } from "zod";
 
 function SearchFilter() {
   const searchParams = useSearchParams();
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
 
-  const propertySearchFilterForm = useForm({
+  const propertySearchFilterForm = useForm<{
+    search?: string | null;
+    location?: string;
+    propertyType: number;
+  }>({
+    mode: "onChange",
     values: {
       search: searchParams?.has("search") ? searchParams.get("search") : "",
+      propertyType: 0,
     },
   });
 
   const router = useRouter();
 
-  function onSubmit() {
-    const searchValue = propertySearchFilterForm.watch();
-    const searchParams = createSearchParams(searchValue);
+  function onSubmit(data: {
+    search?: string | null;
+    location?: string;
+    propertyType: number;
+  }) {
+    const searchParams = createSearchParams(data);
+
+    console.log(data);
 
     if (searchParams && searchParams.size) {
       router.replace(window.location.pathname + "?" + searchParams.toString(), {
@@ -73,7 +85,7 @@ function SearchFilter() {
 
           <ReactSelect
             data={propertyTypes}
-            name="property-types"
+            name="propertyType"
             placeholder="Property Type"
             className="hidden md:block"
           />
@@ -141,7 +153,7 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
           >
             <ReactSelect
               data={propertyTypes}
-              name="property-types"
+              name="propertyType"
               placeholder="Property Type"
               className="md:hidden"
             />

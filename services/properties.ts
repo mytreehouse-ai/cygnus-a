@@ -21,7 +21,7 @@ const getPropertiesQuery = async (filters: IPropertyFilters = {}) => {
   }
 };
 
-const usePropertiesQuery = (filters?: IPropertyFilters) => {
+const usePropertiesQuery = (filters?: Partial<IPropertyFilters>) => {
   return useQuery<IApiBaseResponse<IProperty[]>>({
     queryKey: ['properties', filters],
     queryFn: () => getPropertiesQuery(filters)
