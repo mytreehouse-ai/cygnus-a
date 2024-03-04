@@ -14,7 +14,7 @@ import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useState } from "react";
 import type { IModal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
-import { propertyTypes } from "@/components/search-bar";
+import { propertyTypes } from "@/static_data/property-types";
 import { location } from "@/components/search-bar";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";

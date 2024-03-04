@@ -18,7 +18,7 @@ interface PropertyCardProps {
 function PropertyCard({ property, onClick }: PropertyCardProps) {
   // console.log(env.NEXT_PUBLIC_NODE_ENV);
 
-  return (
+  return(
     <Card
       className="rounded-xl p-1 shadow-none hover:cursor-pointer"
       onClick={onClick}
@@ -66,7 +66,7 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
           </h3>
         </CardContent>
       </CardHeader>
-    </Card>
+    </Card>,
   );
 }
 

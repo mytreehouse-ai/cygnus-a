@@ -13,7 +13,9 @@ import usePropertiesQuery from "@/services/properties";
 const Properties = () => {
   const router = useRouter();
 
-  const { data: propertiesData } = usePropertiesQuery();
+  const { data: propertiesData } = usePropertiesQuery({
+    city_id: 1990,
+  });
 
   console.log(propertiesData);
 
