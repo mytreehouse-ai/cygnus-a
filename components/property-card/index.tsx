@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
@@ -8,21 +10,14 @@ import { Separator } from "@/components/ui/separator";
 import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import type { IProperty } from "@/types/property";
-
-interface PropertyCardProps extends IProperty {
+interface PropertyCardProps {
   onClick?: () => void;
+  property: IProperty;
 }
 
-function PropertyCard({
-  img,
-  location,
-  price,
-  propertyName,
-  propertyType,
-  sqm,
-  type,
-  onClick,
-}: PropertyCardProps) {
+function PropertyCard({ property, onClick }: PropertyCardProps) {
+  // console.log(env.NEXT_PUBLIC_NODE_ENV);
+
   return (
     <Card
       className="rounded-xl p-1 shadow-none hover:cursor-pointer"
@@ -31,8 +26,8 @@ function PropertyCard({
       <CardHeader className="p-2">
         <div className="relative h-0 w-full" style={{ paddingTop: "56.25%" }}>
           <Image
-            src={img}
-            alt={`${propertyName} image`}
+            src="/property-image.png"
+            alt={`${property.estate.building_name} image`}
             fill
             style={{ objectFit: "cover" }}
             placeholder="empty"
@@ -41,33 +36,33 @@ function PropertyCard({
           <Badge
             className={cn(
               "absolute left-0 top-0 m-2 rounded-md",
-              type === "for-rent" ? "bg-orange-400" : "bg-red-500",
+              property.listing_type.id === 1 ? "bg-orange-400" : "bg-red-500",
             )}
           >
-            {type === "for-rent" ? "For Rent" : "For Sale"}
+            {property.listing_type.id === 1 ? "For Sale" : "For Rent"}
           </Badge>
         </div>
         <CardTitle className="truncate text-lg ">
-          <p className="tracking-wide">{propertyName}</p>
+          <p className="tracking-wide">{property.estate.building_name}</p>
           <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
             <MapPin className="h-4 w-4" />
-            <span>{location}</span>
+            <span>{property.estate.address}</span>
           </p>
         </CardTitle>
         <CardContent className="p-0">
           <div className="my-1 flex gap-x-2">
             <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
               <Shrink className="h-4 w-4" />
-              <span>{sqm}</span>
+              <span>{property.estate.floor_size}</span>
             </p>
             <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
               <Building className="h-4 w-4" />
-              <span>{propertyType}</span>
+              <span>{property.property_type.description}</span>
             </p>
           </div>
           <Separator className="my-4" />
           <h3 className="text-lg font-bold text-emerald-600">
-            {formatCurrency(price ?? 0)}
+            {property.price_formatted}
           </h3>
         </CardContent>
       </CardHeader>

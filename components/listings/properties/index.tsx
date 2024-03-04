@@ -4,28 +4,27 @@ import React from "react";
 import type { IProperty } from "@/types/property";
 import PropertyCard from "@/components/property-card";
 import { useRouter } from "next/navigation";
+import usePropertiesQuery from "@/services/properties";
 
-interface IProperties {
-  properties: IProperty[];
-}
+// interface IProperties {
+//   properties: IProperty[];
+// }
 
-const Properties = ({ properties }: IProperties) => {
+const Properties = () => {
   const router = useRouter();
+
+  const { data: propertiesData } = usePropertiesQuery();
+
+  console.log(propertiesData);
 
   return (
     <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0">
-      {properties.map((property) => (
-        <li key={property.propertyName}>
+      {propertiesData?.results?.map((property) => (
+        <li key={property.estate.building_name}>
           <PropertyCard
-            img="/property-image.png"
-            location={property.location}
-            price={property.price}
-            sqm={property.sqm}
-            propertyName="Furnished Condominium Unit"
-            propertyType="Condominium"
-            type={property.type}
+            property={property}
             onClick={() =>
-              void router.push(`/listings/${property.propertyName}`)
+              void router.push(`/listings/${property.listing_title}`)
             }
           />
         </li>

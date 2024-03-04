@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "@/components/search-bar";
 import PropertyCard from "@/components/property-card";
 import { ImageKitLoader } from "@/components/global/imagekit-loader";
+import { useQuery } from "@tanstack/react-query";
 
 export const propertyCardsData = [
   {
@@ -65,7 +66,7 @@ const Home = () => {
           Find your dream property with our listing
         </p>
         <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0">
-          {propertyCardsData.map((property) => (
+          {/* {propertyCardsData.map((property) => (
             <li key={property.propertyName}>
               <PropertyCard
                 img="/property-image.png"
@@ -77,7 +78,7 @@ const Home = () => {
                 type={property.type}
               />
             </li>
-          ))}
+          ))} */}
         </ul>
       </section>
     </main>
