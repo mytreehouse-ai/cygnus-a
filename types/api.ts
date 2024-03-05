@@ -28,6 +28,8 @@ interface IPropertyFilters {
   outdoor_features?: string;
   other_features?: string;
 	search?: string
+	page?: number,
+	page_size?: number
 }
 
 export type {

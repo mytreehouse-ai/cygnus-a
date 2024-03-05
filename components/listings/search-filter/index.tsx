@@ -44,7 +44,13 @@ function SearchFilter() {
     location?: string;
     propertyType?: number;
   }) {
-    const searchParams = createSearchParams(data);
+    const params = {
+      ...data,
+      page: 1,
+      pageSize: 12,
+    };
+
+    const searchParams = createSearchParams(params);
 
     if (searchParams && searchParams.size) {
       router.replace(window.location.pathname + "?" + searchParams.toString(), {

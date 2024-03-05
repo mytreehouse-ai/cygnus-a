@@ -10,11 +10,18 @@ import usePropertiesQuery from "@/services/properties";
 const Properties = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const { data: propertiesData } = usePropertiesQuery({
     search: searchParams?.has("search") ? searchParams.get("search") ?? "" : "",
     property_type_id: searchParams?.has("propertyType")
       ? parseInt(searchParams.get("propertyType") ?? "", 10)
       : undefined,
+    page: searchParams?.has("page")
+      ? parseInt(searchParams.get("page") ?? "", 10)
+      : 1,
+    page_size: searchParams?.has("pageSize")
+      ? parseInt(searchParams.get("pageSize") ?? "", 10)
+      : 12,
     // city_id: 1990,
   });
 
