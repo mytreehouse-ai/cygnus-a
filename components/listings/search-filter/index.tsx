@@ -27,25 +27,24 @@ function SearchFilter() {
   const propertySearchFilterForm = useForm<{
     search?: string | null;
     location?: string;
-    propertyType: number;
+    propertyType?: number;
   }>({
-    mode: "onChange",
+    mode: "all",
     values: {
-      search: searchParams?.has("search") ? searchParams.get("search") : "",
-      propertyType: 0,
+      search: searchParams?.get("search") ?? "",
+      propertyType: searchParams?.has("propertyType")
+        ? parseInt(searchParams.get("propertyType") ?? "0")
+        : undefined,
     },
   });
-
   const router = useRouter();
 
   function onSubmit(data: {
     search?: string | null;
     location?: string;
-    propertyType: number;
+    propertyType?: number;
   }) {
     const searchParams = createSearchParams(data);
-
-    console.log(data);
 
     if (searchParams && searchParams.size) {
       router.replace(window.location.pathname + "?" + searchParams.toString(), {
@@ -99,13 +98,17 @@ function SearchFilter() {
 
           <div className="flex justify-evenly gap-x-2">
             <Button
+              type="button"
               className="order-1 w-full rounded-lg md:order-2"
               variant="outline"
               onClick={handleFilterButtonClick}
             >
               <SlidersHorizontal className="h-4 w-4 text-slate-500" />
             </Button>
-            <Button className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1">
+            <Button
+              type="submit"
+              className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
+            >
               <SearchIcon className="h-4 w-4" />
             </Button>
             <Button className="order-3 w-full rounded-lg" variant="outline">

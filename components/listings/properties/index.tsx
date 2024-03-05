@@ -11,13 +11,20 @@ const Properties = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { data: propertiesData } = usePropertiesQuery({
+    search: searchParams?.has("search") ? searchParams.get("search") ?? "" : "",
     property_type_id: searchParams?.has("propertyType")
-      ? parseInt(searchParams.get("propertyType") || "", 10)
+      ? parseInt(searchParams.get("propertyType") ?? "", 10)
       : undefined,
-    city_id: 1990,
+    // city_id: 1990,
   });
 
-  console.log(propertiesData);
+  if (propertiesData?.count === 0) {
+    return (
+      <div className="my-auto mt-4 flex h-40 w-full items-center justify-center rounded-md text-center font-bold text-neutral-200">
+        <p>No results found</p>
+      </div>
+    );
+  }
 
   return (
     <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0">

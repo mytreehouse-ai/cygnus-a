@@ -27,6 +27,7 @@ interface IPropertyFilters {
   indoor_features?: string;
   outdoor_features?: string;
   other_features?: string;
+	search?: string
 }
 
 export type {
