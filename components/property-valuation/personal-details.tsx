@@ -169,7 +169,10 @@ const PersonalDetails: React.FC = () => {
           >
             Previous
           </Button>
-          <Button className="w-full" type="submit">
+          <Button
+            className="order-2 mt-3 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
+            type="submit"
+          >
             Next
           </Button>
         </div>

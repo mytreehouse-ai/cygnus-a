@@ -28,7 +28,7 @@ function Listings() {
             </div>
             <PropertySort />
           </div>
-          <Properties properties={propertyCardsData} />
+          <Properties />
         </section>
       </div>
       <Pagination className="mt-4 flex justify-start px-4" />
