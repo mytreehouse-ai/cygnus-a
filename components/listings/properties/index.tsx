@@ -5,14 +5,16 @@ import type { IProperty } from "@/types/property";
 import PropertyCard from "@/components/property-card";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import usePropertiesQuery from "@/services/properties";
+import usePropertiesQuery from "@/services/usePropertiesQuery";
 
 const Properties = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const { data: propertiesData } = usePropertiesQuery({
-    search: searchParams?.has("search") ? searchParams.get("search") ?? "" : "",
+    search: searchParams?.has("search")
+      ? searchParams.get("search") ?? ""
+      : undefined,
     property_type_id: searchParams?.has("propertyType")
       ? parseInt(searchParams.get("propertyType") ?? "", 10)
       : undefined,

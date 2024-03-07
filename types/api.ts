@@ -5,7 +5,14 @@ interface IApiBaseResponse<T> {
 	results: T
 }
 
-interface IPropertyFilters {
+interface IApiBaseRequestParams {
+	search?: string,
+	ordering?: string,
+	page?: number,
+	page_size?: number
+}
+
+interface IPropertyFilters extends IApiBaseRequestParams {
   property_type_id?: number;
   listing_type_id?: number;
   property_status_id?: number;
@@ -27,12 +34,10 @@ interface IPropertyFilters {
   indoor_features?: string;
   outdoor_features?: string;
   other_features?: string;
-	search?: string
-	page?: number,
-	page_size?: number
 }
 
 export type {
 	IApiBaseResponse,
-	IPropertyFilters
+	IPropertyFilters,
+	IApiBaseRequestParams
 }

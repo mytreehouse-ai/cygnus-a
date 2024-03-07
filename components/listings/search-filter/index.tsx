@@ -18,11 +18,31 @@ import { propertyTypes } from "@/static_data/property-types";
 import { location } from "@/components/search-bar";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
-import { number } from "zod";
+import useCitiesQuery from "@/services/useCitiesQuery";
 
 function SearchFilter() {
-  const searchParams = useSearchParams();
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
+
+  const {
+    fetchNextPage,
+    results: cities,
+    data,
+  } = useCitiesQuery({
+    // page: 1,
+    // page_size: 20,
+  });
+
+  const citiesOptions = cities
+    ? cities.map((item) => ({
+        value: item.id,
+        label: item.name,
+      }))
+    : [];
 
   const propertySearchFilterForm = useForm<{
     search?: string | null;
@@ -37,7 +57,8 @@ function SearchFilter() {
         : undefined,
     },
   });
-  const router = useRouter();
+
+  console.log(data);
 
   function onSubmit(data: {
     search?: string | null;
@@ -65,6 +86,7 @@ function SearchFilter() {
 
   return (
     <div className="px-4">
+      <button onClick={() => fetchNextPage()}>GFech</button>
       <Form {...propertySearchFilterForm}>
         <form
           name="search-property-form"
@@ -96,7 +118,7 @@ function SearchFilter() {
           />
 
           <ReactSelect
-            data={location}
+            data={citiesOptions}
             name="location"
             placeholder="Location"
             className="hidden lg:block"
