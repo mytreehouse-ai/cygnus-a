@@ -28,21 +28,19 @@ function SearchFilter() {
 
   const router = useRouter();
 
-  const {
-    fetchNextPage,
-    results: cities,
-    data,
-  } = useCitiesQuery({
-    // page: 1,
-    // page_size: 20,
+  //TODO: FIX DUPLICATE DATA ON FIRST FETCH ISSUE
+  const { fetchNextPage, data, isFetching } = useCitiesQuery({
+    page: page,
+    page_size: 20,
   });
 
-  const citiesOptions = cities
-    ? cities.map((item) => ({
-        value: item.id,
-        label: item.name,
-      }))
-    : [];
+  const citiesOptions =
+    data?.pages.flatMap((page) =>
+      page.results.map((city) => ({
+        value: city.id,
+        label: city.name,
+      })),
+    ) ?? [];
 
   const propertySearchFilterForm = useForm<{
     search?: string | null;
@@ -57,8 +55,6 @@ function SearchFilter() {
         : undefined,
     },
   });
-
-  console.log(data);
 
   function onSubmit(data: {
     search?: string | null;
@@ -80,13 +76,19 @@ function SearchFilter() {
     }
   }
 
+  const handleScrolledToBottom = () => {
+    if (!isFetching) {
+      setPage((e) => e + 1);
+      fetchNextPage();
+    }
+  };
+
   function handleFilterButtonClick() {
     setFilterDrawerIsOpen(true);
   }
 
   return (
     <div className="px-4">
-      <button onClick={() => fetchNextPage()}>GFech</button>
       <Form {...propertySearchFilterForm}>
         <form
           name="search-property-form"
@@ -122,6 +124,7 @@ function SearchFilter() {
             name="location"
             placeholder="Location"
             className="hidden lg:block"
+            onMenuScrollToBottom={handleScrolledToBottom}
           />
 
           <div className="flex justify-evenly gap-x-2">
@@ -148,14 +151,20 @@ function SearchFilter() {
       <FilterDrawer
         open={filterDrawerIsOpen}
         onClose={() => setFilterDrawerIsOpen(false)}
+        citiesOptions={citiesOptions}
       />
     </div>
   );
 }
 
-interface FilterDrawerProps extends IModal {}
+interface FilterDrawerProps extends IModal {
+  citiesOptions: {
+    label: string;
+    value: number;
+  }[];
+}
 
-const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
+const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
@@ -189,7 +198,7 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
               className="md:hidden"
             />
             <ReactSelect
-              data={location}
+              data={citiesOptions ?? []}
               name="location"
               placeholder="Location"
               className="lg:hidden"

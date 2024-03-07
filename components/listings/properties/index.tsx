@@ -18,6 +18,9 @@ const Properties = () => {
     property_type_id: searchParams?.has("propertyType")
       ? parseInt(searchParams.get("propertyType") ?? "", 10)
       : undefined,
+    city_id: searchParams?.has("location")
+      ? parseInt(searchParams.get("location") ?? "", 10)
+      : undefined,
     page: searchParams?.has("page")
       ? parseInt(searchParams.get("page") ?? "", 10)
       : 1,
