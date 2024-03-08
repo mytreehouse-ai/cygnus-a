@@ -1,7 +1,6 @@
 import React from "react";
 import { Search } from "@/components/listings/search-filter";
 import { Separator } from "@/components/ui/separator";
-import { propertyCardsData } from "@/app/page";
 import PropertyCard from "@/components/property-card";
 import PropertySort from "@/components/listings/property-sort";
 import Pagination from "@/components/global/pagination";
