@@ -3,5 +3,5 @@
   "editor.detectIndentation": false,
   "editor.insertSpaces": false,
   "editor.wordWrap": "on",
-  "chat.editor.wordWrap": "on"
+	"chat.editor.wordWrap": "on"
 }
