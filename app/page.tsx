@@ -1,38 +1,6 @@
 import React from "react";
 import SearchBar from "@/components/search-bar";
-import PropertyCard from "@/components/property-card";
 import { ImageKitLoader } from "@/components/global/imagekit-loader";
-import { useQuery } from "@tanstack/react-query";
-
-export const propertyCardsData = [
-  {
-    img: "/path/to/image1.jpg",
-    propertyName: "Sunny Apartment",
-    propertyType: "Apartment",
-    location: "Downtown",
-    price: 1200,
-    sqm: 85,
-    type: "for-rent",
-  },
-  {
-    img: "/path/to/image2.jpg",
-    propertyName: "Cozy Cottage",
-    propertyType: "House",
-    location: "Countryside",
-    price: 250000,
-    sqm: 120,
-    type: "for-sale",
-  },
-  {
-    img: "/path/to/image3.jpg",
-    propertyName: "Modern Studio",
-    propertyType: "Studio",
-    location: "City Center",
-    price: 900,
-    sqm: 45,
-    type: "for-rent",
-  },
-];
 
 const Home = () => {
   return (
@@ -65,21 +33,7 @@ const Home = () => {
         <p className="py-2 text-sm text-slate-500">
           Find your dream property with our listing
         </p>
-        <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0">
-          {/* {propertyCardsData.map((property) => (
-            <li key={property.propertyName}>
-              <PropertyCard
-                img="/property-image.png"
-                location={property.location}
-                price={property.price}
-                sqm={property.sqm}
-                propertyName="Furnished Condominium Unit"
-                propertyType="Condominium"
-                type={property.type}
-              />
-            </li>
-          ))} */}
-        </ul>
+        <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0"></ul>
       </section>
     </main>
   );
