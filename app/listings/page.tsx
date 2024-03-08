@@ -1,9 +1,9 @@
-import React from "react";
-import { Search } from "@/components/listings/search-filter";
+import React, { Suspense } from "react";
 import { Separator } from "@/components/ui/separator";
 import PropertySort from "@/components/listings/property-sort";
 import Pagination from "@/components/global/pagination";
 import Properties from "@/components/listings/properties";
+import SearchFilter from "@/components/listings/search-filter";
 
 /**
  * The Listings component renders a list of property cards with search and pagination functionality.
@@ -14,7 +14,9 @@ function Listings() {
   return (
     <main className="flex min-h-screen flex-col justify-between pb-4 pt-2">
       <div>
-        <Search />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SearchFilter />
+        </Suspense>
         <Separator className="my-6" />
         <section className="mt-8 px-4">
           <div className="md:flex md:w-full md:justify-between">
@@ -26,10 +28,14 @@ function Listings() {
             </div>
             <PropertySort />
           </div>
-          <Properties />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Properties />
+          </Suspense>
         </section>
       </div>
-      <Pagination className="mt-4 flex justify-start px-4" />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Pagination className="mt-4 flex justify-start px-4" />
+      </Suspense>
     </main>
   );
 }

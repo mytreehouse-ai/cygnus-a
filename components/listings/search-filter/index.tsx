@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -18,143 +18,6 @@ import { propertyTypes } from "@/static_data/property-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
 import useCitiesQuery from "@/services/useCitiesQuery";
-
-function SearchFilter() {
-  const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
-  const [page, setPage] = useState(1);
-
-  const searchParams = useSearchParams();
-
-  const router = useRouter();
-
-  //TODO: FIX DUPLICATE DATA ON FIRST FETCH ISSUE
-  const { fetchNextPage, data, isFetching } = useCitiesQuery({
-    page: page,
-    page_size: 20,
-  });
-
-  const citiesOptions =
-    data?.pages.flatMap((page) =>
-      page.results.map((city) => ({
-        value: city.id,
-        label: city.name,
-      })),
-    ) ?? [];
-
-  const propertySearchFilterForm = useForm<{
-    search?: string | null;
-    location?: string;
-    propertyType?: number;
-  }>({
-    mode: "all",
-    values: {
-      search: searchParams?.get("search") ?? "",
-      propertyType: searchParams?.has("propertyType")
-        ? parseInt(searchParams.get("propertyType") ?? "0")
-        : undefined,
-    },
-  });
-
-  function onSubmit(data: {
-    search?: string | null;
-    location?: string;
-    propertyType?: number;
-  }) {
-    const params = {
-      ...data,
-      page: 1,
-      pageSize: 12,
-    };
-
-    const searchParams = createSearchParams(params);
-
-    if (searchParams && searchParams.size) {
-      router.replace(window.location.pathname + "?" + searchParams.toString(), {
-        scroll: false,
-      });
-    }
-  }
-
-  const handleScrolledToBottom = () => {
-    if (!isFetching) {
-      setPage((e) => e + 1);
-      fetchNextPage();
-    }
-  };
-
-  function handleFilterButtonClick() {
-    setFilterDrawerIsOpen(true);
-  }
-
-  return (
-    <div className="px-4">
-      <Form {...propertySearchFilterForm}>
-        <form
-          name="search-property-form"
-          onSubmit={propertySearchFilterForm.handleSubmit(onSubmit)}
-          className="mt-4 w-full space-y-2 md:flex md:items-center md:justify-stretch md:gap-x-2 md:space-y-0"
-        >
-          <FormField
-            control={propertySearchFilterForm.control}
-            name="search"
-            render={({ field }) => (
-              <FormItem className="w-auto md:w-full">
-                <FormControl>
-                  <Input
-                    placeholder="Search Property"
-                    {...field}
-                    value={field.value ?? ""}
-                    className="w-full rounded-lg text-sm md:w-full"
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <ReactSelect
-            data={propertyTypes}
-            name="propertyType"
-            placeholder="Property Type"
-            className="hidden md:block"
-          />
-
-          <ReactSelect
-            data={citiesOptions}
-            name="location"
-            placeholder="Location"
-            className="hidden lg:block"
-            onMenuScrollToBottom={handleScrolledToBottom}
-          />
-
-          <div className="flex justify-evenly gap-x-2">
-            <Button
-              type="button"
-              className="order-1 w-full rounded-lg md:order-2"
-              variant="outline"
-              onClick={handleFilterButtonClick}
-            >
-              <SlidersHorizontal className="h-4 w-4 text-slate-500" />
-            </Button>
-            <Button
-              type="submit"
-              className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
-            >
-              <SearchIcon className="h-4 w-4" />
-            </Button>
-            <Button className="order-3 w-full rounded-lg" variant="outline">
-              <Map className="h-4 w-4 text-slate-500" />
-            </Button>
-          </div>
-        </form>
-      </Form>
-      <FilterDrawer
-        open={filterDrawerIsOpen}
-        onClose={() => setFilterDrawerIsOpen(false)}
-        citiesOptions={citiesOptions}
-      />
-    </div>
-  );
-}
 
 interface FilterDrawerProps extends IModal {
   citiesOptions: {
@@ -301,11 +164,141 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   );
 };
 
-// TODO: Create a loader for this search component
-export function Search() {
+function SearchFilter() {
+  const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
+
+  //TODO: FIX DUPLICATE DATA ON FIRST FETCH ISSUE
+  const { fetchNextPage, data, isFetching } = useCitiesQuery({
+    page: page,
+    page_size: 20,
+  });
+
+  const citiesOptions =
+    data?.pages.flatMap((page) =>
+      page.results.map((city) => ({
+        value: city.id,
+        label: city.name,
+      })),
+    ) ?? [];
+
+  const propertySearchFilterForm = useForm<{
+    search?: string | null;
+    location?: string;
+    propertyType?: number;
+  }>({
+    mode: "all",
+    values: {
+      search: searchParams?.get("search") ?? "",
+      propertyType: searchParams?.has("propertyType")
+        ? parseInt(searchParams.get("propertyType") ?? "0")
+        : undefined,
+    },
+  });
+
+  function onSubmit(data: {
+    search?: string | null;
+    location?: string;
+    propertyType?: number;
+  }) {
+    const params = {
+      ...data,
+      page: 1,
+      pageSize: 12,
+    };
+
+    const searchParams = createSearchParams(params);
+
+    if (searchParams && searchParams.size) {
+      router.replace(window.location.pathname + "?" + searchParams.toString(), {
+        scroll: false,
+      });
+    }
+  }
+
+  const handleScrolledToBottom = () => {
+    if (!isFetching) {
+      setPage((e) => e + 1);
+      fetchNextPage();
+    }
+  };
+
+  function handleFilterButtonClick() {
+    setFilterDrawerIsOpen(true);
+  }
+
   return (
-    <Suspense fallback={<div>Loading search...</div>}>
-      <SearchFilter />
-    </Suspense>
+    <div className="px-4">
+      <Form {...propertySearchFilterForm}>
+        <form
+          name="search-property-form"
+          onSubmit={propertySearchFilterForm.handleSubmit(onSubmit)}
+          className="mt-4 w-full space-y-2 md:flex md:items-center md:justify-stretch md:gap-x-2 md:space-y-0"
+        >
+          <FormField
+            control={propertySearchFilterForm.control}
+            name="search"
+            render={({ field }) => (
+              <FormItem className="w-auto md:w-full">
+                <FormControl>
+                  <Input
+                    placeholder="Search Property"
+                    {...field}
+                    value={field.value ?? ""}
+                    className="w-full rounded-lg text-sm md:w-full"
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <ReactSelect
+            data={propertyTypes}
+            name="propertyType"
+            placeholder="Property Type"
+            className="hidden md:block"
+          />
+
+          <ReactSelect
+            data={citiesOptions}
+            name="location"
+            placeholder="Location"
+            className="hidden lg:block"
+            onMenuScrollToBottom={handleScrolledToBottom}
+          />
+
+          <div className="flex justify-evenly gap-x-2">
+            <Button
+              type="button"
+              className="order-1 w-full rounded-lg md:order-2"
+              variant="outline"
+              onClick={handleFilterButtonClick}
+            >
+              <SlidersHorizontal className="h-4 w-4 text-slate-500" />
+            </Button>
+            <Button
+              type="submit"
+              className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
+            >
+              <SearchIcon className="h-4 w-4" />
+            </Button>
+            <Button className="order-3 w-full rounded-lg" variant="outline">
+              <Map className="h-4 w-4 text-slate-500" />
+            </Button>
+          </div>
+        </form>
+      </Form>
+      <FilterDrawer
+        open={filterDrawerIsOpen}
+        onClose={() => setFilterDrawerIsOpen(false)}
+        citiesOptions={citiesOptions}
+      />
+    </div>
   );
 }
+
+export default SearchFilter;

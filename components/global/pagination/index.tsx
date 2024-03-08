@@ -4,13 +4,11 @@ import React from "react";
 import {
   Pagination as PaginationComponent,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { cn, createSearchParams } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
