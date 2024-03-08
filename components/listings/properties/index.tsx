@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import type { IProperty } from "@/types/property";
 import PropertyCard from "@/components/property-card";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
