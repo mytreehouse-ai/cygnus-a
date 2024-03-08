@@ -50,6 +50,7 @@ interface SelectProps
     option: ReactSelectOnChangeOption,
     oldOptionValue?: ReactSelectValueType,
   ) => void;
+  onMenuScrollToBottom?: (event: WheelEvent | TouchEvent) => void;
 }
 
 const ReactSelect: React.FC<SelectProps> = ({
@@ -64,6 +65,8 @@ const ReactSelect: React.FC<SelectProps> = ({
   disabled,
   onChange,
   className,
+
+  onMenuScrollToBottom,
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const id = Date.now().toString();
@@ -287,6 +290,7 @@ const ReactSelect: React.FC<SelectProps> = ({
         isDisabled={disabled}
         closeMenuOnSelect={closeOnSelect}
         isMulti={isMulti}
+        onMenuScrollToBottom={onMenuScrollToBottom}
         onChange={(selectedOption) => {
           let currentValue: ReactSelectValueType;
           let currentOption;

@@ -16,9 +16,7 @@ interface PropertyCardProps {
 }
 
 function PropertyCard({ property, onClick }: PropertyCardProps) {
-  // console.log(env.NEXT_PUBLIC_NODE_ENV);
-
-  return(
+  return (
     <Card
       className="rounded-xl p-1 shadow-none hover:cursor-pointer"
       onClick={onClick}
@@ -42,22 +40,50 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
             {property.listing_type.id === 1 ? "For Sale" : "For Rent"}
           </Badge>
         </div>
-        <CardTitle className="truncate text-lg ">
-          <p className="tracking-wide">{property.estate.building_name}</p>
-          <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
+        <CardTitle className="truncate text-lg">
+          <p className="tracking-wide">
+            {property?.estate?.building_name ? (
+              property?.estate?.building_name
+            ) : (
+              <span className="text-neutral-400 opacity-50">
+                Name not available
+              </span>
+            )}
+          </p>
+          <p className="flex items-center gap-x-2  text-sm font-normal text-slate-500">
             <MapPin className="h-4 w-4" />
-            <span>{property.estate.address}</span>
+            <span>
+              {property?.estate?.address ? (
+                property?.estate?.address
+              ) : (
+                <span className="text-neutral-400 opacity-50">
+                  Address not available
+                </span>
+              )}
+            </span>
           </p>
         </CardTitle>
         <CardContent className="p-0">
           <div className="my-1 flex gap-x-2">
-            <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
+            <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500">
               <Shrink className="h-4 w-4" />
-              <span>{property.estate.floor_size}</span>
+              <span>
+                {property?.estate?.floor_size ? (
+                  property?.estate?.floor_size
+                ) : (
+                  <span className="text-neutral-400 opacity-50">N/A</span>
+                )}
+              </span>
             </p>
-            <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500 ">
+            <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500">
               <Building className="h-4 w-4" />
-              <span>{property.property_type.description}</span>
+              <span>
+                {property?.property_type?.description ? (
+                  property?.property_type?.description
+                ) : (
+                  <span className="text-neutral-400 opacity-50">N/A</span>
+                )}
+              </span>
             </p>
           </div>
           <Separator className="my-4" />
@@ -66,7 +92,7 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
           </h3>
         </CardContent>
       </CardHeader>
-    </Card>,
+    </Card>
   );
 }
 

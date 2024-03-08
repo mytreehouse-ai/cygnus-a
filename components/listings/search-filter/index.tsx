@@ -15,37 +15,58 @@ import { useState } from "react";
 import type { IModal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
-import { location } from "@/components/search-bar";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
-import { number } from "zod";
+import useCitiesQuery from "@/services/useCitiesQuery";
 
 function SearchFilter() {
-  const searchParams = useSearchParams();
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
+
+  //TODO: FIX DUPLICATE DATA ON FIRST FETCH ISSUE
+  const { fetchNextPage, data, isFetching } = useCitiesQuery({
+    page: page,
+    page_size: 20,
+  });
+
+  const citiesOptions =
+    data?.pages.flatMap((page) =>
+      page.results.map((city) => ({
+        value: city.id,
+        label: city.name,
+      })),
+    ) ?? [];
 
   const propertySearchFilterForm = useForm<{
     search?: string | null;
     location?: string;
-    propertyType: number;
+    propertyType?: number;
   }>({
-    mode: "onChange",
+    mode: "all",
     values: {
-      search: searchParams?.has("search") ? searchParams.get("search") : "",
-      propertyType: 0,
+      search: searchParams?.get("search") ?? "",
+      propertyType: searchParams?.has("propertyType")
+        ? parseInt(searchParams.get("propertyType") ?? "0")
+        : undefined,
     },
   });
-
-  const router = useRouter();
 
   function onSubmit(data: {
     search?: string | null;
     location?: string;
-    propertyType: number;
+    propertyType?: number;
   }) {
-    const searchParams = createSearchParams(data);
+    const params = {
+      ...data,
+      page: 1,
+      pageSize: 12,
+    };
 
-    console.log(data);
+    const searchParams = createSearchParams(params);
 
     if (searchParams && searchParams.size) {
       router.replace(window.location.pathname + "?" + searchParams.toString(), {
@@ -53,6 +74,13 @@ function SearchFilter() {
       });
     }
   }
+
+  const handleScrolledToBottom = () => {
+    if (!isFetching) {
+      setPage((e) => e + 1);
+      fetchNextPage();
+    }
+  };
 
   function handleFilterButtonClick() {
     setFilterDrawerIsOpen(true);
@@ -91,21 +119,26 @@ function SearchFilter() {
           />
 
           <ReactSelect
-            data={location}
+            data={citiesOptions}
             name="location"
             placeholder="Location"
             className="hidden lg:block"
+            onMenuScrollToBottom={handleScrolledToBottom}
           />
 
           <div className="flex justify-evenly gap-x-2">
             <Button
+              type="button"
               className="order-1 w-full rounded-lg md:order-2"
               variant="outline"
               onClick={handleFilterButtonClick}
             >
               <SlidersHorizontal className="h-4 w-4 text-slate-500" />
             </Button>
-            <Button className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1">
+            <Button
+              type="submit"
+              className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
+            >
               <SearchIcon className="h-4 w-4" />
             </Button>
             <Button className="order-3 w-full rounded-lg" variant="outline">
@@ -117,14 +150,20 @@ function SearchFilter() {
       <FilterDrawer
         open={filterDrawerIsOpen}
         onClose={() => setFilterDrawerIsOpen(false)}
+        citiesOptions={citiesOptions}
       />
     </div>
   );
 }
 
-interface FilterDrawerProps extends IModal {}
+interface FilterDrawerProps extends IModal {
+  citiesOptions: {
+    label: string;
+    value: number;
+  }[];
+}
 
-const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
+const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
@@ -158,7 +197,7 @@ const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
               className="md:hidden"
             />
             <ReactSelect
-              data={location}
+              data={citiesOptions ?? []}
               name="location"
               placeholder="Location"
               className="lg:hidden"
