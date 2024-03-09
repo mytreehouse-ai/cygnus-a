@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { LayoutList, Pencil, Send } from "lucide-react";
+import { LayoutList, Pencil, Send, HelpCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { useForm } from "react-hook-form";
@@ -30,6 +30,13 @@ const AIChat = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
           tristique.
         </p>
+        <Button
+          variant="outline"
+          className="flex gap-x-1 text-xs text-slate-500"
+        >
+          <HelpCircle className="h-4 w-4" />
+          FAQs
+        </Button>
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
