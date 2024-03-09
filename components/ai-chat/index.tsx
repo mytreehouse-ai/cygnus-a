@@ -1,6 +1,12 @@
+"use client";
+
 import React from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { LayoutList, Pencil } from "lucide-react";
+import { LayoutList, Pencil, Send } from "lucide-react";
+import { Button } from "../ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { useForm } from "react-hook-form";
+import { Input } from "../ui/input";
 
 const AIChat = () => {
   return (
@@ -51,8 +57,14 @@ const DUMMY_MESSAGE = [
 ];
 
 const ChatBody = () => {
+  const chatForm = useForm();
+
+  const onSubmit = () => {
+    console.log("submitted");
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {DUMMY_MESSAGE.map((i) => (
         <div key={i.id}>
           <div className="inline-flex items-center gap-x-2 text-sm font-bold">
@@ -64,6 +76,37 @@ const ChatBody = () => {
           <p className="ml-8 mt-2 text-sm text-slate-900">{i.message}</p>
         </div>
       ))}
+      <Card>
+        <CardContent className="p-2">
+          <Form {...chatForm}>
+            <form
+              name="chat-form"
+              onSubmit={chatForm.handleSubmit(onSubmit)}
+              className="flex flex-row justify-between"
+            >
+              <FormField
+                control={chatForm.control}
+                name="message"
+                render={() => (
+                  <FormItem className="w-full md:w-full">
+                    <FormControl>
+                      <div className="space-y-1 text-start">
+                        <Input
+                          placeholder="Message MyTreeHouseAI..."
+                          className="w-full rounded-lg border-none text-sm focus:border-none focus:outline-none focus-visible:ring-0 md:w-full "
+                        />
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">
+                <Send />
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </div>
   );
 };
