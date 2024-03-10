@@ -74,6 +74,9 @@ dependencies:
   cmdk:
     specifier: ^0.2.1
     version: 0.2.1(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+  lucide:
+    specifier: ^0.353.0
+    version: 0.353.0
   lucide-react:
     specifier: ^0.350.0
     version: 0.350.0(react@18.2.0)
@@ -3723,6 +3726,10 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /lucide@0.353.0:
+    resolution: {integrity: sha512-Kc+rhnUcA5xYU3izoCDXuF+AipwV7YdXPCu8t8JUHN1a5iU6dBHloBG2U4U8At1b626CMHDWp62gz1OmEoOupg==}
     dev: false
 
   /markdown-table@3.0.3:
