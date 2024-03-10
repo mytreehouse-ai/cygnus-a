@@ -31,8 +31,24 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const propertyFilterForms = useForm();
+  const propertyFilterForms = useForm({
+    values: {
+      location: searchParams?.has("location")
+        ? parseInt(searchParams.get("location") ?? "0")
+        : undefined,
+      "listing-type": searchParams?.has("listing-type")
+        ? parseInt(searchParams.get("listing-type") ?? "0")
+        : undefined,
+      bedroom: searchParams?.has("bedroom")
+        ? parseInt(searchParams.get("bedroom") ?? "0")
+        : undefined,
+      bathroom: searchParams?.has("bathroom")
+        ? parseInt(searchParams.get("bathroom") ?? "0")
+        : undefined,
+    },
+  });
 
   const onSubmit = () => {
     const searchValue = propertyFilterForms.watch();

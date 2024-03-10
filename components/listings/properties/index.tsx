@@ -23,6 +23,12 @@ const Properties = () => {
     listing_type_id: searchParams?.has("listing-type")
       ? parseInt(searchParams.get("listing-type") ?? "", 10)
       : undefined,
+    num_bathrooms_min: searchParams?.has("bathroom")
+      ? parseInt(searchParams.get("bathroom") ?? "", 10)
+      : undefined,
+    num_bedrooms_min: searchParams?.has("bedroom")
+      ? parseInt(searchParams.get("bedroom") ?? "", 10)
+      : undefined,
     page: searchParams?.has("page")
       ? parseInt(searchParams.get("page") ?? "", 10)
       : 1,
