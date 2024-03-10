@@ -63,6 +63,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
     void onClose();
   };
 
+  const onResetFilters = () => {
+    void router.replace(window.location.pathname);
+    propertyFilterForms.reset();
+    void onClose();
+  };
+
   return (
     <Drawer open={open} onClose={onClose}>
       <DrawerContent className="flex items-center justify-center py-4">
@@ -173,7 +179,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
             <Button className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1">
               Apply Filters
             </Button>
-            <Button className="order-3 w-full rounded-lg" variant="outline">
+            <Button
+              className="order-3 w-full rounded-lg"
+              variant="outline"
+              type="reset"
+              onClick={onResetFilters}
+            >
               Reset
             </Button>
           </form>
