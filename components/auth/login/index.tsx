@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { cn } from "@/lib/utils";
 
-import { handleCredentialsLogin } from "@/app/auth/login/_login";
 import { useGlobalStore } from "@/lib/store";
 
 const setCount = () => {
@@ -45,20 +44,7 @@ function LoginForm() {
     },
   });
 
-  const onSubmit = form.handleSubmit(async (values) => {
-    try {
-      setLoading(true);
-      await handleCredentialsLogin({
-        username: values.username,
-        password: values.password,
-      });
-      // Handle successful login, e.g., redirect to dashboard
-    } catch (error) {
-      // Handle login error, e.g., show an error message
-      console.error(error);
-      setLoading(false);
-    }
-  });
+  const onSubmit = form.handleSubmit(async (values) => {});
 
   return (
     <Form {...form}>
