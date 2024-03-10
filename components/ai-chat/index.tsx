@@ -32,25 +32,31 @@ const AIChat = () => {
   }
 
   return (
-    <main className="flex flex-col justify-between pb-4 pt-2 lg:mx-auto lg:max-w-7xl">
+    <main className="flex min-h-[calc(100vh_-_200px)] grow flex-col justify-between pb-4 pt-2 md:min-h-[calc(100vh_-_250px)] lg:mx-auto lg:my-auto lg:max-w-7xl">
       <ChatHistory
         open={showChatHistory}
         onClose={() => setShowChatHistory(false)}
       />
       <div className="space-y-4 px-4 pb-4  pt-10 md:pt-12">
-        <h3 className=" text-3xl font-bold md:hidden">AI Chatbot</h3>
-        <p className="tex-sm text-slate-500 md:hidden">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
-          tristique.
-        </p>
-        <Button
-          variant="outline"
-          className="flex gap-x-1 text-xs text-slate-500"
-        >
-          <HelpCircle className="h-4 w-4" />
-          FAQs
-        </Button>
-        <Card className="md:flex md:items-stretch">
+        <div className="flex flex-col items-start gap-y-5 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h3 className=" text-3xl font-bold ">AI Chatbot</h3>
+            <p className="tex-sm text-slate-500 ">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
+              tristique.
+            </p>
+          </div>
+
+          <Button
+            variant="outline"
+            className="flex gap-x-1 text-xs text-slate-500"
+          >
+            <HelpCircle className="h-4 w-4" />
+            FAQs
+          </Button>
+        </div>
+
+        <Card className=" md:flex md:items-stretch">
           <CardHeader className=" flex flex-col justify-between md:w-2/5 md:p-0">
             <div className="flex shrink-0 items-center justify-between md:p-4">
               <LayoutList
@@ -93,7 +99,7 @@ const AIChat = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="bg-[#F2F2F2] py-6 md:w-3/5">
+          <CardContent className="h-full bg-[#F2F2F2] py-6 md:min-h-[calc(100vh_-_400px)] md:w-3/5">
             <ChatBody />
           </CardContent>
         </Card>
@@ -127,18 +133,21 @@ const ChatBody = () => {
   };
 
   return (
-    <div className="space-y-8">
-      {DUMMY_MESSAGE.map((i) => (
-        <div key={i.id}>
-          <div className="inline-flex items-center gap-x-2 text-sm font-bold">
-            <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-3  font-normal text-white">
-              M
+    <div className="flex min-h-[calc(100vh_-_380px)] flex-col justify-between gap-y-8  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]">
+      <div>
+        {DUMMY_MESSAGE.map((i) => (
+          <div key={i.id}>
+            <div className="inline-flex items-center gap-x-2 text-sm font-bold">
+              <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-3  font-normal text-white">
+                M
+              </div>
+              <p>{i.from}</p>
             </div>
-            <p>{i.from}</p>
+            <p className="ml-8 mt-2 text-sm text-slate-900">{i.message}</p>
           </div>
-          <p className="ml-8 mt-2 text-sm text-slate-900">{i.message}</p>
-        </div>
-      ))}
+        ))}
+      </div>
+
       <Card>
         <CardContent className="p-2">
           <Form {...chatForm}>
