@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { SessionProvider } from "next-auth/react";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 import ReactQueryProvider from "@/components/react-query-provider";
@@ -26,14 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "min-h-screen")}>
-        <ReactQueryProvider>
-          <SessionProvider>
+        <ClerkProvider>
+          <ReactQueryProvider>
             <Navbar />
             {children}
             <Footer />
-          </SessionProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </ReactQueryProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ReactQueryProvider>
+        </ClerkProvider>
         <SpeedInsights />
         <Analytics />
       </body>
