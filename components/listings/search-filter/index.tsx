@@ -19,7 +19,6 @@ import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
 import useCitiesQuery from "@/services/useCitiesQuery";
-
 interface FilterDrawerProps extends IModal {
   citiesOptions: {
     label: string;
@@ -33,7 +32,14 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const propertyFilterForms = useForm({
+  const propertyFilterForms = useForm<{
+    location?: number;
+    "listing-type"?: number;
+    bedroom?: number;
+    bathroom?: number;
+    min_price?: number;
+    max_price?: number;
+  }>({
     values: {
       location: searchParams?.has("location")
         ? parseInt(searchParams.get("location") ?? "0")
@@ -148,7 +154,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 withoutLabel={true}
                 minStepsBetweenThumbs={100_000_000}
                 onValueChange={(values) => {
-                  setPriceRange(values);
+                  propertyFilterForms.setValue("min_price", values[0]);
+                  propertyFilterForms.setValue("max_price", values[1]);
                 }}
                 className="mt-2"
               />
