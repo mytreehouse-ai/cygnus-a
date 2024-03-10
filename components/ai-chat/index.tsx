@@ -32,24 +32,30 @@ const AIChat = () => {
   }
 
   return (
-    <main className="flex flex-col justify-between pb-4 pt-2 lg:mx-auto lg:max-w-7xl">
+    <main className="flex min-h-screen grow flex-col justify-between pb-4 pt-2 lg:mx-auto lg:my-auto lg:max-w-7xl">
       <ChatHistory
         open={showChatHistory}
         onClose={() => setShowChatHistory(false)}
       />
       <div className="space-y-4 px-4 pb-4  pt-10 md:pt-12">
-        <h3 className=" text-3xl font-bold md:hidden">AI Chatbot</h3>
-        <p className="tex-sm text-slate-500 md:hidden">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
-          tristique.
-        </p>
-        <Button
-          variant="outline"
-          className="flex gap-x-1 text-xs text-slate-500"
-        >
-          <HelpCircle className="h-4 w-4" />
-          FAQs
-        </Button>
+        <div className="flex flex-col items-start gap-y-5 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h3 className=" text-3xl font-bold ">AI Chatbot</h3>
+            <p className="tex-sm text-slate-500 ">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
+              tristique.
+            </p>
+          </div>
+
+          <Button
+            variant="outline"
+            className="flex gap-x-1 text-xs text-slate-500"
+          >
+            <HelpCircle className="h-4 w-4" />
+            FAQs
+          </Button>
+        </div>
+
         <Card className="md:flex md:items-stretch">
           <CardHeader className=" flex flex-col justify-between md:w-2/5 md:p-0">
             <div className="flex shrink-0 items-center justify-between md:p-4">
