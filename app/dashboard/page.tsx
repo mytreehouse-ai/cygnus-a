@@ -1,12 +1,5 @@
-import { auth } from "@/auth";
-import LogoutButton from "../auth/logout";
-
 const DashboardPage = async () => {
-  const xxx = await auth();
-
-  console.log(xxx);
-
-  return <LogoutButton />;
+  return <div>Dashboard</div>;
 };
 
 export default DashboardPage;
