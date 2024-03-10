@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import ValuationStepper from "@/hooks/useStepperStore";
 import useValuationFormStore from "@/hooks/useValuationFormStore";
 import Image from "next/image";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
 
 import { Separator } from "@/components/ui/separator";
