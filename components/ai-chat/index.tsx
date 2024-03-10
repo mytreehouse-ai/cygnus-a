@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent, CardHeader } from "@/components//ui/card";
 import { LayoutList, Pencil, Send, HelpCircle } from "lucide-react";
-import { Button } from "../ui/button";
-import { Form, FormControl, FormField, FormItem } from "../ui/form";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem } from "@/components//ui/form";
 import { useForm } from "react-hook-form";
-import { Input } from "../ui/input";
-import { Drawer, DrawerContent, DrawerHeader } from "../ui/drawer";
+import { Input } from "@/components//ui/input";
+import { Drawer, DrawerContent, DrawerHeader } from "@/components//ui/drawer";
 import type { IModal } from "@/types";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components//ui/separator";
 
 const DUMMY_CHAT_HISTORY = [
   {

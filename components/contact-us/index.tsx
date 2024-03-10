@@ -1,13 +1,24 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components//ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components//ui/form";
 import { useForm } from "react-hook-form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
+import { Input } from "@/components//ui/input";
+import { Textarea } from "@/components//ui/textarea";
+import { Button } from "@/components//ui/button";
+import { Checkbox } from "@/components//ui/checkbox";
 
 const ContactUs = () => {
   return (
