@@ -8,7 +8,6 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
-import { ImageKitLoader } from "../global/imagekit-loader";
 
 const ContactUs = () => {
   return (
