@@ -15,6 +15,7 @@ import { useState } from "react";
 import type { IModal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
+import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
 import useCitiesQuery from "@/services/useCitiesQuery";
@@ -42,6 +43,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
         scroll: false,
       });
     }
+
+    void onClose();
   };
 
   return (
@@ -66,8 +69,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               className="lg:hidden"
             />
             <ReactSelect
-              data={[]}
-              name="listing-types"
+              data={listingTypes}
+              name="listing-type"
               placeholder="Listing Type"
             />
             <div className="flex gap-x-2">

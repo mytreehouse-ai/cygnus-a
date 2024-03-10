@@ -32,7 +32,7 @@ const AIChat = () => {
   }
 
   return (
-    <main className="flex min-h-screen grow flex-col justify-between pb-4 pt-2 lg:mx-auto lg:my-auto lg:max-w-7xl">
+    <main className="flex min-h-[calc(100vh_-_200px)] grow flex-col justify-between pb-4 pt-2 md:min-h-[calc(100vh_-_250px)] lg:mx-auto lg:my-auto lg:max-w-7xl">
       <ChatHistory
         open={showChatHistory}
         onClose={() => setShowChatHistory(false)}
@@ -56,7 +56,7 @@ const AIChat = () => {
           </Button>
         </div>
 
-        <Card className="md:flex md:items-stretch">
+        <Card className=" md:flex md:items-stretch">
           <CardHeader className=" flex flex-col justify-between md:w-2/5 md:p-0">
             <div className="flex shrink-0 items-center justify-between md:p-4">
               <LayoutList
@@ -99,7 +99,7 @@ const AIChat = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="bg-[#F2F2F2] py-6 md:w-3/5">
+          <CardContent className="h-full bg-[#F2F2F2] py-6 md:min-h-[calc(100vh_-_400px)] md:w-3/5">
             <ChatBody />
           </CardContent>
         </Card>
@@ -133,18 +133,21 @@ const ChatBody = () => {
   };
 
   return (
-    <div className="space-y-8">
-      {DUMMY_MESSAGE.map((i) => (
-        <div key={i.id}>
-          <div className="inline-flex items-center gap-x-2 text-sm font-bold">
-            <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-3  font-normal text-white">
-              M
+    <div className="flex min-h-[calc(100vh_-_380px)] flex-col justify-between gap-y-8  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]">
+      <div>
+        {DUMMY_MESSAGE.map((i) => (
+          <div key={i.id}>
+            <div className="inline-flex items-center gap-x-2 text-sm font-bold">
+              <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-3  font-normal text-white">
+                M
+              </div>
+              <p>{i.from}</p>
             </div>
-            <p>{i.from}</p>
+            <p className="ml-8 mt-2 text-sm text-slate-900">{i.message}</p>
           </div>
-          <p className="ml-8 mt-2 text-sm text-slate-900">{i.message}</p>
-        </div>
-      ))}
+        ))}
+      </div>
+
       <Card>
         <CardContent className="p-2">
           <Form {...chatForm}>
