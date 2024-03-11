@@ -15,10 +15,10 @@ import { useState } from "react";
 import type { IModal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
+import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
 import useCitiesQuery from "@/services/useCitiesQuery";
-
 interface FilterDrawerProps extends IModal {
   citiesOptions: {
     label: string;
@@ -30,8 +30,31 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const propertyFilterForms = useForm();
+  const propertyFilterForms = useForm<{
+    location?: number;
+    "listing-type"?: number;
+    bedroom?: number;
+    bathroom?: number;
+    min_price?: number;
+    max_price?: number;
+  }>({
+    values: {
+      location: searchParams?.has("location")
+        ? parseInt(searchParams.get("location") ?? "0")
+        : undefined,
+      "listing-type": searchParams?.has("listing-type")
+        ? parseInt(searchParams.get("listing-type") ?? "0")
+        : undefined,
+      bedroom: searchParams?.has("bedroom")
+        ? parseInt(searchParams.get("bedroom") ?? "0")
+        : undefined,
+      bathroom: searchParams?.has("bathroom")
+        ? parseInt(searchParams.get("bathroom") ?? "0")
+        : undefined,
+    },
+  });
 
   const onSubmit = () => {
     const searchValue = propertyFilterForms.watch();
@@ -42,6 +65,14 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
         scroll: false,
       });
     }
+
+    void onClose();
+  };
+
+  const onResetFilters = () => {
+    void router.replace(window.location.pathname);
+    propertyFilterForms.reset();
+    void onClose();
   };
 
   return (
@@ -66,8 +97,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               className="lg:hidden"
             />
             <ReactSelect
-              data={[]}
-              name="listing-types"
+              data={listingTypes}
+              name="listing-type"
               placeholder="Listing Type"
             />
             <div className="flex gap-x-2">
@@ -123,7 +154,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 withoutLabel={true}
                 minStepsBetweenThumbs={100_000_000}
                 onValueChange={(values) => {
-                  setPriceRange(values);
+                  propertyFilterForms.setValue("min_price", values[0]);
+                  propertyFilterForms.setValue("max_price", values[1]);
                 }}
                 className="mt-2"
               />
@@ -154,7 +186,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
             <Button className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1">
               Apply Filters
             </Button>
-            <Button className="order-3 w-full rounded-lg" variant="outline">
+            <Button
+              className="order-3 w-full rounded-lg"
+              variant="outline"
+              type="reset"
+              onClick={onResetFilters}
+            >
               Reset
             </Button>
           </form>

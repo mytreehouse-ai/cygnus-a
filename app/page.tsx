@@ -4,7 +4,7 @@ import { ImageKitLoader } from "@/components/global/imagekit-loader";
 
 const Home = () => {
   return (
-    <main className="mx-auto">
+    <main className="mx-auto min-h-screen">
       <section className="bg-emerald-50 px-6 py-14 lg:flex lg:justify-between lg:px-12 lg:pb-0">
         <div className="lg:w-1/2">
           <h1 className="text-4xl font-bold md:text-6xl">
