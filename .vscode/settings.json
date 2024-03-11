@@ -2,6 +2,7 @@
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "editor.insertSpaces": false,
+  "explorer.compactFolders": false,
   "editor.wordWrap": "on",
-	"chat.editor.wordWrap": "on"
+  "chat.editor.wordWrap": "on"
 }
