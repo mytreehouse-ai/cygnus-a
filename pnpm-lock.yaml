@@ -78,8 +78,8 @@ dependencies:
     specifier: ^0.2.1
     version: 0.2.1(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
   lucide:
-    specifier: ^0.353.0
-    version: 0.353.0
+    specifier: ^0.354.0
+    version: 0.354.0
   lucide-react:
     specifier: ^0.350.0
     version: 0.350.0(react@18.2.0)
@@ -3958,8 +3958,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /lucide@0.353.0:
-    resolution: {integrity: sha512-Kc+rhnUcA5xYU3izoCDXuF+AipwV7YdXPCu8t8JUHN1a5iU6dBHloBG2U4U8At1b626CMHDWp62gz1OmEoOupg==}
+  /lucide@0.354.0:
+    resolution: {integrity: sha512-j/l0/PcEqODPTAL+KGuNcdE5C6dwrEf2Tzr8TIXyX3YWH83zLFuJnytlU6EhwzZx8Vcb/mL2FGTurG2wpoJyiQ==}
     dev: false
 
   /map-obj@4.3.0:
