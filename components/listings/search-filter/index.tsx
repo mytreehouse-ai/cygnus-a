@@ -34,11 +34,13 @@ interface IFilters {
   bathroom?: number;
   min_price?: number;
   max_price?: number;
+  min_sqm?: number;
+  max_sqm?: number;
   property_type?: number;
 }
 
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
-  const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 10000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -155,12 +157,13 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 </span>
               </label>
               <MultiSlider
-                max={1_000_000_000}
+                max={10_000_000}
                 min={0}
                 step={1}
                 withoutLabel={true}
-                minStepsBetweenThumbs={100_000_000}
+                minStepsBetweenThumbs={100_000}
                 onValueChange={(values) => {
+                  setPriceRange(values);
                   propertyFilterForms.setValue("min_price", values[0]);
                   propertyFilterForms.setValue("max_price", values[1]);
                 }}
@@ -186,6 +189,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 minStepsBetweenThumbs={1}
                 onValueChange={(values) => {
                   setSqm(values);
+                  propertyFilterForms.setValue("min_sqm", values[0]);
+                  propertyFilterForms.setValue("max_sqm", values[1]);
                 }}
                 className="mt-2"
               />
