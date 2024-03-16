@@ -1,4 +1,7 @@
 import { ICity } from "./city";
+import { ListingType } from "./listing-type";
+import { PropertyStatus } from "./property-status";
+import { PropertyType } from "./property-type";
 
 interface IFeatures {
   indoor_features: string[];
@@ -27,29 +30,14 @@ interface IEstate extends IFeatures {
   updated_at: string;
 }
 
-interface IPropertyType {
-  id: number;
-  description: string;
-}
-
-interface IListingType {
-  id: number;
-  description: string;
-}
-
-interface IPropertyStatus {
-  id: number;
-  description: string;
-}
-
 export interface IProperty {
   id: number;
   listing_title: string;
   listing_url: string;
   estate: IEstate;
-  property_type: IPropertyType;
-  listing_type: IListingType;
-  property_status: IPropertyStatus;
+  property_type: PropertyType;
+  listing_type: ListingType;
+  property_status: PropertyStatus;
   price: string;
   price_formatted: string;
   is_delisted: boolean;

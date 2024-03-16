@@ -13,13 +13,16 @@ function checkQueryParamsAndClean(config: InternalAxiosRequestConfig<any>) {
       }
     });
 
+    const publicListingsEndpoint =
+      config.url === "https://openred-api.kmcc-app.cc/properties/public";
+
     /**
      * 1 - for Available
      * 2 - for Under Offer
      * 3 - for Sold
      * 4 - Delisted property
      */
-    if (!config.params?.property_status) {
+    if (!config.params?.property_status && publicListingsEndpoint) {
       // Query only all properties that is available.
       config.params.property_status = 1;
     }

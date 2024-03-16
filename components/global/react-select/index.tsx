@@ -68,7 +68,6 @@ const ReactSelect: React.FC<SelectProps> = ({
 
   onMenuScrollToBottom,
 }) => {
-  const [isMounted, setIsMounted] = useState(false);
   const id = Date.now().toString();
 
   const {
@@ -82,8 +81,6 @@ const ReactSelect: React.FC<SelectProps> = ({
       console.info(errors);
     }
   }, [errors]);
-
-  useEffect(() => setIsMounted(true), []);
 
   const formValue = getValues(name) as ReactSelectValueType;
 
@@ -255,7 +252,7 @@ const ReactSelect: React.FC<SelectProps> = ({
     }),
   };
 
-  return isMounted ? (
+  return (
     <div className={cn("w-full ", className)}>
       <label
         className={cn(
@@ -319,7 +316,7 @@ const ReactSelect: React.FC<SelectProps> = ({
         styles={selectStyle}
       />
     </div>
-  ) : null;
+  );
 };
 
 export function isMultiValue<T>(
