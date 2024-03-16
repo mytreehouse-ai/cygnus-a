@@ -22,7 +22,7 @@ const getCitiesQuery = async (filters: Partial<IApiBaseRequestParams> = {}) => {
 
 const useCitiesQuery = (filters?: Partial<IApiBaseRequestParams>) => {
   return useInfiniteQuery<IApiBaseResponse<ICity[]>>({
-    queryKey: ["cities", JSON.stringify(filters)],
+    queryKey: ["cities", filters || {}],
     queryFn: () => getCitiesQuery(filters),
     initialPageParam: filters?.page,
     getNextPageParam: (lastPage) => lastPage.next,

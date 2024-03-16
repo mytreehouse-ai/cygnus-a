@@ -23,7 +23,7 @@ const getPropertiesQuery = async (filters: Partial<IPropertyFilters> = {}) => {
 
 const usePropertiesQuery = (filters?: Partial<IPropertyFilters>) => {
   return useQuery<IApiBaseResponse<IProperty[]>>({
-    queryKey: ["properties", JSON.stringify(filters)],
+    queryKey: ["properties", filters || {}],
     queryFn: () => getPropertiesQuery(filters),
   });
 };
