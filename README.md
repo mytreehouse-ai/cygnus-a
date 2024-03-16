@@ -4,18 +4,24 @@ To maintain a high standard of code quality and ensure the project is easy to na
 
 ### Directory Structure
 
-- **app/auth**: Authentication-related components and logic.
 - **components/ui**: Reusable UI components like buttons and inputs.
+  - Example: `Button.tsx`, `Input.tsx`
 - **hooks**: Custom React hooks.
+  - Example: `useLocalStorage.ts`, `useFetch.ts`
 - **services** or **api**: API call logic.
+  - Example: `userService.ts`, `apiClient.ts`
 - **types**: TypeScript type definitions.
+  - Example: `User.ts`, `Post.ts`
+- **lib**: Shared utility functions and modules.
+  - Example: `utils.ts`, `constants.ts`
 - \***\*tests\*\***: Unit and integration tests.
+  - Example: `User.test.tsx`, `apiClient.test.ts`
 - **public** or **assets**: Static assets like images, stylesheets, and fonts.
+  - Example: `logo.svg`, `styles.css`
 
 ### Naming Conventions
 
 - Use consistent naming conventions across files and folders (preferably `camelCase` or `kebab-case`).
-- Prefix interface names with `I` (e.g., `IUser`).
 
 ### Environment Variables
 
