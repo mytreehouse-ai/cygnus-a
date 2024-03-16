@@ -8,11 +8,11 @@ import { MapPin } from "lucide-react";
 import { Shrink, Building } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import type { IProperty } from "@/types/property";
+import { PropertyListing } from "@/types";
 
 interface PropertyCardProps {
   onClick?: () => void;
-  property: IProperty;
+  property: PropertyListing;
 }
 
 function PropertyCard({ property, onClick }: PropertyCardProps) {

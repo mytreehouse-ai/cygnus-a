@@ -1,7 +1,7 @@
-interface ICity {
+interface City {
   id: number;
   name: string;
   slug: string;
 }
 
-export type { ICity };
+export type { City };
