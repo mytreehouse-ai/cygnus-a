@@ -1,5 +1,5 @@
 import { env } from "@/env.mjs";
-import axios from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 
 // Create an Axios instance
 const apiClient = axios.create({
@@ -17,6 +17,18 @@ apiClient.interceptors.request.use(
     // if (token) {
     //   config.headers.Authorization = `Bearer ${token}`;
     // }
+
+    function checkQueryParamsAndClean(config: InternalAxiosRequestConfig<any>) {
+      if (config.params) {
+        Object.keys(config.params).forEach((key) => {
+          if (config.params[key] === null || config.params[key] === undefined) {
+            delete config.params[key];
+          }
+        });
+      }
+    }
+
+    checkQueryParamsAndClean(config);
 
     return config;
   },

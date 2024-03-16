@@ -8,17 +8,12 @@ import { env } from "@/env.mjs";
 import apiClient from "@/lib/api-client";
 
 const getCitiesQuery = async (filters: Partial<IApiBaseRequestParams> = {}) => {
-  const queryParams = new URLSearchParams();
-  Object.entries(filters).forEach(([key, value]) => {
-    if (value !== undefined) {
-      queryParams.append(key, value.toString());
-    }
-  });
-
-  const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/domains/cities?${queryParams.toString()}`;
+  const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/domains/cities`;
 
   try {
-    const response = await apiClient.get<IApiBaseResponse<ICity[]>>(url);
+    const response = await apiClient.get<IApiBaseResponse<ICity[]>>(url, {
+      params: filters,
+    });
     return response.data;
   } catch (error) {
     throw new Error("Failed to fetch cities");
