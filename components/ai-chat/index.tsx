@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components//ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components//ui/input";
 import { Drawer, DrawerContent, DrawerHeader } from "@/components//ui/drawer";
-import type { IModal } from "@/types";
+import { Modal } from "@/types";
 import { Separator } from "@/components//ui/separator";
 
 const DUMMY_CHAT_HISTORY = [
@@ -183,7 +183,7 @@ const ChatBody = () => {
   );
 };
 
-const ChatHistory = ({ onClose, open }: IModal) => {
+const ChatHistory = ({ onClose, open }: Modal) => {
   return (
     <Drawer open={open} onClose={onClose}>
       <DrawerContent>

@@ -1,7 +1,5 @@
-import { IUser } from "./user";
-import { IProfile } from "./profile";
-import { IImageKitLoaderParams } from "./imagekit-params";
-import { IModal } from "./modal";
+import { ImageKitLoaderParams } from "./imagekit-params";
+import { Modal } from "./modal";
 import { PropertyType } from "./property-type";
 import { PropertyStatus } from "./property-status";
 import { ListingType } from "./listing-type";
@@ -16,10 +14,8 @@ import {
 } from "./property-api-filters";
 
 export type {
-  IUser,
-  IProfile,
-  IImageKitLoaderParams,
-  IModal,
+  ImageKitLoaderParams,
+  Modal,
   City,
   PropertyType,
   PropertyStatus,
