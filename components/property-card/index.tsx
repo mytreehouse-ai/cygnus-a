@@ -7,9 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
 import { Shrink, Building } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import type { IProperty } from "@/types/property";
+
 interface PropertyCardProps {
   onClick?: () => void;
   property: IProperty;
@@ -41,15 +41,7 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
           </Badge>
         </div>
         <CardTitle className="truncate text-lg">
-          <p className="tracking-wide">
-            {property?.estate?.building_name ? (
-              property?.estate?.building_name
-            ) : (
-              <span className="text-neutral-400 opacity-50">
-                Name not available
-              </span>
-            )}
-          </p>
+          <p className="truncate">{property.listing_title}</p>
           <p className="flex items-center gap-x-2  text-sm font-normal text-slate-500">
             <MapPin className="h-4 w-4" />
             <span>
