@@ -26,7 +26,7 @@ interface FilterDrawerProps extends Modal {
   }[];
 }
 
-interface IFilters {
+interface Filters {
   search?: string | null;
   location?: number;
   listing_type?: number;
@@ -45,7 +45,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const propertyFilterForms = useForm<IFilters>({
+  const propertyFilterForms = useForm<Filters>({
     values: {
       location: searchParams?.has("location")
         ? parseInt(searchParams.get("location") ?? "0")
@@ -232,7 +232,7 @@ function SearchFilter() {
     ) ?? [];
 
   const propertySearchFilterForm = useForm<
-    Pick<IFilters, "search" | "location" | "property_type">
+    Pick<Filters, "search" | "location" | "property_type">
   >({
     mode: "all",
     values: {
@@ -243,17 +243,20 @@ function SearchFilter() {
     },
   });
 
-  function onSubmit(data: IFilters) {
+  function onSubmit(data: Filters) {
     const params = {
       ...data,
     };
 
-    const searchParams = createSearchParams(params);
+    const createdSearchParams = createSearchParams(params);
 
-    if (searchParams && searchParams.size) {
-      router.replace(window.location.pathname + "?" + searchParams.toString(), {
-        scroll: false,
-      });
+    if (createdSearchParams && createdSearchParams.size) {
+      router.replace(
+        window.location.pathname + "?" + createdSearchParams.toString(),
+        {
+          scroll: false,
+        },
+      );
     }
   }
 
