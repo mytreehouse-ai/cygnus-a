@@ -1,18 +1,18 @@
-interface IApiBaseResponse<T> {
+interface ApiBaseResponse<T> {
   count: number;
   next: string | null;
   previous: string | null;
   results: T;
 }
 
-interface IApiBaseRequestParams {
+interface ApiBaseRequestParams {
   search: string;
   ordering: string;
   page: number;
   page_size: number;
 }
 
-interface IPropertyFilters extends IApiBaseRequestParams {
+interface PropertyFilters extends ApiBaseRequestParams {
   property_type_id: number;
   listing_type_id: number;
   property_status_id: number;
@@ -36,4 +36,4 @@ interface IPropertyFilters extends IApiBaseRequestParams {
   other_features: string;
 }
 
-export type { IApiBaseResponse, IPropertyFilters, IApiBaseRequestParams };
+export type { ApiBaseResponse, ApiBaseRequestParams, PropertyFilters };
