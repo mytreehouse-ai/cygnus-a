@@ -1,4 +1,5 @@
 import { ICity } from "./city";
+
 interface IFeatures {
   indoor_features: string[];
   outdoor_features: string[];

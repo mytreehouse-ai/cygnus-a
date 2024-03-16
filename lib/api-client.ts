@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Create an Axios instance
 const apiClient = axios.create({
-  baseURL: env.NEXT_PUBLIC_ARTEMIS_BASEAPI_URL,
+  baseURL: env.NEXT_PUBLIC_OPENRED_BASEAPI_URL,
 });
 
 // Add a request interceptor
