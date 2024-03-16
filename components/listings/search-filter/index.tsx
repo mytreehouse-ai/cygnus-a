@@ -246,8 +246,6 @@ function SearchFilter() {
   function onSubmit(data: IFilters) {
     const params = {
       ...data,
-      page: 1,
-      pageSize: 12,
     };
 
     const searchParams = createSearchParams(params);
