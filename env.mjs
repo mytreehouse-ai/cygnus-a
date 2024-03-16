@@ -14,7 +14,7 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "production"]),
-    NEXT_PUBLIC_ARTEMIS_BASEAPI_URL: z.string().url(),
+    NEXT_PUBLIC_OPENRED_BASEAPI_URL: z.string().url(),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
   },
   runtimeEnv: {
@@ -22,8 +22,8 @@ export const env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     DOCKER_BUILD: process.env.DOCKER_BUILD,
     NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
-    NEXT_PUBLIC_ARTEMIS_BASEAPI_URL:
-      process.env.NEXT_PUBLIC_ARTEMIS_BASEAPI_URL,
+    NEXT_PUBLIC_OPENRED_BASEAPI_URL:
+      process.env.NEXT_PUBLIC_OPENRED_BASEAPI_URL,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },
