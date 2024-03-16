@@ -25,6 +25,17 @@ apiClient.interceptors.request.use(
             delete config.params[key];
           }
         });
+
+        /**
+         * 1 - for Available
+         * 2 - for Under Offer
+         * 3 - for Sold
+         * 4 - Delisted property
+         */
+        if (!config.params?.property_status_id) {
+          // Query only all properties that is available.
+          config.params.property_status_id = 1;
+        }
       }
     }
 
