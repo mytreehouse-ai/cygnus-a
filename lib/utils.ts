@@ -1,24 +1,12 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { IImageKitLoaderParams } from "@/types";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
-/**
- * Combines class names using clsx and merges them with tailwind-merge.
- * This function takes any number of arguments which can be a string, array, or object.
- *
- * @param {ClassValue[]} inputs - An array of class values to be combined and merged.
- * @returns {string} The final string of combined and deduplicated class names.
- */
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-/**
- * Constructs a URL for loading images with ImageKit with specified parameters.
- *
- * @param {IImageKitLoaderParams} params - The parameters for the image loader.
- * @returns {string} The constructed ImageKit URL.
- */
 export function imageKitLoader(params: IImageKitLoaderParams): string {
   let { src, width, quality } = params;
 
@@ -42,6 +30,10 @@ export function imageKitLoader(params: IImageKitLoaderParams): string {
   return `${urlEndpoint}/${src}?tr=${parametersString}`;
 }
 
+export function getParams(filters?: ReadonlyURLSearchParams) {
+  return filters ? Object.fromEntries(filters) : {};
+}
+
 export function formatCurrency(
   amount: number,
   currencyCode: string = "PHP",
@@ -53,7 +45,9 @@ export function formatCurrency(
   }).format(amount);
 }
 
-export function createSearchParams(queryParams: Record<string, any>) {
+export function createSearchParams(
+  queryParams: Record<string, any>,
+): URLSearchParams | undefined {
   const isValidJSONObject =
     queryParams !== null &&
     typeof queryParams === "object" &&
