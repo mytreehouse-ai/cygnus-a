@@ -3,6 +3,4 @@ interface ICity {
   name: string;
 }
 
-export type {
-	ICity
-}
+export type { ICity };
