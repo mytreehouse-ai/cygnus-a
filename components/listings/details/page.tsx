@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import {
@@ -16,7 +16,7 @@ import {
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Shrink, Expand } from "lucide-react";
+import { Shrink, Expand, SquareCheckBigIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -24,6 +24,8 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { IModal } from "@/types";
+import { Drawer, DrawerContent, DrawerHeader } from "@/components/ui/drawer";
 
 const propertyDetails = {
   floorArea: 45,
@@ -37,10 +39,34 @@ const propertyDetails = {
   listingUrl: "www.example.com",
 };
 
+const DUMMY_AMENITIES = [
+  "CCTV",
+  "Utility room",
+  "Air conditioning",
+  "Alarm System",
+  "Balcony",
+  "Basement Parking",
+  "Elevators",
+  "Fire exits",
+  "Fitness center",
+  "Function Room",
+  "Game Room",
+  "Indoor spa",
+  "Lobby",
+  "Lounge",
+  "Multi-Purpose Hall",
+  "Smoke detector",
+  "Wi-Fi",
+  "Fire Alarm",
+];
+
 function PropertyDetails() {
+  const [showAmenities, setShowAmenities] = useState(false);
+
   return (
     <Fragment>
       {/* <main > */}
+
       <main className=" grid-cols-auto grid-rows grid min-h-screen grid-flow-row  gap-6 px-4 pb-4 pt-10 md:grid-cols-4 ">
         <section className="space-y-1 md:col-span-3 ">
           <div className="md:flex md:items-center md:gap-x-2">
@@ -175,6 +201,41 @@ function PropertyDetails() {
           </Card>
         </section>
 
+        <section id="desc" className="md:col-span-2 lg:col-span-3">
+          <Card className="border-none shadow ">
+            <CardHeader>
+              <CardTitle className="text-lg text-gray-950">
+                Property Amenities
+              </CardTitle>
+              <Separator className="bg-slate-200" />
+            </CardHeader>
+            <CardContent>
+              <ul className="flex flex-col gap-2">
+                {DUMMY_AMENITIES.slice(0, 6).map((amenity, i) => (
+                  <li
+                    className="inline-flex items-center gap-x-2 text-sm font-medium"
+                    key={i}
+                  >
+                    <SquareCheckBigIcon className="h-4 w-4 text-emerald-600" />
+                    <p>{amenity}</p>
+                  </li>
+                ))}
+              </ul>
+              <PropertyAmenities
+                open={showAmenities}
+                onClose={() => setShowAmenities(false)}
+              />
+              <Button
+                variant={"outline"}
+                className="mt-8 w-full rounded-lg border-emerald-400 text-emerald-600 hover:bg-white hover:text-emerald-700 md:order-1"
+                onClick={() => setShowAmenities(true)}
+              >
+                Show All
+              </Button>
+            </CardContent>
+          </Card>
+        </section>
+
         {/* md:row-start-4 */}
         <section className="md:col-span-2 md:row-start-4 lg:col-span-3">
           <Card className="border-none shadow">
@@ -200,6 +261,31 @@ function PropertyDetails() {
 }
 
 export default PropertyDetails;
+
+const PropertyAmenities = ({ open, onClose }: IModal) => {
+  return (
+    <Drawer open={open} onClose={onClose}>
+      <DrawerContent className="p-6 ">
+        <DrawerHeader className="my-4 p-0 text-start font-bold">
+          Property Amenities
+        </DrawerHeader>
+        <Separator />
+        <p className="py-4 text-xs font-bold text-slate-500">INDOOR FEATURES</p>
+        <ul className="my-2 flex flex-col gap-2">
+          {DUMMY_AMENITIES.map((amenity, i) => (
+            <li
+              className="inline-flex items-center gap-x-2 text-sm font-medium"
+              key={i}
+            >
+              <SquareCheckBigIcon className="h-4 w-4 text-emerald-600" />
+              <p>{amenity}</p>
+            </li>
+          ))}
+        </ul>
+      </DrawerContent>
+    </Drawer>
+  );
+};
 
 const ContactUs = () => {
   const contactUsForm = useForm();

@@ -26,25 +26,34 @@ interface FilterDrawerProps extends IModal {
   }[];
 }
 
+interface IFilters {
+  search?: string | null;
+  location?: number;
+  listing_type?: number;
+  bedroom?: number;
+  bathroom?: number;
+  min_price?: number;
+  max_price?: number;
+  min_sqm?: number;
+  max_sqm?: number;
+  property_type?: number;
+}
+
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
-  const [priceRange, setPriceRange] = useState<number[]>([0, 1000000000]);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 10000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const propertyFilterForms = useForm<{
-    location?: number;
-    "listing-type"?: number;
-    bedroom?: number;
-    bathroom?: number;
-    min_price?: number;
-    max_price?: number;
-  }>({
+  const propertyFilterForms = useForm<IFilters>({
     values: {
       location: searchParams?.has("location")
         ? parseInt(searchParams.get("location") ?? "0")
         : undefined,
-      "listing-type": searchParams?.has("listing-type")
+      property_type: searchParams?.has("property_type")
+        ? parseInt(searchParams.get("property_type") ?? "0")
+        : undefined,
+      listing_type: searchParams?.has("listing-type")
         ? parseInt(searchParams.get("listing-type") ?? "0")
         : undefined,
       bedroom: searchParams?.has("bedroom")
@@ -86,7 +95,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
           >
             <ReactSelect
               data={propertyTypes}
-              name="propertyType"
+              name="property_type"
               placeholder="Property Type"
               className="md:hidden"
             />
@@ -98,7 +107,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
             />
             <ReactSelect
               data={listingTypes}
-              name="listing-type"
+              name="listing_type"
               placeholder="Listing Type"
             />
             <div className="flex gap-x-2">
@@ -148,12 +157,13 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 </span>
               </label>
               <MultiSlider
-                max={1_000_000_000}
+                max={10_000_000}
                 min={0}
                 step={1}
                 withoutLabel={true}
-                minStepsBetweenThumbs={100_000_000}
+                minStepsBetweenThumbs={100_000}
                 onValueChange={(values) => {
+                  setPriceRange(values);
                   propertyFilterForms.setValue("min_price", values[0]);
                   propertyFilterForms.setValue("max_price", values[1]);
                 }}
@@ -179,6 +189,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 minStepsBetweenThumbs={1}
                 onValueChange={(values) => {
                   setSqm(values);
+                  propertyFilterForms.setValue("min_sqm", values[0]);
+                  propertyFilterForms.setValue("max_sqm", values[1]);
                 }}
                 className="mt-2"
               />
@@ -223,25 +235,19 @@ function SearchFilter() {
       })),
     ) ?? [];
 
-  const propertySearchFilterForm = useForm<{
-    search?: string | null;
-    location?: string;
-    propertyType?: number;
-  }>({
+  const propertySearchFilterForm = useForm<
+    Pick<IFilters, "search" | "location" | "property_type">
+  >({
     mode: "all",
     values: {
       search: searchParams?.get("search") ?? "",
-      propertyType: searchParams?.has("propertyType")
-        ? parseInt(searchParams.get("propertyType") ?? "0")
+      property_type: searchParams?.has("property_type")
+        ? parseInt(searchParams.get("property_type") ?? "0")
         : undefined,
     },
   });
 
-  function onSubmit(data: {
-    search?: string | null;
-    location?: string;
-    propertyType?: number;
-  }) {
+  function onSubmit(data: IFilters) {
     const params = {
       ...data,
       page: 1,
@@ -295,7 +301,7 @@ function SearchFilter() {
 
           <ReactSelect
             data={propertyTypes}
-            name="propertyType"
+            name="property_type"
             placeholder="Property Type"
             className="hidden md:block"
           />
