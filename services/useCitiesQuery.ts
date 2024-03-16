@@ -14,8 +14,10 @@ const getCitiesQuery = async (filters: Partial<IApiBaseRequestParams> = {}) => {
       queryParams.append(key, value.toString());
     }
   });
+
+  const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/domains/cities?${queryParams.toString()}`;
+
   try {
-    const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/domains/cities?${queryParams.toString()}`;
     const response = await apiClient.get<IApiBaseResponse<ICity[]>>(url);
     return response.data;
   } catch (error) {
@@ -25,7 +27,7 @@ const getCitiesQuery = async (filters: Partial<IApiBaseRequestParams> = {}) => {
 
 const useCitiesQuery = (filters?: Partial<IApiBaseRequestParams>) => {
   return useInfiniteQuery<IApiBaseResponse<ICity[]>>({
-    queryKey: ["cities"],
+    queryKey: ["cities", JSON.stringify(filters)],
     queryFn: () => getCitiesQuery(filters),
     initialPageParam: filters?.page,
     getNextPageParam: (lastPage) => lastPage.next,
