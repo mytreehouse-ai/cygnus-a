@@ -32,9 +32,9 @@ apiClient.interceptors.request.use(
          * 3 - for Sold
          * 4 - Delisted property
          */
-        if (!config.params?.property_status_id) {
+        if (!config.params?.property_status) {
           // Query only all properties that is available.
-          config.params.property_status_id = 1;
+          config.params.property_status = 1;
         }
       }
     }
