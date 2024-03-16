@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { type IProperty } from "@/types/property";
-import {
-  type IApiBaseResponse,
+import type {
+  IApiBaseResponse,
   IPropertyFilters,
 } from "@/types/property-api-filters";
 import { env } from "@/env.mjs";

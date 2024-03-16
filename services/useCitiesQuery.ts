@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { type ICity } from "@/types/city";
-import {
-  type IApiBaseResponse,
+import type {
+  IApiBaseResponse,
   IApiBaseRequestParams,
 } from "@/types/property-api-filters";
 import { env } from "@/env.mjs";
