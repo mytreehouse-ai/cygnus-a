@@ -1,13 +1,13 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { IImageKitLoaderParams } from "@/types";
+import { ImageKitLoaderParams } from "@/types";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-export function imageKitLoader(params: IImageKitLoaderParams): string {
+export function imageKitLoader(params: ImageKitLoaderParams): string {
   let { src, width, quality } = params;
 
   if (src.startsWith("/")) {

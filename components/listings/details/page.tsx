@@ -24,7 +24,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { IModal } from "@/types";
+import { Modal } from "@/types";
 import { Drawer, DrawerContent, DrawerHeader } from "@/components/ui/drawer";
 
 const propertyDetails = {
@@ -262,7 +262,7 @@ function PropertyDetails() {
 
 export default PropertyDetails;
 
-const PropertyAmenities = ({ open, onClose }: IModal) => {
+const PropertyAmenities = ({ open, onClose }: Modal) => {
   return (
     <Drawer open={open} onClose={onClose}>
       <DrawerContent className="p-6 ">

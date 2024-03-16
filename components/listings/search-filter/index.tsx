@@ -12,14 +12,14 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useState } from "react";
-import type { IModal } from "@/types";
+import { Modal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
 import useCitiesQuery from "@/services/useCitiesQuery";
-interface FilterDrawerProps extends IModal {
+interface FilterDrawerProps extends Modal {
   citiesOptions: {
     label: string;
     value: number;

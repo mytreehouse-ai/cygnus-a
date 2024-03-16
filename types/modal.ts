@@ -1,4 +1,6 @@
-export interface IModal  {
-	open: boolean,
-	onClose: () => void
+interface Modal {
+  open: boolean;
+  onClose: () => void;
 }
+
+export type { Modal };
