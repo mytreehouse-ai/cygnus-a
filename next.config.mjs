@@ -13,6 +13,12 @@ const nextConfig = {
         port: "",
         pathname: "/public/**",
       },
+      {
+        protocol: "https",
+        hostname: "static-ph.lamudi.com",
+        port: "",
+        pathname: "/static/**",
+      },
     ],
   },
 };

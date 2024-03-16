@@ -24,10 +24,11 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
       <CardHeader className="p-2">
         <div className="relative h-0 w-full" style={{ paddingTop: "56.25%" }}>
           <Image
-            src="/property-image.png"
+            src={property.estate.image_url}
             alt={`${property.estate.building_name} image`}
-            fill
-            style={{ objectFit: "cover" }}
+            priority={true}
+            fill={true}
+            sizes="(max-width: 768px) 100vw, 700px"
             placeholder="empty"
             className="rounded-lg"
           />
