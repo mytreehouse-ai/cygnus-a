@@ -65,7 +65,6 @@ const ReactSelect: React.FC<SelectProps> = ({
   disabled,
   onChange,
   className,
-
   onMenuScrollToBottom,
 }) => {
   const id = Date.now().toString();
