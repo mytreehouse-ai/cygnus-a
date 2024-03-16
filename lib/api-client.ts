@@ -26,10 +26,6 @@ function checkQueryParamsAndClean(config: InternalAxiosRequestConfig<any>) {
       // Query only all properties that is available.
       config.params.property_status = 1;
     }
-
-    if (!config.params?.page_size) {
-      config.params.page_size = 15;
-    }
   }
 }
 
