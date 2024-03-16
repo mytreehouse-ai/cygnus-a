@@ -221,11 +221,7 @@ function SearchFilter() {
 
   const router = useRouter();
 
-  //TODO: FIX DUPLICATE DATA ON FIRST FETCH ISSUE
-  const { fetchNextPage, data, isFetching } = useCitiesQuery({
-    page: page,
-    page_size: 20,
-  });
+  const { fetchNextPage, data, isFetching } = useCitiesQuery();
 
   const citiesOptions =
     data?.pages.flatMap((page) =>

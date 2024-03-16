@@ -21,8 +21,8 @@ export function imageKitLoader(params: IImageKitLoaderParams): string {
   }
 
   const parametersString = parameters.join(",");
-
   let urlEndpoint = "https://ik.imagekit.io/veaeev6wu";
+
   if (urlEndpoint.endsWith("/")) {
     urlEndpoint = urlEndpoint.slice(0, -1);
   }
@@ -31,7 +31,7 @@ export function imageKitLoader(params: IImageKitLoaderParams): string {
 }
 
 export function getParams(filters?: ReadonlyURLSearchParams) {
-  return filters ? Object.fromEntries(filters) : {};
+  return filters?.size ? Object.fromEntries(filters.entries()) : {};
 }
 
 export function formatCurrency(
