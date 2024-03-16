@@ -1,32 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from 'axios';
 import { type IProperty } from "@/types/property";
-import { type IApiBaseResponse, IPropertyFilters } from "@/types/api";
+import type {
+  IApiBaseResponse,
+  IPropertyFilters,
+} from "@/types/property-api-filters";
 import { env } from "@/env.mjs";
+import apiClient from "@/lib/api-client";
 
-const getPropertiesQuery = async (filters: IPropertyFilters = {}) => {
-
+const getPropertiesQuery = async (filters: Partial<IPropertyFilters> = {}) => {
   const queryParams = new URLSearchParams();
+
   Object.entries(filters).forEach(([key, value]) => {
     if (value !== undefined) {
       queryParams.append(key, value.toString());
     }
   });
 
+  const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/properties/public?${queryParams.toString()}`;
+
   try {
-		const baseUrl = env.NEXT_PUBLIC_MYTREEHOUSE_BASEAPI_URL
-    const url = `${baseUrl}/properties/public?${queryParams.toString()}`;
-    const response = await axios.get<IApiBaseResponse<IProperty[]>>(url);
+    const response = await apiClient.get<IApiBaseResponse<IProperty[]>>(url);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch properties');
+    console.error("Failed to fetch cities:", error);
+    throw new Error("Failed to fetch properties");
   }
 };
 
 const usePropertiesQuery = (filters?: Partial<IPropertyFilters>) => {
   return useQuery<IApiBaseResponse<IProperty[]>>({
-    queryKey: ['properties', filters],
-    queryFn: () => getPropertiesQuery(filters)
+    queryKey: ["properties", filters],
+    queryFn: () => getPropertiesQuery(filters),
   });
 };
 
