@@ -65,9 +65,7 @@ function PropertyDetails() {
 
   return (
     <Fragment>
-      {/* <main > */}
-
-      <main className=" grid-cols-auto grid-rows grid min-h-screen grid-flow-row  gap-6 px-4 pb-4 pt-10 md:grid-cols-4 ">
+      <main className="grid-cols-auto grid-rows grid min-h-screen grid-flow-row gap-6 px-4 pb-4 pt-10 md:grid-cols-4">
         <section className="space-y-1 md:col-span-3 ">
           <div className="md:flex md:items-center md:gap-x-2">
             <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>
@@ -86,11 +84,12 @@ function PropertyDetails() {
           <div className="relative col-span-2 w-full">
             <Image
               src="/dummy-img.png"
-              alt="homepage header image"
-              layout="responsive"
-              width={500}
-              height={500}
-              className="object-contain"
+              alt="Property image."
+              priority={true}
+              fill={true}
+              sizes="(max-width: 768px) 100vw, 700px"
+              placeholder="empty"
+              className="rounded-lg"
             />
           </div>
         </section>
