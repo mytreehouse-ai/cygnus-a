@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { User, LinkIcon } from "lucide-react";
@@ -5,7 +7,7 @@ import { User, LinkIcon } from "lucide-react";
 function Broker() {
   return (
     <Card className="h-[11.25rem] border-none shadow">
-      <CardHeader>
+      <CardHeader className="space-y-5">
         <CardTitle className="text-lg font-bold text-gray-950">
           Our Trusted Broker
         </CardTitle>
@@ -19,7 +21,6 @@ function Broker() {
             </dt>
             <dd className="font-bold">100 sqm</dd>
           </div>
-
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
               <LinkIcon className="h-4 w-4" /> <span>Url Key</span>

@@ -1,3 +1,4 @@
+import Amenities from "@/components/listings/details/amenities";
 import Broker from "@/components/listings/details/broker";
 import Description from "@/components/listings/details/description";
 import Galery from "@/components/listings/details/galery";
@@ -27,6 +28,9 @@ function PropertyDetails() {
       <section className="space-y-8 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
         <Description />
         <Broker />
+      </section>
+      <section className="space-y-8 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+        <Amenities />
       </section>
     </main>
   );
