@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Markdown from "react-markdown";
@@ -6,7 +8,7 @@ import remarkGfm from "remark-gfm";
 function Description() {
   return (
     <Card className="border-none shadow ">
-      <CardHeader>
+      <CardHeader className="space-y-5">
         <CardTitle className="text-lg font-bold text-gray-950">
           Description
         </CardTitle>
