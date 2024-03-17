@@ -56,7 +56,7 @@ function Amenities() {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-xs font-bold text-gray-500">INDOOR FEATURES</p>
-        <ul className="grid grid-cols-3">
+        <ul className="grid grid-cols-3 gap-y-2">
           {DUMMY_AMENITIES.map((amenity, i) => (
             <li
               className="inline-flex items-center gap-x-2 text-sm font-medium"
