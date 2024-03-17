@@ -15,7 +15,7 @@ function Galery() {
           className="rounded-lg"
         />
       </div>
-      <div className="grid h-[10rem] grid-cols-2 gap-4">
+      <div className="grid h-[10rem] grid-cols-2 gap-4 sm:h-[12rem]">
         <div className="relative">
           <Image
             src="/dummy-img.png"

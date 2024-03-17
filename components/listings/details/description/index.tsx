@@ -17,9 +17,7 @@ function Description() {
       <CardContent>
         <article className="prose lg:prose-sm">
           <Markdown remarkPlugins={[remarkGfm]}>
-            **2 bedroom fully furnished loft type** Long term lease only 50K per
-            month 2 mos deposit 2 mos advance. 10 pdc Condominium property for
-            rent in Ususan, Taguig, Metro Manila
+            {"* Lists\n* [ ] todo\n* [x] done"}
           </Markdown>
         </article>
       </CardContent>
