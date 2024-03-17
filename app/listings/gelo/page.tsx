@@ -21,15 +21,15 @@ function PropertyDetails() {
         </p>
         <h3 className="text-3xl font-bold text-emerald-600">$146,000</h3>
       </section>
-      <section className="space-y-8 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+      <section className="grid gap-y-8 lg:grid-cols-2 lg:gap-x-4 xl:grid-cols-3">
         <Galery />
         <Overview />
       </section>
-      <section className="space-y-8 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+      <section className="grid gap-y-8 lg:grid-cols-2 lg:gap-x-4">
         <Description />
         <Broker />
       </section>
-      <section className="space-y-8 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+      <section className="grid gap-y-8 lg:grid-cols-2 lg:gap-x-4">
         <Amenities />
       </section>
     </main>

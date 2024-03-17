@@ -14,18 +14,20 @@ function Broker() {
         <Separator className="bg-slate-200" />
       </CardHeader>
       <CardContent>
-        <dl className="flex flex-col gap-y-6">
+        <dl className="flex flex-col gap-y-4">
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
               <User className="h-4 w-4" /> <span>Product Owner</span>
             </dt>
-            <dd className="font-bold">100 sqm</dd>
+            <dd className="font-bold">Ortigas Land Corp</dd>
           </div>
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
               <LinkIcon className="h-4 w-4" /> <span>Url Key</span>
             </dt>
-            <dd className="font-bold">100 sqm</dd>
+            <dd className="font-bold text-emerald-600 underline">
+              https://ortigaslandcorp.com
+            </dd>
           </div>
         </dl>
       </CardContent>
