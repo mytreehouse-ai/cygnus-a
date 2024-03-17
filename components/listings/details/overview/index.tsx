@@ -24,7 +24,7 @@ function Overview() {
         <Separator className="w-full bg-slate-200" />
       </CardHeader>
       <CardContent>
-        <dl className="flex flex-col gap-y-6">
+        <dl className="flex flex-col gap-y-5">
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
               <Shrink className="h-4 w-4" /> <span>Floor Area</span>
