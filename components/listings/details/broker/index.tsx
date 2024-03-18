@@ -23,7 +23,7 @@ function Broker() {
           </div>
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
-              <LinkIcon className="h-4 w-4" /> <span>Url Key</span>
+              <LinkIcon className="h-4 w-4" /> <span>Broker Site</span>
             </dt>
             <dd className="font-bold text-emerald-600 underline">Click here</dd>
           </div>
