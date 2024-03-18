@@ -5,7 +5,7 @@ import Image from "next/image";
 function Galery() {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <div className="relative h-[30rem]">
+      <div className="relative h-[24rem] md:h-[30rem]">
         <Image
           className="rounded-lg object-cover"
           src="/dummy-img.png"
@@ -15,7 +15,7 @@ function Galery() {
           sizes="(max-width: 768px) 100vw, 700px"
         />
       </div>
-      <div className="grid h-[15rem] gap-4 lg:h-[30rem]">
+      <div className="grid h-[12rem] gap-4 md:h-[15rem] lg:h-[30rem]">
         <div className="relative hidden lg:block">
           <Image
             className="rounded-lg"
