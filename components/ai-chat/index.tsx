@@ -32,7 +32,7 @@ const AIChat = () => {
   }
 
   return (
-    <main className="flex  grow flex-col justify-between pb-4 pt-2 md:min-h-[calc(100vh_-_250px)] lg:mx-auto lg:my-auto lg:max-w-7xl">
+    <main className="flex h-[calc(100vh)] grow flex-col justify-between lg:mx-auto ">
       <ChatHistory
         open={showChatHistory}
         onClose={() => setShowChatHistory(false)}
@@ -56,8 +56,8 @@ const AIChat = () => {
           </Button>
         </div> */}
 
-        <Card className=" h-[calc(100vh_-_90px)] border-none md:flex md:items-stretch">
-          <CardHeader className=" flex flex-col justify-between md:w-2/5 md:p-0">
+        <Card className=" h-[calc(100vh_-_90px)] border-none shadow-none md:flex md:items-stretch">
+          <CardHeader className=" flex  flex-col justify-between md:h-[calc(100vh)] md:w-2/5 md:p-0 lg:w-[20%] ">
             <div className="flex shrink-0 items-center justify-between md:p-4">
               <LayoutList
                 onClick={handleListButtonClick}
@@ -85,7 +85,7 @@ const AIChat = () => {
             </div>
 
             <Separator className="hidden md:block" />
-            <div className=" hidden px-4 py-4 md:block">
+            <div className=" hidden bg-white px-4 py-4 md:block">
               <div className="inline-flex gap-x-2">
                 <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-5  font-normal text-white">
                   M
@@ -99,7 +99,7 @@ const AIChat = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="h-full bg-[#F2F2F2] py-6 md:min-h-[calc(100vh_-_400px)] md:w-3/5">
+          <CardContent className="md:w-3/ h-[calc(100vh_-_90px)] bg-[#F2F2F2]  py-6 md:h-[calc(100vh)] lg:w-[80%]">
             <ChatBody />
           </CardContent>
         </Card>
@@ -132,8 +132,10 @@ const ChatBody = () => {
     console.log("submitted");
   };
 
+  //  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]
+
   return (
-    <div className="flex min-h-full flex-col justify-between gap-y-8  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]">
+    <div className="flex min-h-full flex-col justify-between gap-y-8 md:pt-12 lg:px-32  ">
       <div>
         {DUMMY_MESSAGE.map((i) => (
           <div key={i.id}>
