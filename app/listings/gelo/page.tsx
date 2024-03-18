@@ -1,5 +1,6 @@
 import Amenities from "@/components/listings/details/amenities";
 import Broker from "@/components/listings/details/broker";
+import ContactForm from "@/components/listings/details/contact-form";
 import Description from "@/components/listings/details/description";
 import Galery from "@/components/listings/details/galery";
 import Overview from "@/components/listings/details/overview";
@@ -21,8 +22,8 @@ function PropertyDetails() {
         </p>
         <h3 className="text-3xl font-bold text-emerald-600">$146,000</h3>
       </section>
-      <div className="lg:grid lg:grid-cols-3">
-        <div className="w-full space-y-4 px-4 py-10 lg:col-span-2">
+      <div className="px-4 lg:grid lg:grid-cols-3 lg:gap-x-4">
+        <div className="w-full space-y-4 py-10 lg:col-span-2">
           <section className="grid gap-4">
             <Galery />
             <div className="block lg:hidden">
@@ -38,7 +39,7 @@ function PropertyDetails() {
           <section className="grid gap-y-4">
             <Amenities />
             <div className="block lg:hidden">
-              <div className="h-96 border">C form</div>
+              <ContactForm />
             </div>
           </section>
           <section>
@@ -48,7 +49,7 @@ function PropertyDetails() {
         <div className="hidden h-full space-y-4 py-10 lg:block">
           <Overview />
           <Broker />
-          <div className="h-96 border">C form</div>
+          <ContactForm />
         </div>
       </div>
     </main>
