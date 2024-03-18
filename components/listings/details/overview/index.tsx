@@ -85,9 +85,7 @@ function Overview() {
             <dt className="inline-flex items-center gap-x-2">
               <LinkIcon className="h-4 w-4" /> <span>Listing URL</span>
             </dt>
-            <dd className="font-bold text-emerald-600 underline">
-              https://example.com
-            </dd>
+            <dd className="font-bold text-emerald-600 underline">Click here</dd>
           </div>
         </dl>
       </CardContent>

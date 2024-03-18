@@ -47,7 +47,7 @@ const DUMMY_AMENITIES = [
 
 function Amenities() {
   return (
-    <Card className="border-none shadow">
+    <Card className="border-none shadow xl:col-span-2">
       <CardHeader className="space-y-5">
         <CardTitle className="text-lg font-bold text-gray-950">
           Property Ameneties

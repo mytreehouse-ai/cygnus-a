@@ -9,8 +9,8 @@ import { MapPin } from "lucide-react";
 
 function PropertyDetails() {
   return (
-    <main className="min-h-screen space-y-4 px-4 py-10">
-      <section className="space-y-1 md:col-span-3 ">
+    <main className="min-h-screen">
+      <section className="space-y-1 px-4 pt-10 md:col-span-3">
         <div className="md:flex md:items-center md:gap-x-2">
           <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>
           <Badge className={cn(" rounded-md bg-orange-400 ")}>For Rent</Badge>
@@ -21,17 +21,36 @@ function PropertyDetails() {
         </p>
         <h3 className="text-3xl font-bold text-emerald-600">$146,000</h3>
       </section>
-      <section className="grid lg:grid-cols-2 lg:gap-x-4 xl:grid-cols-3">
-        <Galery />
-        <Overview />
-      </section>
-      <section className="grid lg:grid-cols-2 lg:gap-x-4 xl:grid-cols-3">
-        <Description />
-        <Broker />
-      </section>
-      <section className="grid lg:grid-cols-2 lg:gap-x-4">
-        <Amenities />
-      </section>
+      <div className="lg:grid lg:grid-cols-3">
+        <div className="w-full space-y-4 px-4 py-10 lg:col-span-2">
+          <section className="grid gap-4">
+            <Galery />
+            <div className="block lg:hidden">
+              <Overview />
+            </div>
+          </section>
+          <section className="grid gap-y-4">
+            <Description />
+            <div className="block lg:hidden">
+              <Broker />
+            </div>
+          </section>
+          <section className="grid gap-y-4">
+            <Amenities />
+            <div className="block lg:hidden">
+              <div className="h-96 border">C form</div>
+            </div>
+          </section>
+          <section>
+            <div className="h-96 border">Address and map</div>
+          </section>
+        </div>
+        <div className="hidden h-full space-y-4 py-10 lg:block">
+          <Overview />
+          <Broker />
+          <div className="h-96 border">C form</div>
+        </div>
+      </div>
     </main>
   );
 }
