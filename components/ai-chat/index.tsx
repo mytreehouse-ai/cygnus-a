@@ -56,7 +56,7 @@ const AIChat = () => {
           </Button>
         </div> */}
 
-        <Card className=" border-none md:flex md:items-stretch">
+        <Card className=" h-[calc(100vh_-_90px)] border-none md:flex md:items-stretch">
           <CardHeader className=" flex flex-col justify-between md:w-2/5 md:p-0">
             <div className="flex shrink-0 items-center justify-between md:p-4">
               <LayoutList
@@ -133,7 +133,7 @@ const ChatBody = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh_-_380px)] flex-col justify-between gap-y-8  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]">
+    <div className="flex min-h-full flex-col justify-between gap-y-8  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]">
       <div>
         {DUMMY_MESSAGE.map((i) => (
           <div key={i.id}>
