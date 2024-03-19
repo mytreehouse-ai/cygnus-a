@@ -13,8 +13,7 @@ function checkQueryParamsAndClean(config: InternalAxiosRequestConfig<any>) {
       }
     });
 
-    const publicListingsEndpoint =
-      config.url === "https://openred-api.kmcc-app.cc/properties/public";
+    const publicListingsEndpoint = config.url === "/properties/public";
 
     /**
      * 1 - for Available
