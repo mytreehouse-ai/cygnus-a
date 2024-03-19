@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { env } from "@/env.mjs";
 import apiClient from "@/lib/api-client";
 import type { ReadonlyURLSearchParams } from "next/navigation";
 import { getParams } from "@/lib/utils";
 import { ApiBaseResponse, PropertyListing } from "@/types";
 
 const getPropertiesQuery = async (filters?: ReadonlyURLSearchParams) => {
-  const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/properties/public`;
+  const url = "/properties/public";
   const params = getParams(filters);
   try {
     const response = await apiClient.get<ApiBaseResponse<PropertyListing[]>>(

@@ -1,8 +1,8 @@
 import React from "react";
 import AIChat from "@/components/ai-chat";
 
-const page = () => {
+const AiChat = () => {
   return <AIChat />;
 };
 
-export default page;
+export default AiChat;

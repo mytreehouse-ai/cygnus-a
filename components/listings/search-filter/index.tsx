@@ -18,7 +18,7 @@ import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import { formatCurrency } from "@/lib/utils";
-import useCitiesQuery from "@/services/useCitiesQuery";
+import useCitiesQuery from "@/hooks/useCitiesQuery";
 interface FilterDrawerProps extends Modal {
   citiesOptions: {
     label: string;

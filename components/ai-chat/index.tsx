@@ -1,15 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components//ui/card";
-import { LayoutList, Pencil, Send, HelpCircle } from "lucide-react";
+import { LayoutList, Pencil, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components//ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Input } from "@/components//ui/input";
 import { Drawer, DrawerContent, DrawerHeader } from "@/components//ui/drawer";
 import { Modal } from "@/types";
 import { Separator } from "@/components//ui/separator";
+import useAiChatQuery from "@/hooks/useAiChatQuery";
+import { useAiChatStore } from "@/hooks/useAiChatStore";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { v4 as uuidv4 } from "uuid";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const DUMMY_CHAT_HISTORY = [
   {
@@ -32,13 +40,13 @@ const AIChat = () => {
   }
 
   return (
-    <main className="flex min-h-[calc(100vh_-_200px)] grow flex-col justify-between pb-4 pt-2 md:min-h-[calc(100vh_-_250px)] lg:mx-auto lg:my-auto lg:max-w-7xl">
+    <main className="flex h-full grow flex-col justify-between lg:mx-auto ">
       <ChatHistory
         open={showChatHistory}
         onClose={() => setShowChatHistory(false)}
       />
-      <div className="space-y-4 px-4 pb-4  pt-10 md:pt-12">
-        <div className="flex flex-col items-start gap-y-5 md:flex-row md:items-start md:justify-between">
+      <div className="space-y-4">
+        {/* <div className="flex flex-col items-start gap-y-5 md:flex-row md:items-start md:justify-between">
           <div>
             <h3 className=" text-3xl font-bold ">AI Chatbot</h3>
             <p className="tex-sm text-slate-500 ">
@@ -54,10 +62,10 @@ const AIChat = () => {
             <HelpCircle className="h-4 w-4" />
             FAQs
           </Button>
-        </div>
+        </div> */}
 
-        <Card className=" md:flex md:items-stretch">
-          <CardHeader className=" flex flex-col justify-between md:w-2/5 md:p-0">
+        <Card className="h-full border-none shadow-none md:flex md:items-stretch">
+          <CardHeader className=" flex  flex-col justify-between md:h-[calc(100vh)] md:w-2/5 md:p-0 lg:w-[20%] ">
             <div className="flex shrink-0 items-center justify-between md:p-4">
               <LayoutList
                 onClick={handleListButtonClick}
@@ -85,7 +93,7 @@ const AIChat = () => {
             </div>
 
             <Separator className="hidden md:block" />
-            <div className=" hidden px-4 py-4 md:block">
+            <div className=" hidden bg-white px-4 py-4 md:block">
               <div className="inline-flex gap-x-2">
                 <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-5  font-normal text-white">
                   M
@@ -99,7 +107,7 @@ const AIChat = () => {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="h-full bg-[#F2F2F2] py-6 md:min-h-[calc(100vh_-_400px)] md:w-3/5">
+          <CardContent className="md:w-3/ h-[calc(100vh_-_90px)] bg-[#F2F2F2]  py-6 md:h-[calc(100vh)] lg:w-[80%]">
             <ChatBody />
           </CardContent>
         </Card>
@@ -125,54 +133,126 @@ const DUMMY_MESSAGE = [
   },
 ];
 
-const ChatBody = () => {
-  const chatForm = useForm();
+const formSchema = z.object({
+  message: z.string().min(1, {
+    message: "message must be at least 1 character.",
+  }),
+});
 
-  const onSubmit = () => {
-    console.log("submitted");
+const ChatBody = () => {
+  const [message, setMessage] = useState("");
+  const [threadId, setThreadId] = useState("");
+  const { messages, addMessage } = useAiChatStore();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      message: "",
+    },
+  });
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const messageParentRef = useRef<HTMLDivElement>(null);
+  const scrollToBottomRef = useRef<HTMLDivElement>(null);
+
+  if (!searchParams.get("thread_id") || !threadId) {
+    const thread_id = uuidv4();
+    setThreadId(thread_id);
+    router.replace(window.location.pathname + "?" + `thread_id=${thread_id}`, {
+      scroll: false,
+    });
+  }
+
+  const { isLoading, isSuccess, data } = useAiChatQuery({
+    query: message,
+    collection_name: "property_listings",
+    thread_id: threadId,
+    llm: "mixtral-8x7b-32768",
+  });
+
+  useEffect(() => {
+    if (messageParentRef?.current && messages.length) {
+      messageParentRef.current.scrollTop =
+        messageParentRef.current.scrollHeight;
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (scrollToBottomRef?.current) {
+        scrollToBottomRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }, 200);
+
+    return () => clearTimeout(timeout);
+  }, [messages.length]);
+
+  if (isSuccess) {
+    setMessage("");
+    addMessage({ id: Date.now(), type: "ai", content: data.ai_suggestion });
+  }
+
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    setMessage(data.message);
+    addMessage({ id: Date.now(), type: "human", content: data.message });
+    form.reset();
   };
 
   return (
-    <div className="flex min-h-[calc(100vh_-_380px)] flex-col justify-between gap-y-8  md:min-h-[calc(100vh_-_300px)] lg:md:min-h-[calc(100vh_-_400px)]">
-      <div>
-        {DUMMY_MESSAGE.map((i) => (
-          <div key={i.id}>
+    <div className="flex min-h-full flex-col justify-between gap-y-8 md:pt-12 lg:px-32">
+      <div
+        className="h-[calc(100vh-15rem)] space-y-4 overflow-y-auto"
+        ref={messageParentRef}
+      >
+        {messages.map((message) => (
+          <div className="space-y-2" key={message.id}>
             <div className="inline-flex items-center gap-x-2 text-sm font-bold">
               <div className="shink-0 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-3  font-normal text-white">
                 M
               </div>
-              <p>{i.from}</p>
+              <p>{message.type}</p>
             </div>
-            <p className="ml-8 mt-2 text-sm text-slate-900">{i.message}</p>
+            <article className="prose w-full">
+              <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+            </article>
           </div>
         ))}
+        <div ref={scrollToBottomRef} />
       </div>
 
       <Card>
         <CardContent className="p-2">
-          <Form {...chatForm}>
+          <Form {...form}>
             <form
               name="chat-form"
-              onSubmit={chatForm.handleSubmit(onSubmit)}
+              onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-row justify-between"
             >
               <FormField
-                control={chatForm.control}
+                control={form.control}
                 name="message"
-                render={() => (
+                render={({ field }) => (
                   <FormItem className="w-full md:w-full">
                     <FormControl>
                       <div className="space-y-1 text-start">
                         <Input
                           placeholder="Message MyTreeHouseAI..."
                           className="w-full rounded-lg border-none text-sm focus:border-none focus:outline-none focus-visible:ring-0 md:w-full "
+                          {...field}
+                          disabled={isLoading}
                         />
                       </div>
                     </FormControl>
                   </FormItem>
                 )}
               />
-              <Button type="submit">
+              <Button type="submit" disabled={isLoading}>
                 <Send />
               </Button>
             </form>

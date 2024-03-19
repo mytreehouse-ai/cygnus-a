@@ -8,8 +8,6 @@ import "./globals.css";
 import ReactQueryProvider from "@/components/react-query-provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/global/nav-bar";
-import Footer from "@/components/global/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +26,7 @@ export default function RootLayout({
       <body className={cn(inter.className, "min-h-screen")}>
         <ClerkProvider>
           <ReactQueryProvider>
-            <Navbar />
             {children}
-            <Footer />
             <ReactQueryDevtools initialIsOpen={false} />
           </ReactQueryProvider>
         </ClerkProvider>

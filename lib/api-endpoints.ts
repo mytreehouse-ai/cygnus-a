@@ -1,22 +1,9 @@
+import { aiChatSchema } from "@/schema/ai-chat";
 import apiClient from "./api-client";
+import { z } from "zod";
 
-export async function login(username: string, password: string) {
-  return apiClient.post("/token", {
-    username,
-    password,
+export function getAiChat(query: z.infer<typeof aiChatSchema>) {
+  return apiClient.get("/ai/langchain/assistant", {
+    params: query,
   });
 }
-
-export async function me(token: string) {
-  return apiClient.get("/management/users/me", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-export function forgotPassword() {}
-
-export function changePassword() {}
-
-export function checkResetPasswordTokenValidity() {}
