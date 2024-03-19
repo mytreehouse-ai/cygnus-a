@@ -42,11 +42,11 @@ function ChatBody(props: PropsWithChildren) {
   }, [messages.length]);
 
   return (
-    <div className="flex w-full flex-1 flex-col gap-y-6 bg-[#F2F2F2] lg:w-2/3">
-      <div className="scrollbar-thin scrollbar-thumb-slate-100 scrollbar-track-slate-100 max-h-[calc(100vh-10rem)] flex-1 overflow-y-auto px-6 pt-6">
-        <div ref={messageParentRef} className="flex flex-col gap-y-4">
+    <div className="flex w-full flex-1 flex-col bg-[#F2F2F2] lg:w-2/3">
+      <div className="scrollbar-thin scrollbar-thumb-slate-100 scrollbar-track-slate-100 max-h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
+        <div ref={messageParentRef} className="flex flex-col gap-y-4 px-6 pt-4">
           {messages.map((message) => (
-            <div className="w-full" key={message.id}>
+            <div key={message.id}>
               <div className="inline-flex items-center gap-x-2 text-sm font-bold">
                 <div className="flex h-3 w-3 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-emerald-600 p-3 font-normal text-white">
                   M
