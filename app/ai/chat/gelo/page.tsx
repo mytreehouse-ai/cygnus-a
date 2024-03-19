@@ -3,7 +3,7 @@ import ChatBox from "@/components/ai-chat/chat-box";
 
 function AiChat() {
   return (
-    <main className="flex min-h-screen flex-col items-center lg:p-8">
+    <main className="flex flex-col items-center lg:p-8">
       <ChatBody>
         <ChatBox />
       </ChatBody>
