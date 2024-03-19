@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "flex min-h-screen flex-col")}>
+      <body className={cn(inter.className, "h-screen")}>
         <ClerkProvider>
           <ReactQueryProvider>
             {children}
