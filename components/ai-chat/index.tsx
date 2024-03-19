@@ -210,6 +210,14 @@ const ChatBody = () => {
     form.reset();
   };
 
+  function AtagRenderer(props: any) {
+    return (
+      <a href={props.href} target="_blank">
+        {props.children}
+      </a>
+    );
+  }
+
   return (
     <div className="flex min-h-full flex-col justify-between gap-y-8 md:pt-12 lg:px-32">
       <div
@@ -225,7 +233,14 @@ const ChatBody = () => {
               <p>{message.type}</p>
             </div>
             <article className="prose w-full">
-              <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+              <Markdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a: AtagRenderer,
+                }}
+              >
+                {message.content}
+              </Markdown>
             </article>
           </div>
         ))}
