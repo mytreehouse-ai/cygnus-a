@@ -232,7 +232,7 @@ const ChatBody = () => {
               </div>
               <p>{message.type}</p>
             </div>
-            <article className="prose w-full">
+            <article className="prose prose-sm md:prose-base">
               <Markdown
                 remarkPlugins={[remarkGfm]}
                 components={{
