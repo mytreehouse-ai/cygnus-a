@@ -65,7 +65,7 @@ function ChatBox() {
   };
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 shadow-sm">
       <Form {...form}>
         <form
           name="chat-form"
@@ -76,7 +76,7 @@ function ChatBox() {
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem className=" w-full">
+              <FormItem className="w-full">
                 <FormControl>
                   <Input
                     placeholder="Message..."
