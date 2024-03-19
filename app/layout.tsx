@@ -27,7 +27,6 @@ export default function RootLayout({
         <ClerkProvider>
           <ReactQueryProvider>
             {children}
-
             <ReactQueryDevtools initialIsOpen={false} />
           </ReactQueryProvider>
         </ClerkProvider>

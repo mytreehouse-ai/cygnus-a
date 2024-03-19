@@ -1,13 +1,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { City } from "@/types/city";
-import { env } from "@/env.mjs";
 import apiClient from "@/lib/api-client";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { getParams } from "@/lib/utils";
 import { ApiBaseResponse } from "@/types";
 
 const getCitiesQuery = async (filters?: ReadonlyURLSearchParams) => {
-  const url = `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/domains/cities`;
+  const url = "/domains/cities";
   const params = getParams(filters);
   try {
     const response = await apiClient.get<ApiBaseResponse<City[]>>(url, {

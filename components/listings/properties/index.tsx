@@ -4,7 +4,7 @@ import React from "react";
 import PropertyCard from "@/components/property-card";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import usePropertiesQuery from "@/services/usePropertiesQuery";
+import usePropertiesQuery from "@/hooks/usePropertiesQuery";
 
 const Properties = () => {
   const router = useRouter();
