@@ -156,13 +156,19 @@ const ChatBody = () => {
   const messageParentRef = useRef<HTMLDivElement>(null);
   const scrollToBottomRef = useRef<HTMLDivElement>(null);
 
-  if (!searchParams.get("thread_id") || !threadId) {
-    const thread_id = uuidv4();
-    setThreadId(thread_id);
-    router.replace(window.location.pathname + "?" + `thread_id=${thread_id}`, {
-      scroll: false,
-    });
-  }
+  useEffect(() => {
+    if (!searchParams.get("thread_id") || !threadId) {
+      const thread_id = uuidv4();
+      setThreadId(thread_id);
+      router.replace(
+        window.location.pathname + "?" + `thread_id=${thread_id}`,
+        {
+          scroll: false,
+        },
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { isLoading, isSuccess, data } = useAiChatQuery({
     query: message,
