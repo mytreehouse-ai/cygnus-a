@@ -201,12 +201,12 @@ const ChatBody = () => {
 
   if (isSuccess) {
     setMessage("");
-    addMessage({ id: Date.now(), type: "ai", content: data.ai_suggestion });
+    addMessage({ id: Date.now(), type: "AI", content: data.ai_suggestion });
   }
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setMessage(data.message);
-    addMessage({ id: Date.now(), type: "human", content: data.message });
+    addMessage({ id: Date.now(), type: "Human", content: data.message });
     form.reset();
   };
 

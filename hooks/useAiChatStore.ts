@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 interface Message {
   id: number;
-  type: "human" | "ai";
+  type: "Human" | "AI";
   content: string;
 }
 
