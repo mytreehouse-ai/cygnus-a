@@ -80,7 +80,7 @@ function ChatBox() {
                 <FormControl>
                   <Input
                     placeholder="Message..."
-                    className="w-full rounded-lg p-6 text-sm"
+                    className="w-full rounded-lg p-6 placeholder:text-base"
                     {...field}
                     disabled={isLoading}
                   />
