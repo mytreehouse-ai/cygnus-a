@@ -44,7 +44,10 @@ function ChatBody(props: PropsWithChildren) {
   return (
     <div className="flex w-full flex-1 flex-col bg-[#F2F2F2] lg:w-2/3">
       <div className="scrollbar-thin scrollbar-thumb-slate-100 scrollbar-track-slate-100 max-h-[calc(100vh-4rem)] flex-1 overflow-y-auto">
-        <div ref={messageParentRef} className="flex flex-col gap-y-4 px-6 pt-4">
+        <div
+          ref={messageParentRef}
+          className="flex flex-col gap-y-4 px-2 pt-4 lg:px-6"
+        >
           {messages.map((message) => (
             <div key={message.id}>
               <div className="inline-flex items-center gap-x-2 text-sm font-bold">
