@@ -206,7 +206,7 @@ const ChatBody = () => {
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setMessage(data.message);
-    addMessage({ id: Date.now(), type: "Human", content: data.message });
+    addMessage({ id: Date.now(), type: "You", content: data.message });
     form.reset();
   };
 
@@ -232,7 +232,7 @@ const ChatBody = () => {
               </div>
               <p>{message.type}</p>
             </div>
-            <article className="prose prose-sm md:prose-base">
+            <div className="prose prose-sm md:prose-base">
               <Markdown
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -241,7 +241,7 @@ const ChatBody = () => {
               >
                 {message.content}
               </Markdown>
-            </article>
+            </div>
           </div>
         ))}
         <div ref={scrollToBottomRef} />

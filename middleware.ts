@@ -8,6 +8,7 @@ export default authMiddleware({
     "/valuation",
     "/contact",
     "/ai/chat",
+    "/ai/chat/(.*)",
   ],
   // ignoredRoutes: ["/", "/listings/(.*)", "/valuation", "/contact"],
 });
