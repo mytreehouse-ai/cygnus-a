@@ -210,7 +210,7 @@ const ChatBody = () => {
     form.reset();
   };
 
-  function AtagRenderer(props: any) {
+  function AnchortagRenderer(props: any) {
     return (
       <a href={props.href} target="_blank">
         {props.children}
@@ -236,7 +236,7 @@ const ChatBody = () => {
               <Markdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  a: AtagRenderer,
+                  a: AnchortagRenderer,
                 }}
               >
                 {message.content}
