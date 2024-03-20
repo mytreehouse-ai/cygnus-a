@@ -24,7 +24,6 @@ function ChatBody(props: PropsWithChildren) {
       messageParentRef.current.scrollTop =
         messageParentRef.current.scrollHeight;
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,7 +36,6 @@ function ChatBody(props: PropsWithChildren) {
         });
       }
     }, 100);
-
     return () => clearTimeout(timeout);
   }, [messages.length]);
 
@@ -56,7 +54,7 @@ function ChatBody(props: PropsWithChildren) {
                 </div>
                 <p>{message.type}</p>
               </div>
-              <div className="prose prose-base max-w-none px-12">
+              <div className="prose prose-base max-w-none px-8">
                 <Markdown
                   remarkPlugins={[remarkGfm]}
                   components={{
