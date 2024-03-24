@@ -64,11 +64,16 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
           <div className="my-1 flex gap-x-2">
             <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500">
               <Shrink className="h-4 w-4" />
-              <span>
-                {property.property_type.description !== "Warehouse"
-                  ? property.estate.floor_size
-                  : property.estate?.building_size}
-              </span>
+              {property.property_type.description === "Warehouse" && (
+                <span>{property.estate.building_size}</span>
+              )}
+              {["Condominium", "House", "Apartment", "Land"].includes(
+                property.property_type.description,
+              ) && (
+                <span>
+                  {property.estate.floor_size || property.estate.lot_size}
+                </span>
+              )}
             </p>
             <p className="inline-flex items-center gap-x-2 text-sm font-normal text-slate-500">
               <Building className="h-4 w-4" />
