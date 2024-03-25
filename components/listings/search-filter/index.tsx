@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
 import { Search as SearchIcon, Map } from "lucide-react";
-import { createSearchParams } from "@/lib/utils";
+import { createSearchParams, getParams } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
@@ -98,17 +98,47 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               name="property_type"
               placeholder="Property Type"
               className="md:hidden"
+              onClear={() => {
+                const params = new URLSearchParams(getParams(searchParams));
+                params.delete("property_type");
+                router.replace(
+                  window.location.pathname + "?" + params.toString(),
+                  {
+                    scroll: false,
+                  },
+                );
+              }}
             />
             <ReactSelect
               data={citiesOptions ?? []}
               name="location"
               placeholder="Location"
               className="lg:hidden"
+              onClear={() => {
+                const params = new URLSearchParams(getParams(searchParams));
+                params.delete("location");
+                router.replace(
+                  window.location.pathname + "?" + params.toString(),
+                  {
+                    scroll: false,
+                  },
+                );
+              }}
             />
             <ReactSelect
               data={listingTypes}
               name="listing_type"
               placeholder="Listing Type"
+              onClear={() => {
+                const params = new URLSearchParams(getParams(searchParams));
+                params.delete("listing_type");
+                router.replace(
+                  window.location.pathname + "?" + params.toString(),
+                  {
+                    scroll: false,
+                  },
+                );
+              }}
             />
             <div className="flex gap-x-2">
               <FormField
@@ -215,21 +245,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
 
 function SearchFilter() {
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
-  const [page, setPage] = useState(1);
 
   const searchParams = useSearchParams();
 
   const router = useRouter();
 
-  const { fetchNextPage, data, isFetching } = useCitiesQuery();
-
-  const citiesOptions =
-    data?.pages.flatMap((page) =>
-      page.results.map((city) => ({
-        value: city.id,
-        label: city.name,
-      })),
-    ) ?? [];
+  const { data, isFetching } = useCitiesQuery();
 
   const propertySearchFilterForm = useForm<
     Pick<Filters, "search" | "location" | "property_type">
@@ -259,13 +280,6 @@ function SearchFilter() {
       );
     }
   }
-
-  const handleScrolledToBottom = () => {
-    if (!isFetching) {
-      setPage((e) => e + 1);
-      fetchNextPage();
-    }
-  };
 
   function handleFilterButtonClick() {
     setFilterDrawerIsOpen(true);
@@ -301,14 +315,39 @@ function SearchFilter() {
             name="property_type"
             placeholder="Property Type"
             className="hidden md:block"
+            onClear={() => {
+              const params = new URLSearchParams(getParams(searchParams));
+              params.delete("property_type");
+              router.replace(
+                window.location.pathname + "?" + params.toString(),
+                {
+                  scroll: false,
+                },
+              );
+            }}
+            isLoading={isFetching}
           />
 
           <ReactSelect
-            data={citiesOptions}
+            data={
+              data?.map((city) => ({
+                value: city.id,
+                label: city.name,
+              })) ?? []
+            }
             name="location"
             placeholder="Location"
             className="hidden lg:block"
-            onMenuScrollToBottom={handleScrolledToBottom}
+            onClear={() => {
+              const params = new URLSearchParams(getParams(searchParams));
+              params.delete("location");
+              router.replace(
+                window.location.pathname + "?" + params.toString(),
+                {
+                  scroll: false,
+                },
+              );
+            }}
           />
 
           <div className="flex justify-evenly gap-x-2">
@@ -335,7 +374,12 @@ function SearchFilter() {
       <FilterDrawer
         open={filterDrawerIsOpen}
         onClose={() => setFilterDrawerIsOpen(false)}
-        citiesOptions={citiesOptions}
+        citiesOptions={
+          data?.map((city) => ({
+            value: city.id,
+            label: city.name,
+          })) ?? []
+        }
       />
     </div>
   );
