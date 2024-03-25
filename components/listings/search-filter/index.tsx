@@ -28,15 +28,15 @@ interface FilterDrawerProps extends Modal {
 
 interface Filters {
   search?: string | null;
-  location?: number;
   listing_type?: string | null;
+  property_type?: string | null;
+  location?: number;
   bedroom?: number;
   bathroom?: number;
   min_price?: number;
   max_price?: number;
   min_sqm?: number;
   max_sqm?: number;
-  property_type?: string | null;
 }
 
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
@@ -61,6 +61,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
         : undefined,
       bathroom: searchParams?.has("bathroom")
         ? parseInt(searchParams.get("bathroom") ?? "0")
+        : undefined,
+      min_price: searchParams?.has("min_price")
+        ? parseInt(searchParams.get("min_price") ?? "0")
+        : undefined,
+      max_price: searchParams?.has("max_price")
+        ? parseInt(searchParams.get("max_price") ?? "0")
         : undefined,
     },
   });
@@ -155,6 +161,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                           {...field}
                           value={field.value}
                           className="w-full rounded-lg text-sm md:w-full"
+                          type="number"
+                          inputMode="numeric"
                         />
                       </FormControl>
                     </FormItem>
@@ -171,6 +179,8 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                           {...field}
                           value={field.value}
                           className="w-full rounded-lg text-sm md:w-full"
+                          type="number"
+                          inputMode="numeric"
                         />
                       </FormControl>
                     </FormItem>
@@ -178,30 +188,59 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 />
               </div>
             )}
-            <div className="w-full">
-              <label
-                htmlFor="max_price"
-                className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
-              >
-                <span>Price</span>
-                <span className="text-sm text-slate-500">
-                  {formatCurrency(priceRange[0])} -{" "}
-                  {formatCurrency(priceRange[1])}
-                </span>
-              </label>
-              <MultiSlider
-                max={10_000_000}
-                min={0}
-                step={1}
-                withoutLabel={true}
-                minStepsBetweenThumbs={100_000}
-                onValueChange={(values) => {
-                  setPriceRange(values);
-                  propertyFilterForms.setValue("min_price", values[0]);
-                  propertyFilterForms.setValue("max_price", values[1]);
-                }}
-                className="mt-2"
-              />
+            <div className="flex w-full items-center gap-x-2">
+              <div className="w-full">
+                <label
+                  htmlFor="min_price"
+                  className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
+                >
+                  <span>Price</span>
+                </label>
+                <FormField
+                  control={propertyFilterForms.control}
+                  name="min_price"
+                  render={({ field }) => (
+                    <FormItem className="w-auto md:w-full">
+                      <FormControl>
+                        <Input
+                          placeholder="Minimum"
+                          {...field}
+                          value={field.value}
+                          className="w-full rounded-lg text-sm md:w-full"
+                          type="number"
+                          inputMode="numeric"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="max_price"
+                  className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
+                >
+                  <span className="invisible">Price</span>
+                </label>
+                <FormField
+                  control={propertyFilterForms.control}
+                  name="max_price"
+                  render={({ field }) => (
+                    <FormItem className="w-auto md:w-full">
+                      <FormControl>
+                        <Input
+                          placeholder="Maximum"
+                          {...field}
+                          value={field.value}
+                          className="w-full rounded-lg text-sm md:w-full"
+                          type="number"
+                          inputMode="numeric"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
 
             <div className="mt-2 w-full">
