@@ -29,7 +29,7 @@ interface FilterDrawerProps extends Modal {
 interface Filters {
   search?: string | null;
   location?: number;
-  listing_type?: number;
+  listing_type?: string | null;
   bedroom?: number;
   bathroom?: number;
   min_price?: number;
@@ -54,7 +54,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
         ? searchParams.get("property_type")
         : undefined,
       listing_type: searchParams?.has("listing-type")
-        ? parseInt(searchParams.get("listing-type") ?? "0")
+        ? searchParams.get("listing-type")
         : undefined,
       bedroom: searchParams?.has("bedroom")
         ? parseInt(searchParams.get("bedroom") ?? "0")
