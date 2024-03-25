@@ -215,21 +215,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
 
 function SearchFilter() {
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
-  const [page, setPage] = useState(1);
 
   const searchParams = useSearchParams();
 
   const router = useRouter();
 
-  const { fetchNextPage, data, isFetching } = useCitiesQuery();
-
-  const citiesOptions =
-    data?.pages.flatMap((page) =>
-      page.results.map((city) => ({
-        value: city.id,
-        label: city.name,
-      })),
-    ) ?? [];
+  const { data, isFetching } = useCitiesQuery();
 
   const propertySearchFilterForm = useForm<
     Pick<Filters, "search" | "location" | "property_type">
@@ -259,13 +250,6 @@ function SearchFilter() {
       );
     }
   }
-
-  const handleScrolledToBottom = () => {
-    if (!isFetching) {
-      setPage((e) => e + 1);
-      fetchNextPage();
-    }
-  };
 
   function handleFilterButtonClick() {
     setFilterDrawerIsOpen(true);
@@ -301,14 +285,19 @@ function SearchFilter() {
             name="property_type"
             placeholder="Property Type"
             className="hidden md:block"
+            isLoading={isFetching}
           />
 
           <ReactSelect
-            data={citiesOptions}
+            data={
+              data?.map((city) => ({
+                value: city.id,
+                label: city.name,
+              })) ?? []
+            }
             name="location"
             placeholder="Location"
             className="hidden lg:block"
-            onMenuScrollToBottom={handleScrolledToBottom}
           />
 
           <div className="flex justify-evenly gap-x-2">
@@ -335,7 +324,12 @@ function SearchFilter() {
       <FilterDrawer
         open={filterDrawerIsOpen}
         onClose={() => setFilterDrawerIsOpen(false)}
-        citiesOptions={citiesOptions}
+        citiesOptions={
+          data?.map((city) => ({
+            value: city.id,
+            label: city.name,
+          })) ?? []
+        }
       />
     </div>
   );

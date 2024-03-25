@@ -1,17 +1,12 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { City } from "@/types/city";
 import apiClient from "@/lib/api-client";
-import { ReadonlyURLSearchParams } from "next/navigation";
 import { getParams } from "@/lib/utils";
-import { ApiBaseResponse } from "@/types";
 
-const getCitiesQuery = async (filters?: ReadonlyURLSearchParams) => {
-  const url = "/domains/cities";
-  const params = getParams(filters);
+const getCitiesQuery = async () => {
+  const url = "/domains/all-cities";
   try {
-    const response = await apiClient.get<ApiBaseResponse<City[]>>(url, {
-      params,
-    });
+    const response = await apiClient.get<City[]>(url);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch cities", error);
@@ -19,13 +14,10 @@ const getCitiesQuery = async (filters?: ReadonlyURLSearchParams) => {
   }
 };
 
-const useCitiesQuery = (filters?: ReadonlyURLSearchParams) => {
-  const params = getParams(filters);
-  return useInfiniteQuery({
-    queryKey: ["cities", params],
-    queryFn: () => getCitiesQuery(filters),
-    initialPageParam: params?.page,
-    getNextPageParam: (lastPage) => lastPage.next,
+const useCitiesQuery = () => {
+  return useQuery({
+    queryKey: ["cities", "all"],
+    queryFn: () => getCitiesQuery(),
   });
 };
 
