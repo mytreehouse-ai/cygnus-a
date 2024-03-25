@@ -17,12 +17,11 @@ import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
-import { formatCurrency } from "@/lib/utils";
 import useCitiesQuery from "@/hooks/useCitiesQuery";
 interface FilterDrawerProps extends Modal {
   citiesOptions: {
     label: string;
-    value: number;
+    value: string;
   }[];
 }
 
@@ -30,7 +29,7 @@ interface Filters {
   search?: string | null;
   listing_type?: string | null;
   property_type?: string | null;
-  location?: number;
+  location?: string | null;
   bedroom?: number;
   bathroom?: number;
   min_price?: number;
@@ -44,7 +43,6 @@ interface Filters {
 }
 
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
-  const [priceRange, setPriceRange] = useState<number[]>([0, 10000000]);
   const [sqm, setSqm] = useState<number[]>([0, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -52,7 +50,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const propertyFilterForms = useForm<Filters>({
     values: {
       location: searchParams?.has("location")
-        ? parseInt(searchParams.get("location") ?? "0")
+        ? searchParams.get("location")
         : undefined,
       property_type: searchParams?.has("property_type")
         ? searchParams.get("property_type")
@@ -413,7 +411,7 @@ function SearchFilter() {
           <ReactSelect
             data={
               data?.map((city) => ({
-                value: city.id,
+                value: city.slug,
                 label: city.name,
               })) ?? []
             }
@@ -458,7 +456,7 @@ function SearchFilter() {
         onClose={() => setFilterDrawerIsOpen(false)}
         citiesOptions={
           data?.map((city) => ({
-            value: city.id,
+            value: city.slug,
             label: city.name,
           })) ?? []
         }
