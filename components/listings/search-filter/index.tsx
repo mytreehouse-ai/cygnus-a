@@ -91,7 +91,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
           <form
             name="search-property-form"
             onSubmit={propertyFilterForms.handleSubmit(onSubmit)}
-            className="lg: my-8 mt-8 space-y-3"
+            className="mt-8 w-full space-y-3 px-4 lg:my-8 lg:w-2/6"
           >
             <ReactSelect
               data={propertyTypes}
@@ -140,42 +140,45 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 );
               }}
             />
-            <div className="flex gap-x-2">
-              <FormField
-                control={propertyFilterForms.control}
-                name="bedroom"
-                render={({ field }) => (
-                  <FormItem className="w-auto md:w-full">
-                    <FormControl>
-                      <Input
-                        placeholder="No. Bedroom"
-                        {...field}
-                        value={field.value}
-                        className="w-full rounded-lg text-sm md:w-full"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={propertyFilterForms.control}
-                name="bathroom"
-                render={({ field }) => (
-                  <FormItem className="w-auto md:w-full">
-                    <FormControl>
-                      <Input
-                        placeholder="No. Bathroom"
-                        {...field}
-                        value={field.value}
-                        className="w-full rounded-lg text-sm md:w-full"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div>
+            {!["Warehouse", "land"].includes(
+              searchParams?.get("property_type") ?? "",
+            ) && (
+              <div className="flex w-full gap-x-2">
+                <FormField
+                  control={propertyFilterForms.control}
+                  name="bedroom"
+                  render={({ field }) => (
+                    <FormItem className="w-auto md:w-full">
+                      <FormControl>
+                        <Input
+                          placeholder="No. Bedroom"
+                          {...field}
+                          value={field.value}
+                          className="w-full rounded-lg text-sm md:w-full"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={propertyFilterForms.control}
+                  name="bathroom"
+                  render={({ field }) => (
+                    <FormItem className="w-auto md:w-full">
+                      <FormControl>
+                        <Input
+                          placeholder="No. Bathroom"
+                          {...field}
+                          value={field.value}
+                          className="w-full rounded-lg text-sm md:w-full"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+            <div className="w-full">
               <label
                 htmlFor="max_price"
                 className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
@@ -201,7 +204,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               />
             </div>
 
-            <div className="mt-2">
+            <div className="mt-2 w-full">
               <label
                 htmlFor="max_price"
                 className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
