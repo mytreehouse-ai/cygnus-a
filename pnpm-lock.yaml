@@ -84,8 +84,8 @@ dependencies:
     specifier: ^0.30.4
     version: 0.30.4(@types/react@18.2.66)(@vercel/postgres@0.7.2)(react@18.2.0)
   lucide:
-    specifier: ^0.359.0
-    version: 0.359.0
+    specifier: ^0.363.0
+    version: 0.363.0
   lucide-react:
     specifier: ^0.359.0
     version: 0.359.0(react@18.2.0)
@@ -4815,8 +4815,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /lucide@0.359.0:
-    resolution: {integrity: sha512-dnWnZRSqDVzz9oAcuIIvlfDrtSwDc2sVwF9zO5dPryQ+uLdS00XQJrprsC687nPC0dp4z1znBrtdRyb9rcBZ9w==}
+  /lucide@0.363.0:
+    resolution: {integrity: sha512-/AAsZdclXMOn4Q3wWw6kcyYHzwyafoRyEOCD9bVlhRTU5rxJ3Gs2Hj70xwOhK2z14Iukmon6dTvgzhkoj21YZg==}
     dev: false
 
   /map-obj@4.3.0:
