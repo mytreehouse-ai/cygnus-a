@@ -36,7 +36,7 @@ interface Filters {
   max_price?: number;
   min_sqm?: number;
   max_sqm?: number;
-  property_type?: number;
+  property_type?: string | null;
 }
 
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
@@ -51,7 +51,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
         ? parseInt(searchParams.get("location") ?? "0")
         : undefined,
       property_type: searchParams?.has("property_type")
-        ? parseInt(searchParams.get("property_type") ?? "0")
+        ? searchParams.get("property_type")
         : undefined,
       listing_type: searchParams?.has("listing-type")
         ? parseInt(searchParams.get("listing-type") ?? "0")
@@ -238,7 +238,7 @@ function SearchFilter() {
     values: {
       search: searchParams?.get("search") ?? "",
       property_type: searchParams?.has("property_type")
-        ? parseInt(searchParams.get("property_type") ?? "0")
+        ? searchParams.get("property_type")
         : undefined,
     },
   });
