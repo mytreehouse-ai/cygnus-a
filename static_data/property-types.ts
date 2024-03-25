@@ -1,23 +1,22 @@
 export const propertyTypes = [
   {
-    value:1,
+    value: "Condominium",
     label: "Condominium",
   },
-	{
-    value:2,
+  {
+    value: "House",
     label: "House",
   },
-	{
-    value:3,
+  {
+    value: "Apartment",
     label: "Apartment",
   },
-	{
-    value:4,
+  {
+    value: "Warehouse",
     label: "Warehouse",
   },
-	{
-    value:5,
+  {
+    value: "Land",
     label: "Land",
   },
- 
 ];
