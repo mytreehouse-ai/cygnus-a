@@ -35,8 +35,12 @@ interface Filters {
   bathroom?: number;
   min_price?: number;
   max_price?: number;
-  min_sqm?: number;
-  max_sqm?: number;
+  lot_size_min?: number;
+  lot_size_max?: number;
+  floor_size_min?: number;
+  floor_size_max?: number;
+  building_size_min?: number;
+  building_size_max?: number;
 }
 
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
@@ -62,11 +66,23 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
       bathroom: searchParams?.has("bathroom")
         ? parseInt(searchParams.get("bathroom") ?? "0")
         : undefined,
-      min_price: searchParams?.has("min_price")
-        ? parseInt(searchParams.get("min_price") ?? "0")
+      lot_size_min: searchParams?.has("lot_size_min")
+        ? parseInt(searchParams.get("lot_size_min") ?? "0")
         : undefined,
-      max_price: searchParams?.has("max_price")
-        ? parseInt(searchParams.get("max_price") ?? "0")
+      lot_size_max: searchParams?.has("lot_size_max")
+        ? parseInt(searchParams.get("lot_size_max") ?? "0")
+        : undefined,
+      floor_size_min: searchParams?.has("floor_size_min")
+        ? parseInt(searchParams.get("floor_size_min") ?? "0")
+        : undefined,
+      floor_size_max: searchParams?.has("floor_size_max")
+        ? parseInt(searchParams.get("floor_size_max") ?? "0")
+        : undefined,
+      building_size_min: searchParams?.has("building_size_min")
+        ? parseInt(searchParams.get("building_size_min") ?? "0")
+        : undefined,
+      building_size_max: searchParams?.has("building_size_max")
+        ? parseInt(searchParams.get("building_size_max") ?? "0")
         : undefined,
     },
   });
@@ -261,8 +277,32 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 minStepsBetweenThumbs={1}
                 onValueChange={(values) => {
                   setSqm(values);
-                  propertyFilterForms.setValue("min_sqm", values[0]);
-                  propertyFilterForms.setValue("max_sqm", values[1]);
+                  propertyFilterForms.setValue(
+                    (() => {
+                      switch (searchParams?.get("property_type")) {
+                        case "Warehouse":
+                          return "building_size_min";
+                        case "Land":
+                          return "lot_size_min";
+                        default:
+                          return "floor_size_min";
+                      }
+                    })(),
+                    values[0],
+                  );
+                  propertyFilterForms.setValue(
+                    (() => {
+                      switch (searchParams?.get("property_type")) {
+                        case "Warehouse":
+                          return "building_size_max";
+                        case "Land":
+                          return "lot_size_max";
+                        default:
+                          return "floor_size_max";
+                      }
+                    })(),
+                    values[1],
+                  );
                 }}
                 className="mt-2"
               />
