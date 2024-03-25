@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { City } from "@/types/city";
 import apiClient from "@/lib/api-client";
-import { getParams } from "@/lib/utils";
 
 const getCitiesQuery = async () => {
-  const url = "/domains/all-cities";
+  const url = "/domains/all-citiess";
   try {
     const response = await apiClient.get<City[]>(url);
     return response.data;

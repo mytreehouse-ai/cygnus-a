@@ -50,6 +50,7 @@ interface SelectProps
     option: ReactSelectOnChangeOption,
     oldOptionValue?: ReactSelectValueType,
   ) => void;
+  onClear?: () => void;
   onMenuScrollToBottom?: (event: WheelEvent | TouchEvent) => void;
 }
 
@@ -64,6 +65,7 @@ const ReactSelect: React.FC<SelectProps> = ({
   placeholder,
   disabled,
   onChange,
+  onClear,
   className,
   onMenuScrollToBottom,
 }) => {
@@ -207,8 +209,7 @@ const ReactSelect: React.FC<SelectProps> = ({
     }),
     clearIndicator: (provided: CSSObjectWithLabel) => ({
       ...provided,
-      width: "50%",
-      color: "#FF7200",
+      color: "#10b981",
     }),
     menu: (provided: CSSObjectWithLabel) => ({
       ...provided,
@@ -284,26 +285,32 @@ const ReactSelect: React.FC<SelectProps> = ({
         className="text-sm"
         isLoading={isLoading}
         isDisabled={disabled}
+        isClearable={!!formValue}
         closeMenuOnSelect={closeOnSelect}
         isMulti={isMulti}
         onMenuScrollToBottom={onMenuScrollToBottom}
-        onChange={(selectedOption) => {
+        onChange={(selectedOption, triggeredAction) => {
           let currentValue: ReactSelectValueType;
           let currentOption;
 
           if (Array.isArray(selectedOption)) {
             currentOption = selectedOption as OptionData[];
-            currentValue = currentOption.map((item) => item.value);
+            currentValue = currentOption.map((item) => item?.value);
           } else {
             currentOption = selectedOption as OptionData;
-            currentValue = currentOption.value;
+            currentValue = currentOption?.value;
           }
 
-          field.onChange(currentValue);
+          field.onChange(currentValue ?? "");
 
           // only trigger change when previous value is not the same as new value
           if (!isMulti && field.value !== currentValue) {
             onChange?.(currentOption, field.value as ReactSelectValueType);
+          }
+
+          if (triggeredAction.action === "clear" && onClear) {
+            setDefaultValue(undefined);
+            onClear();
           }
         }}
         theme={(theme) => ({

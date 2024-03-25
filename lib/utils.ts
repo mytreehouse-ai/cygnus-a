@@ -30,10 +30,13 @@ export function imageKitLoader(params: ImageKitLoaderParams): string {
   return `${urlEndpoint}/${src}?tr=${parametersString}`;
 }
 
-export function getParams(filters?: ReadonlyURLSearchParams) {
-  return filters?.size ? Object.fromEntries(filters.entries()) : {};
+export function getParams(
+  filters?: ReadonlyURLSearchParams,
+): Record<string, string> {
+  return filters?.size
+    ? (Object.fromEntries(filters.entries()) as Record<string, string>)
+    : {};
 }
-
 export function formatCurrency(
   amount: number,
   currencyCode: string = "PHP",
