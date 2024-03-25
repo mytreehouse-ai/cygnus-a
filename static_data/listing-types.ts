@@ -1,10 +1,10 @@
 export const listingTypes = [
   {
-    value: 1,
+    value: "for-sale",
     label: "For Sale",
   },
   {
-    value: 2,
+    value: "for-rent",
     label: "For Rent",
   },
 ];
