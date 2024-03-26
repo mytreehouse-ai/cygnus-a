@@ -210,6 +210,8 @@ const ReactSelect: React.FC<SelectProps> = ({
     clearIndicator: (provided: CSSObjectWithLabel) => ({
       ...provided,
       color: "#10b981",
+      position: "absolute",
+      right: "1.8em",
     }),
     menu: (provided: CSSObjectWithLabel) => ({
       ...provided,

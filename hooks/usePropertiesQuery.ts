@@ -16,7 +16,7 @@ const getPropertiesQuery = async (filters?: ReadonlyURLSearchParams) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch cities:", error);
+    console.error("Failed to fetch properties:", error);
     throw new Error("Failed to fetch properties");
   }
 };

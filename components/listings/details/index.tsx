@@ -1,26 +1,42 @@
-import Amenities from "@/components/listings/details/amenities";
-import Broker from "@/components/listings/details/broker";
-import ContactForm from "@/components/listings/details/contact-form";
-import Description from "@/components/listings/details/description";
-import Galery from "@/components/listings/details/galery";
-import Overview from "@/components/listings/details/overview";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { MapPin } from "lucide-react";
+"use client";
 
-function PropertyDetails() {
+import { Badge } from "@/components/ui/badge";
+import { MapPin } from "lucide-react";
+import Galery from "./galery";
+import Overview from "./overview";
+import Description from "./description";
+import Broker from "./broker";
+import Amenities from "./amenities";
+import ContactForm from "./contact-form";
+import usePropertyQuery from "@/hooks/usePropertyQuery";
+import { PropertyListing } from "@/types";
+
+interface PropertyDetailsProps {
+  slug: string;
+  initialData?: PropertyListing;
+}
+
+function PropertyDetails(props: PropertyDetailsProps) {
+  const { data } = usePropertyQuery(props.slug, props?.initialData);
+
+  console.log(data);
+
   return (
     <main className="min-h-screen">
       <section className="space-y-1 px-4 pt-10 md:col-span-3">
         <div className="md:flex md:items-center md:gap-x-2">
-          <h3 className="text-2xl font-bold">Furnished Condominium Unit</h3>
-          <Badge className={cn(" rounded-md bg-orange-400 ")}>For Rent</Badge>
+          <h3 className="truncate text-2xl font-bold">{data?.listing_title}</h3>
+          <Badge className="rounded-md bg-orange-400">
+            {data?.listing_type.description}
+          </Badge>
         </div>
         <p className="flex items-center gap-x-2 py-2 text-sm text-slate-500">
           <MapPin className="h-4 w-4 text-slate-500" />
-          <span> Paseo de Roxas, Makati</span>
+          <span>{data?.estate.city.name || data?.estate.address}</span>
         </p>
-        <h3 className="text-3xl font-bold text-emerald-600">$146,000</h3>
+        <h3 className="text-3xl font-bold text-emerald-600">
+          {data?.price_formatted}
+        </h3>
       </section>
       <div className="px-4 lg:grid lg:grid-cols-3 lg:gap-x-4">
         <div className="w-full space-y-4 py-10 lg:col-span-2">

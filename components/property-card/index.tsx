@@ -53,7 +53,7 @@ function PropertyCard({ property, onClick }: PropertyCardProps) {
           <p className="truncate">{property.listing_title}</p>
           <p className="flex items-center gap-x-2  text-sm font-normal text-slate-500">
             <MapPin className="h-4 w-4" />
-            <span>
+            <span className="truncate">
               {property.estate?.address
                 ? property.estate.address
                 : property.estate.city.name}
