@@ -26,9 +26,7 @@ const Properties = () => {
         <li key={property.id}>
           <PropertyCard
             property={property}
-            onClick={() =>
-              void router.push(`/listings/${property.listing_title}`)
-            }
+            onClick={() => void router.push(`/listings/${property.slug}`)}
           />
         </li>
       ))}

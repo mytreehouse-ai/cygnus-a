@@ -7,6 +7,7 @@ export interface PropertyListing {
   id: number;
   listing_title: string;
   listing_url: string;
+  slug: string;
   estate: PropertyEstate;
   property_type: PropertyType;
   listing_type: ListingType;
