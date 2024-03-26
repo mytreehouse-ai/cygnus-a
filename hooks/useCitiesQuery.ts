@@ -3,7 +3,7 @@ import { City } from "@/types/city";
 import apiClient from "@/lib/api-client";
 
 const getCitiesQuery = async () => {
-  const url = "/domains/all-citiess";
+  const url = "/domains/all-cities";
   try {
     const response = await apiClient.get<City[]>(url);
     return response.data;
