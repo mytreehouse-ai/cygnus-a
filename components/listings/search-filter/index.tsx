@@ -18,6 +18,7 @@ import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import useCitiesQuery from "@/hooks/useCitiesQuery";
+
 interface FilterDrawerProps extends Modal {
   citiesOptions: {
     label: string;
@@ -43,7 +44,7 @@ interface Filters {
 }
 
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
-  const [sqm, setSqm] = useState<number[]>([0, 10000]);
+  const [sqm, setSqm] = useState<number[]>([1, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -273,6 +274,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 step={1}
                 withoutLabel={true}
                 minStepsBetweenThumbs={1}
+                value={sqm}
                 onValueChange={(values) => {
                   setSqm(values);
                   propertyFilterForms.setValue(

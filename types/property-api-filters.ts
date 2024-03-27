@@ -13,8 +13,8 @@ interface ApiBaseRequestParams {
 }
 
 interface PropertyFilters extends ApiBaseRequestParams {
-  property_type: number;
-  listing_type: number;
+  property_type?: string | null;
+  listing_type?: string | null;
   property_status: number;
   price_min: number;
   price_max: number;
@@ -30,10 +30,10 @@ interface PropertyFilters extends ApiBaseRequestParams {
   num_bathrooms_max: number;
   num_carspaces_min: number;
   num_carspaces_max: number;
-  city: number;
-  indoor_features: string;
-  outdoor_features: string;
-  other_features: string;
+  location: string | null;
+  indoor_features: string | null;
+  outdoor_features: string | null;
+  other_features: string | null;
 }
 
 export type { ApiBaseResponse, ApiBaseRequestParams, PropertyFilters };

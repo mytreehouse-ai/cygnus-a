@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { City } from "@/types/city";
-import apiClient from "@/lib/api-client";
+import apiClient from "@/lib/apiClient";
 
 const getCitiesQuery = async () => {
   const url = "/domains/all-cities";

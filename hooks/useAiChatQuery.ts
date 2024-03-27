@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "@/lib/api-client";
+import apiClient from "@/lib/apiClient";
 import { z } from "zod";
-import { aiChatSchema } from "@/schema/ai-chat";
+import { aiChatSchema } from "@/schema/aiChat";
 
 const getAiChatQuery = async (query: z.infer<typeof aiChatSchema>) => {
   const url = "/ai/langchain/assistant";
