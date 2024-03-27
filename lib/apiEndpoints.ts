@@ -1,5 +1,5 @@
-import { aiChatSchema } from "@/schema/ai-chat";
-import apiClient from "./api-client";
+import { aiChatSchema } from "@/schema/aiChat";
+import apiClient from "./apiClient";
 import { z } from "zod";
 
 export function getAiChat(query: z.infer<typeof aiChatSchema>) {

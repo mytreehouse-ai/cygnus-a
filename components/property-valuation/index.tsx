@@ -2,7 +2,7 @@
 import z from "zod";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import ValuationStepper from "@/hooks/useStepperStore";
+import ValuationStepper from "@/store/useStepperStore";
 import PropertyDetails from "./property-details";
 import PersonalDetails from "./personal-details";
 import ValuationResult from "./valuation-result";

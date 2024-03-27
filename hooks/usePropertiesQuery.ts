@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "@/lib/api-client";
+import apiClient from "@/lib/apiClient";
 import type { ReadonlyURLSearchParams } from "next/navigation";
 import { getParams } from "@/lib/utils";
 import { ApiBaseResponse, PropertyListing } from "@/types";

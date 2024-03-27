@@ -11,10 +11,10 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import ValuationStepper from "@/hooks/useStepperStore";
+import ValuationStepper from "@/store/useStepperStore";
 import { personalDetailsFormSchema } from "@/schema/valuation";
 import { Checkbox } from "@/components/ui/checkbox";
-import useValuationFormStore from "@/hooks/useValuationFormStore";
+import useValuationFormStore from "@/store/useValuationFormStore";
 
 const PersonalDetails: React.FC = () => {
   const { currentStepIndex, setCurrentStepIndex, steps } = ValuationStepper();
