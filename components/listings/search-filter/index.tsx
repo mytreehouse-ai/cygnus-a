@@ -21,13 +21,6 @@ import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import useCitiesQuery from "@/hooks/useCitiesQuery";
 
-interface FilterDrawerProps extends Modal {
-  citiesOptions: {
-    label: string;
-    value: string;
-  }[];
-}
-
 const propertyFiltersSchema = z
   .object({
     search: z.string(),
@@ -109,7 +102,7 @@ const propertyFiltersSchema = z
   })
   .partial();
 
-const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
+const FilterDrawer = ({ open, onClose }: Modal) => {
   const [sqm, setSqm] = useState<number[]>([1, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -120,10 +113,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   useEffect(() => {
     if (searchParams.size > 0) {
       searchParams.forEach((value, key) => {
-        propertyFilterForms.setValue(
-          key as keyof z.infer<typeof propertyFiltersSchema>,
-          value,
-        );
+        if (["listing_type"].includes(key)) {
+          propertyFilterForms.setValue(
+            key as keyof z.infer<typeof propertyFiltersSchema>,
+            value,
+          );
+        }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -133,6 +128,12 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
     const currentQuerySearchParamsEntries = Object.fromEntries(
       searchParams.entries(),
     );
+
+    console.log({
+      ...currentQuerySearchParamsEntries,
+      ...data,
+    });
+
     const updatedSearchParams = createSearchParams({
       ...currentQuerySearchParamsEntries,
       ...data,
@@ -165,40 +166,6 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
             onSubmit={propertyFilterForms.handleSubmit(onSubmit)}
             className="mt-8 w-full space-y-3 px-4 lg:my-8 lg:w-2/6"
           >
-            <ReactSelect
-              data={propertyTypes}
-              name="property_type"
-              placeholder="Property Type"
-              className="md:hidden"
-              onClear={() => {
-                propertyFilterForms.resetField("property_type", undefined);
-                const params = new URLSearchParams(getParams(searchParams));
-                params.delete("property_type");
-                router.replace(
-                  window.location.pathname + "?" + params.toString(),
-                  {
-                    scroll: false,
-                  },
-                );
-              }}
-            />
-            <ReactSelect
-              data={citiesOptions ?? []}
-              name="location"
-              placeholder="Location"
-              className="lg:hidden"
-              onClear={() => {
-                propertyFilterForms.resetField("location", undefined);
-                const params = new URLSearchParams(getParams(searchParams));
-                params.delete("location");
-                router.replace(
-                  window.location.pathname + "?" + params.toString(),
-                  {
-                    scroll: false,
-                  },
-                );
-              }}
-            />
             <ReactSelect
               data={listingTypes}
               name="listing_type"
@@ -408,6 +375,8 @@ function SearchFilter() {
       searchParams.entries(),
     );
 
+    console.log(currentQuerySearchParamsEntries);
+
     const updatedSearchParams = createSearchParams({
       ...currentQuerySearchParamsEntries,
       ...data,
@@ -516,12 +485,6 @@ function SearchFilter() {
       <FilterDrawer
         open={filterDrawerIsOpen}
         onClose={() => setFilterDrawerIsOpen(false)}
-        citiesOptions={
-          data?.map((city) => ({
-            value: city.slug,
-            label: city.name,
-          })) ?? []
-        }
       />
     </div>
   );
