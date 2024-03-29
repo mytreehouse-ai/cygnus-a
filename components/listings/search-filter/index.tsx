@@ -10,18 +10,21 @@ import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
 import { Search as SearchIcon, Map } from "lucide-react";
 import { createSearchParams, getParams } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { ReadonlyURLSearchParams, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useState } from "react";
-import { Modal } from "@/types";
+import { Modal, PropertyFilters } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import useCitiesQuery from "@/hooks/useCitiesQuery";
+import usePropertyListingFilterStore from "@/store/usePropertyListingFilterStore";
 
 interface FilterDrawerProps extends Modal {
+  searchParams: ReadonlyURLSearchParams;
+  filters: Partial<PropertyFilters>;
   citiesOptions: {
     label: string;
     value: string;
@@ -109,30 +112,53 @@ const propertyFiltersSchema = z
   })
   .partial();
 
-const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
+const FilterDrawer = ({
+  open,
+  onClose,
+  searchParams,
+  filters,
+  citiesOptions,
+}: FilterDrawerProps) => {
   const [sqm, setSqm] = useState<number[]>([1, 10000]);
   const router = useRouter();
-  const searchParams = useSearchParams();
   const propertyFilterForms = useForm<z.infer<typeof propertyFiltersSchema>>({
     resolver: zodResolver(propertyFiltersSchema),
   });
 
   useEffect(() => {
-    if (searchParams.size > 0) {
-      searchParams.forEach((value, key) => {
+    if (filters.search) {
+      propertyFilterForms.setValue("search", filters.search);
+    }
+
+    if (filters.property_type) {
+      propertyFilterForms.setValue("property_type", filters.property_type);
+    }
+
+    if (filters.location) {
+      propertyFilterForms.setValue("location", filters.location);
+    }
+
+    searchParams.forEach((value, key) => {
+      if (["listing_type"].includes(key)) {
         propertyFilterForms.setValue(
           key as keyof z.infer<typeof propertyFiltersSchema>,
           value,
         );
-      });
-    }
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filters]);
 
   const onSubmit = (data: z.infer<typeof propertyFiltersSchema>) => {
     const currentQuerySearchParamsEntries = Object.fromEntries(
       searchParams.entries(),
     );
+
+    console.log({
+      ...currentQuerySearchParamsEntries,
+      ...data,
+    });
+
     const updatedSearchParams = createSearchParams({
       ...currentQuerySearchParamsEntries,
       ...data,
@@ -383,6 +409,7 @@ function SearchFilter() {
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const filters = usePropertyListingFilterStore();
   const { data, isFetching } = useCitiesQuery();
 
   const propertySearchFilterForm = useForm<
@@ -404,6 +431,8 @@ function SearchFilter() {
   }, []);
 
   function onSubmit(data: z.infer<typeof propertyFiltersSchema>) {
+    filters.updateFilters(data);
+
     const currentQuerySearchParamsEntries = Object.fromEntries(
       searchParams.entries(),
     );
@@ -516,6 +545,8 @@ function SearchFilter() {
       <FilterDrawer
         open={filterDrawerIsOpen}
         onClose={() => setFilterDrawerIsOpen(false)}
+        searchParams={searchParams}
+        filters={filters.data}
         citiesOptions={
           data?.map((city) => ({
             value: city.slug,
