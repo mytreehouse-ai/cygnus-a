@@ -4,10 +4,11 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 interface DescriptionProps {
+  markdown: string;
   description: string;
 }
 
-function Description({ description }: DescriptionProps) {
+function Description({ markdown, description }: DescriptionProps) {
   return (
     <Card className="border-none shadow">
       <CardHeader className="space-y-5">
@@ -18,7 +19,9 @@ function Description({ description }: DescriptionProps) {
       </CardHeader>
       <CardContent>
         <article className="prose prose-base max-w-none">
-          <Markdown remarkPlugins={[remarkGfm]}>{description}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]}>
+            {markdown || description}
+          </Markdown>
         </article>
       </CardContent>
     </Card>

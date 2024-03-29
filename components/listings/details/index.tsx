@@ -48,7 +48,10 @@ function PropertyDetails(props: PropertyDetailsProps) {
             </div>
           </section>
           <section className="grid gap-y-4">
-            <Description description={data?.estate.description!} />
+            <Description
+              markdown={data?.estate.markdown!}
+              description={data?.estate.description!}
+            />
             <div className="block lg:hidden">
               <Broker />
             </div>
