@@ -12,7 +12,7 @@ async function PropertyDetailsPage({
     `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/properties/public/${params.slug}`,
     {
       next: {
-        revalidate: 60 * 30, // 30 mins
+        revalidate: 60, // 1 min
       },
     },
   );
