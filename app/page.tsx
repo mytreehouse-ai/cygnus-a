@@ -10,6 +10,11 @@ import { env } from "@/env.mjs";
 async function Home() {
   const response = await fetch(
     `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/properties/public?page_size=3&property_status=1`,
+    {
+      next: {
+        revalidate: 60 * 30, // 30 minutes
+      },
+    },
   );
 
   if (!response.ok) {
@@ -18,7 +23,7 @@ async function Home() {
     );
   }
 
-  const data = (await response.json()) as ApiBaseResponse<PropertyListing[]>;
+  const data: ApiBaseResponse<PropertyListing[]> = await response.json();
 
   return (
     <>
