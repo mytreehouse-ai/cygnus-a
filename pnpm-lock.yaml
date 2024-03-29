@@ -81,14 +81,14 @@ dependencies:
     specifier: ^0.2.1
     version: 0.2.1(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
   drizzle-orm:
-    specifier: ^0.30.4
-    version: 0.30.4(@types/react@18.2.66)(@vercel/postgres@0.7.2)(react@18.2.0)
+    specifier: ^0.30.6
+    version: 0.30.6(@types/react@18.2.66)(@vercel/postgres@0.7.2)(react@18.2.0)
   lucide:
     specifier: ^0.363.0
     version: 0.363.0
   lucide-react:
-    specifier: ^0.359.0
-    version: 0.359.0(react@18.2.0)
+    specifier: ^0.363.0
+    version: 0.363.0(react@18.2.0)
   next:
     specifier: 14.1.4
     version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
@@ -3383,11 +3383,12 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.4(@types/react@18.2.66)(@vercel/postgres@0.7.2)(react@18.2.0):
-    resolution: {integrity: sha512-kWoSMGbrOFkmkAweLTFtHJMpN+nwhx89q0mLELqT2aEU+1szNV8jrnBmJwZ0WGNp7J7yQn/ezEtxBI/qzTSElQ==}
+  /drizzle-orm@0.30.6(@types/react@18.2.66)(@vercel/postgres@0.7.2)(react@18.2.0):
+    resolution: {integrity: sha512-8RgNUmY7J03GRuRgBV5SaJNbYgLVPjdSWNS/bRkIMIHt2TFCA439lJsNpqYX8asyKMqkw8ceBiamUnCIXZIt9w==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
+      '@electric-sql/pglite': '>=0.1.1'
       '@libsql/client': '*'
       '@neondatabase/serverless': '>=0.1'
       '@op-engineering/op-sqlite': '>=2'
@@ -3414,6 +3415,8 @@ packages:
       '@aws-sdk/client-rds-data':
         optional: true
       '@cloudflare/workers-types':
+        optional: true
+      '@electric-sql/pglite':
         optional: true
       '@libsql/client':
         optional: true
@@ -4812,8 +4815,8 @@ packages:
       es5-ext: 0.10.64
     dev: true
 
-  /lucide-react@0.359.0(react@18.2.0):
-    resolution: {integrity: sha512-bxVL+rM/wacjpT0BKShA6r5IIKb6LCRg+ltFG9pnnIwaRX8kK3hq8v5JwMpT7RC6XeqB5cSaaV6GapPWWmtliw==}
+  /lucide-react@0.363.0(react@18.2.0):
+    resolution: {integrity: sha512-AlsfPCsXQyQx7wwsIgzcKOL9LwC498LIMAo+c0Es5PkHJa33xwmYAkkSoKoJWWWSYQEStqu58/jT4tL2gi32uQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
