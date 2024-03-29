@@ -10,6 +10,11 @@ async function PropertyDetailsPage({
 }) {
   const response = await fetch(
     `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/properties/public/${params.slug}`,
+    {
+      next: {
+        revalidate: 60 * 30, // 30 mins
+      },
+    },
   );
 
   if (!response.ok) {
