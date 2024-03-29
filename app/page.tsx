@@ -1,10 +1,25 @@
 import React from "react";
 import SearchBar from "@/components/search-bar";
 import { ImageKitLoader } from "@/components/global/imagekit-loader";
+import TopThreeListings from "@/components/listings/top-three";
 import Navbar from "@/components/global/nav-bar";
 import Footer from "@/components/global/footer";
+import { ApiBaseResponse, PropertyListing } from "@/types";
+import { env } from "@/env.mjs";
 
-const Home = () => {
+async function Home() {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_OPENRED_BASEAPI_URL}/properties/public?page_size=3&property_status=1`,
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch properties: Received a ${response.status} status code.`,
+    );
+  }
+
+  const data = (await response.json()) as ApiBaseResponse<PropertyListing[]>;
+
   return (
     <>
       <Navbar />
@@ -37,12 +52,12 @@ const Home = () => {
           <p className="py-2 text-sm text-slate-500">
             Find your dream property with our listing
           </p>
-          <ul className="mt-10 space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0"></ul>
+          <TopThreeListings propertiesData={data.results} />
         </section>
       </main>
       <Footer />
     </>
   );
-};
+}
 
 export default Home;
