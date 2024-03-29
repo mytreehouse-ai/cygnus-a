@@ -421,10 +421,12 @@ function SearchFilter() {
   useEffect(() => {
     if (searchParams.size > 0) {
       searchParams.forEach((value, key) => {
-        propertySearchFilterForm.setValue(
-          key as keyof z.infer<typeof propertyFiltersSchema>,
-          value,
-        );
+        if (["search", "property_type", "location"].includes(key)) {
+          propertySearchFilterForm.setValue(
+            key as keyof z.infer<typeof propertyFiltersSchema>,
+            value,
+          );
+        }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
