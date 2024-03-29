@@ -2,7 +2,9 @@
 
 import React, { useEffect } from "react";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
@@ -12,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useState } from "react";
-import { Modal, PropertyFilters } from "@/types";
+import { Modal } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
@@ -26,30 +28,123 @@ interface FilterDrawerProps extends Modal {
   }[];
 }
 
+const propertyFiltersSchema = z
+  .object({
+    search: z.string(),
+    ordering: z.string(),
+    page: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    page_size: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    property_type: z.string(),
+    listing_type: z.string(),
+    property_status: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    price_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    price_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    lot_size_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    lot_size_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    floor_size_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    floor_size_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    building_size_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    building_size_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    num_bedrooms_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    num_bedrooms_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    num_bathrooms_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    num_bathrooms_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    num_carspaces_min: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    num_carspaces_max: z.preprocess(
+      (val) => (isNaN(Number(val)) ? 0 : Number(val)),
+      z.number(),
+    ),
+    location: z.string(),
+    indoor_features: z.string(),
+    outdoor_features: z.string(),
+    other_features: z.string(),
+  })
+  .partial();
+
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const [sqm, setSqm] = useState<number[]>([1, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const propertyFilterForms = useForm<PropertyFilters>();
+  const propertyFilterForms = useForm<z.infer<typeof propertyFiltersSchema>>({
+    resolver: zodResolver(propertyFiltersSchema),
+  });
 
   useEffect(() => {
     if (searchParams.size > 0) {
       searchParams.forEach((value, key) => {
-        propertyFilterForms.setValue(key as keyof PropertyFilters, value);
+        propertyFilterForms.setValue(
+          key as keyof z.infer<typeof propertyFiltersSchema>,
+          value,
+        );
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = () => {
-    const searchValue = propertyFilterForms.watch();
-    const searchParams = createSearchParams(searchValue);
+  const onSubmit = (data: z.infer<typeof propertyFiltersSchema>) => {
+    const currentQuerySearchParamsEntries = Object.fromEntries(
+      searchParams.entries(),
+    );
+    const updatedSearchParams = createSearchParams({
+      ...currentQuerySearchParamsEntries,
+      ...data,
+    });
 
-    if (searchParams && searchParams.size) {
-      router.replace(window.location.pathname + "?" + searchParams.toString(), {
-        scroll: false,
-      });
+    if (updatedSearchParams) {
+      router.replace(
+        window.location.pathname + "?" + updatedSearchParams.toString(),
+        {
+          scroll: false,
+        },
+      );
     }
 
     void onClose();
@@ -283,24 +378,21 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
 
 function SearchFilter() {
   const [filterDrawerIsOpen, setFilterDrawerIsOpen] = useState(false);
-
   const searchParams = useSearchParams();
-
   const router = useRouter();
-
   const { data, isFetching } = useCitiesQuery();
 
-  const propertySearchFilterForm =
-    useForm<Pick<PropertyFilters, "search" | "location" | "property_type">>();
+  const propertySearchFilterForm = useForm<
+    z.infer<typeof propertyFiltersSchema>
+  >({
+    resolver: zodResolver(propertyFiltersSchema),
+  });
 
   useEffect(() => {
     if (searchParams.size > 0) {
       searchParams.forEach((value, key) => {
         propertySearchFilterForm.setValue(
-          key as keyof Pick<
-            PropertyFilters,
-            "search" | "location" | "property_type"
-          >,
+          key as keyof z.infer<typeof propertyFiltersSchema>,
           value,
         );
       });
@@ -308,18 +400,19 @@ function SearchFilter() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function onSubmit(
-    data: Pick<PropertyFilters, "search" | "location" | "property_type">,
-  ) {
-    const params = {
+  function onSubmit(data: z.infer<typeof propertyFiltersSchema>) {
+    const currentQuerySearchParamsEntries = Object.fromEntries(
+      searchParams.entries(),
+    );
+
+    const updatedSearchParams = createSearchParams({
+      ...currentQuerySearchParamsEntries,
       ...data,
-    };
+    });
 
-    const createdSearchParams = createSearchParams(params);
-
-    if (createdSearchParams) {
+    if (updatedSearchParams) {
       router.replace(
-        window.location.pathname + "?" + createdSearchParams.toString(),
+        window.location.pathname + "?" + updatedSearchParams.toString(),
         {
           scroll: false,
         },

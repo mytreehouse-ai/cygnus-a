@@ -50,21 +50,14 @@ export function formatCurrency(
 
 export function createSearchParams(
   queryParams: Record<string, any>,
-): URLSearchParams | undefined {
-  const isValidJSONObject =
-    queryParams !== null &&
-    typeof queryParams === "object" &&
-    !Array.isArray(queryParams);
+): URLSearchParams {
+  const searchParams = new URLSearchParams();
 
-  if (isValidJSONObject) {
-    const searchParams = new URLSearchParams();
-
-    for (const [key, value] of Object.entries(queryParams)) {
-      if (value !== undefined && value !== "" && value !== null) {
-        searchParams.append(key, String(value));
-      }
+  Object.entries(queryParams).forEach(([key, value]) => {
+    if (value !== null && value !== undefined && value !== "" && value !== 0) {
+      searchParams.append(key, String(value));
     }
+  });
 
-    return searchParams;
-  }
+  return searchParams;
 }
