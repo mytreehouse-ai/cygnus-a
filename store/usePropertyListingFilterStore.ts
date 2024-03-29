@@ -29,10 +29,14 @@ const initialState: PropertyFilters = {
   other_features: "",
 };
 
-const usePropertyListingFilterStore = create((set) => ({
-  ...initialState,
+const usePropertyListingFilterStore = create<
+  { data: PropertyFilters } & {
+    updateFilters: (filters: Partial<PropertyFilters>) => void;
+  }
+>((set) => ({
+  data: initialState,
   updateFilters: (filters: Partial<PropertyFilters>) =>
-    set((state: PropertyFilters) => ({ ...state, ...filters })),
+    set((state) => ({ data: { ...state.data, ...filters } })),
 }));
 
 export default usePropertyListingFilterStore;
