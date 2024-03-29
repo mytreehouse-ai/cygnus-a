@@ -57,7 +57,11 @@ function PropertyDetails(props: PropertyDetailsProps) {
             </div>
           </section>
           <section className="grid gap-y-4">
-            <Amenities />
+            <Amenities
+              indoorFeatures={data?.estate.indoor_features!}
+              outdoorFeatures={data?.estate.outdoor_features!}
+              otherFeatures={data?.estate.other_features!}
+            />
             <div className="block lg:hidden">
               <ContactForm />
             </div>

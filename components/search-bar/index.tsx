@@ -13,9 +13,11 @@ import { propertyTypes } from "@/static_data/property-types";
 import { useRouter } from "next/navigation";
 import { createSearchParams } from "@/lib/utils";
 import { PropertyFilters } from "@/types";
+import usePropertyListingFilterStore from "@/store/usePropertyListingFilterStore";
 
 function SearchBar() {
   const router = useRouter();
+  const filters = usePropertyListingFilterStore();
 
   const form =
     useForm<
@@ -32,6 +34,8 @@ function SearchBar() {
   function onSubmit(
     data: Pick<PropertyFilters, "listing_type" | "property_type" | "location">,
   ) {
+    filters.updateFilters(data);
+
     const createdSearchParams = createSearchParams(data);
 
     if (createdSearchParams) {
