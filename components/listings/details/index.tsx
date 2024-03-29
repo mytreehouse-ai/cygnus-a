@@ -19,8 +19,6 @@ interface PropertyDetailsProps {
 function PropertyDetails(props: PropertyDetailsProps) {
   const { data } = usePropertyQuery(props.slug, props?.initialData);
 
-  console.log(data);
-
   return (
     <main className="min-h-screen">
       <section className="space-y-1 px-4 pt-10 md:col-span-3">
@@ -41,13 +39,16 @@ function PropertyDetails(props: PropertyDetailsProps) {
       <div className="px-4 lg:grid lg:grid-cols-3 lg:gap-x-4">
         <div className="w-full space-y-4 py-10 lg:col-span-2">
           <section className="grid gap-4">
-            <Galery />
+            <Galery
+              propertyMainImage={data?.estate.image_url!}
+              propertyImages={[]}
+            />
             <div className="block lg:hidden">
               <Overview />
             </div>
           </section>
           <section className="grid gap-y-4">
-            <Description />
+            <Description description={data?.estate.description!} />
             <div className="block lg:hidden">
               <Broker />
             </div>

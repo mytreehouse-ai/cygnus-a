@@ -1,12 +1,17 @@
 import Image from "next/image";
 
-function Galery() {
+interface GaleryProps {
+  propertyMainImage: string;
+  propertyImages: string[];
+}
+
+function Galery({ propertyMainImage, propertyImages }: GaleryProps) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="relative h-[24rem] md:h-[30rem]">
         <Image
           className="rounded-lg object-cover"
-          src="/dummy-img.png"
+          src={propertyMainImage}
           alt="Property image."
           priority={true}
           fill={true}
