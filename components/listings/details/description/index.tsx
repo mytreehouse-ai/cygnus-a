@@ -18,7 +18,7 @@ function Description({ markdown, description }: DescriptionProps) {
         <Separator className="bg-slate-200" />
       </CardHeader>
       <CardContent>
-        <article className="prose prose-base max-w-none">
+        <article className="prose prose-sm max-w-none">
           <Markdown remarkPlugins={[remarkGfm]}>
             {markdown || description}
           </Markdown>
