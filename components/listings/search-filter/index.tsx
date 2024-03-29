@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useState } from "react";
-import { Modal } from "@/types";
+import { Modal, PropertyFilters } from "@/types";
 import ReactSelect from "@/components/global/react-select";
 import { propertyTypes } from "@/static_data/property-types";
 import { listingTypes } from "@/static_data/listing-types";
@@ -26,65 +26,21 @@ interface FilterDrawerProps extends Modal {
   }[];
 }
 
-interface Filters {
-  search?: string | null;
-  listing_type?: string | null;
-  property_type?: string | null;
-  location?: string | null;
-  bedroom?: number;
-  bathroom?: number;
-  min_price?: number;
-  max_price?: number;
-  lot_size_min?: number;
-  lot_size_max?: number;
-  floor_size_min?: number;
-  floor_size_max?: number;
-  building_size_min?: number;
-  building_size_max?: number;
-}
-
 const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   const [sqm, setSqm] = useState<number[]>([1, 10000]);
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const propertyFilterForms = useForm<Filters>({
-    values: {
-      location: searchParams?.has("location")
-        ? searchParams.get("location")
-        : undefined,
-      property_type: searchParams?.has("property_type")
-        ? searchParams.get("property_type")
-        : undefined,
-      listing_type: searchParams?.has("listing-type")
-        ? searchParams.get("listing-type")
-        : undefined,
-      bedroom: searchParams?.has("bedroom")
-        ? parseInt(searchParams.get("bedroom") ?? "0")
-        : undefined,
-      bathroom: searchParams?.has("bathroom")
-        ? parseInt(searchParams.get("bathroom") ?? "0")
-        : undefined,
-      lot_size_min: searchParams?.has("lot_size_min")
-        ? parseInt(searchParams.get("lot_size_min") ?? "0")
-        : undefined,
-      lot_size_max: searchParams?.has("lot_size_max")
-        ? parseInt(searchParams.get("lot_size_max") ?? "0")
-        : undefined,
-      floor_size_min: searchParams?.has("floor_size_min")
-        ? parseInt(searchParams.get("floor_size_min") ?? "0")
-        : undefined,
-      floor_size_max: searchParams?.has("floor_size_max")
-        ? parseInt(searchParams.get("floor_size_max") ?? "0")
-        : undefined,
-      building_size_min: searchParams?.has("building_size_min")
-        ? parseInt(searchParams.get("building_size_min") ?? "0")
-        : undefined,
-      building_size_max: searchParams?.has("building_size_max")
-        ? parseInt(searchParams.get("building_size_max") ?? "0")
-        : undefined,
-    },
-  });
+  const propertyFilterForms = useForm<PropertyFilters>();
+
+  useEffect(() => {
+    if (searchParams.size > 0) {
+      searchParams.forEach((value, key) => {
+        propertyFilterForms.setValue(key as keyof PropertyFilters, value);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = () => {
     const searchValue = propertyFilterForms.watch();
@@ -100,9 +56,9 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
   };
 
   const onResetFilters = () => {
-    void router.replace(window.location.pathname);
     propertyFilterForms.reset();
     void onClose();
+    void router.replace(window.location.pathname);
   };
 
   return (
@@ -167,7 +123,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               <div className="flex w-full gap-x-2">
                 <FormField
                   control={propertyFilterForms.control}
-                  name="bedroom"
+                  name="num_bedrooms_max"
                   render={({ field }) => (
                     <FormItem className="w-auto md:w-full">
                       <FormControl>
@@ -185,7 +141,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
                 />
                 <FormField
                   control={propertyFilterForms.control}
-                  name="bathroom"
+                  name="num_bathrooms_max"
                   render={({ field }) => (
                     <FormItem className="w-auto md:w-full">
                       <FormControl>
@@ -206,14 +162,14 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
             <div className="flex w-full items-center gap-x-2">
               <div className="w-full">
                 <label
-                  htmlFor="min_price"
+                  htmlFor="price_min"
                   className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
                 >
                   <span>Price</span>
                 </label>
                 <FormField
                   control={propertyFilterForms.control}
-                  name="min_price"
+                  name="price_min"
                   render={({ field }) => (
                     <FormItem className="w-auto md:w-full">
                       <FormControl>
@@ -232,14 +188,14 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               </div>
               <div className="w-full">
                 <label
-                  htmlFor="max_price"
+                  htmlFor="price_max"
                   className=" leading-nonepeer-disabled:cursor-not-allowed  space-x-2 font-medium peer-disabled:opacity-70"
                 >
                   <span className="invisible">Price</span>
                 </label>
                 <FormField
                   control={propertyFilterForms.control}
-                  name="max_price"
+                  name="price_max"
                   render={({ field }) => (
                     <FormItem className="w-auto md:w-full">
                       <FormControl>
@@ -334,26 +290,34 @@ function SearchFilter() {
 
   const { data, isFetching } = useCitiesQuery();
 
-  const propertySearchFilterForm = useForm<
-    Pick<Filters, "search" | "location" | "property_type">
-  >({
-    mode: "all",
-    values: {
-      search: searchParams?.get("search") ?? "",
-      property_type: searchParams?.has("property_type")
-        ? searchParams.get("property_type")
-        : undefined,
-    },
-  });
+  const propertySearchFilterForm =
+    useForm<Pick<PropertyFilters, "search" | "location" | "property_type">>();
 
-  function onSubmit(data: Filters) {
+  useEffect(() => {
+    if (searchParams.size > 0) {
+      searchParams.forEach((value, key) => {
+        propertySearchFilterForm.setValue(
+          key as keyof Pick<
+            PropertyFilters,
+            "search" | "location" | "property_type"
+          >,
+          value,
+        );
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function onSubmit(
+    data: Pick<PropertyFilters, "search" | "location" | "property_type">,
+  ) {
     const params = {
       ...data,
     };
 
     const createdSearchParams = createSearchParams(params);
 
-    if (createdSearchParams && createdSearchParams.size) {
+    if (createdSearchParams) {
       router.replace(
         window.location.pathname + "?" + createdSearchParams.toString(),
         {

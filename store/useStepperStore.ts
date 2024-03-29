@@ -48,7 +48,7 @@ const updateStepStatusBasedOnIndex = (
   }
 };
 
-const ValuationStepper = create<StepperState & StepperActions>((set) => ({
+const useStepperStore = create<StepperState & StepperActions>((set) => ({
   ...initialState,
   setCurrentStepIndex: (index: number) => {
     set((state) => ({
@@ -74,4 +74,4 @@ const ValuationStepper = create<StepperState & StepperActions>((set) => ({
   },
 }));
 
-export default ValuationStepper;
+export default useStepperStore;
