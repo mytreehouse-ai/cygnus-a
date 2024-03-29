@@ -171,6 +171,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               placeholder="Property Type"
               className="md:hidden"
               onClear={() => {
+                propertyFilterForms.resetField("property_type", undefined);
                 const params = new URLSearchParams(getParams(searchParams));
                 params.delete("property_type");
                 router.replace(
@@ -187,6 +188,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               placeholder="Location"
               className="lg:hidden"
               onClear={() => {
+                propertyFilterForms.resetField("location", undefined);
                 const params = new URLSearchParams(getParams(searchParams));
                 params.delete("location");
                 router.replace(
@@ -202,6 +204,7 @@ const FilterDrawer = ({ open, onClose, citiesOptions }: FilterDrawerProps) => {
               name="listing_type"
               placeholder="Listing Type"
               onClear={() => {
+                propertyFilterForms.resetField("listing_type", undefined);
                 const params = new URLSearchParams(getParams(searchParams));
                 params.delete("listing_type");
                 router.replace(
