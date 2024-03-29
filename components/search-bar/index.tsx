@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
@@ -8,60 +8,57 @@ import { Search } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import ReactSelect from "@/components/global/react-select";
-
-export const propertyTypes = [
-  {
-    label: "Condominium",
-    value: "condominium",
-  },
-  {
-    label: "Apartment",
-    value: "apartment",
-  },
-  {
-    label: "Warehouse",
-    value: "warehouse",
-  },
-];
-
-export const location = [
-  {
-    label: "Makati City",
-    value: "makati-city",
-  },
-  {
-    label: "Quezon City",
-    value: "quezon-city",
-  },
-  {
-    label: "Pasig City",
-    value: "pasig-city",
-  },
-];
+import useCitiesQuery from "@/hooks/useCitiesQuery";
+import { propertyTypes } from "@/static_data/property-types";
+import { useRouter } from "next/navigation";
+import { createSearchParams } from "@/lib/utils";
+import { PropertyFilters } from "@/types";
 
 function SearchBar() {
-  const form = useForm();
+  const router = useRouter();
 
-  function onSubmit() {
-    form.setValue("type", " for-rent");
-    console.log(form.getValues());
+  const form =
+    useForm<
+      Pick<PropertyFilters, "listing_type" | "property_type" | "location">
+    >();
+
+  const { data, isFetching } = useCitiesQuery();
+
+  useEffect(() => {
+    form.setValue("listing_type", "for-rent");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function onSubmit(
+    data: Pick<PropertyFilters, "listing_type" | "property_type" | "location">,
+  ) {
+    const createdSearchParams = createSearchParams(data);
+
+    if (createdSearchParams) {
+      router.replace(
+        `${window.location.origin}/listings?` + createdSearchParams.toString(),
+        {
+          scroll: false,
+        },
+      );
+    }
   }
 
   return (
     <Tabs
       defaultValue="for-rent"
-      onValueChange={(e) => form.setValue("type", e)}
+      onValueChange={(e) => form.setValue("listing_type", e)}
     >
       <TabsList className="h-0 p-0 ">
         <TabsTrigger
           value="for-rent"
-          className="rounded-b-none rounded-br-none rounded-tl-md rounded-tr-none bg-slate-200 px-6 text-neutral-900 focus:bg-fuchsia-300 data-[state=active]:bg-emerald-700 data-[state=active]:text-white"
+          className="rounded-b-none rounded-br-none rounded-tl-md rounded-tr-none bg-slate-200 px-6 text-neutral-900 data-[state=active]:bg-emerald-700 data-[state=active]:text-white focus:bg-fuchsia-300"
         >
           For Rent
         </TabsTrigger>
         <TabsTrigger
           value="for-sale"
-          className="rounded-b-none rounded-bl-none rounded-tl-none rounded-tr-md bg-slate-200 px-6 text-neutral-900 focus:bg-fuchsia-300 data-[state=active]:bg-emerald-700 data-[state=active]:text-white"
+          className="rounded-b-none rounded-bl-none rounded-tl-none rounded-tr-md bg-slate-200 px-6 text-neutral-900 data-[state=active]:bg-emerald-700 data-[state=active]:text-white focus:bg-fuchsia-300"
         >
           For Sale
         </TabsTrigger>
@@ -76,14 +73,20 @@ function SearchBar() {
           >
             <ReactSelect
               data={propertyTypes}
-              name="property-types"
+              name="property_type"
               placeholder="Property Type"
             />
 
             <ReactSelect
-              data={location}
+              data={
+                data?.map((city) => ({
+                  value: city.slug,
+                  label: city.name,
+                })) ?? []
+              }
               name="location"
               placeholder="Location"
+              isLoading={isFetching}
             />
 
             <Button

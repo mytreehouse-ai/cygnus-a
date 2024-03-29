@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import ValuationStepper from "@/store/useStepperStore";
+import useStepperStore from "@/store/useStepperStore";
 import useValuationFormStore from "@/store/useValuationFormStore";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import { formatCurrency } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 
 const ValuationResult: React.FC = () => {
-  const { setCurrentStepIndex } = ValuationStepper();
+  const { setCurrentStepIndex } = useStepperStore();
 
   const { propertyDetailValues } = useValuationFormStore();
 

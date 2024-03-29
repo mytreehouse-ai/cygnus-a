@@ -18,7 +18,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import ValuationStepper from "@/store/useStepperStore";
+import useStepperStore from "@/store/useStepperStore";
 import { propertyValuationFormSchema } from "@/schema/valuation";
 import useValuationFormStore from "@/store/useValuationFormStore";
 import { propertyTypes } from "@/static_data/property-types";
@@ -27,7 +27,7 @@ import { listingDuration } from "@/static_data/listing-duration";
 import ReactSelect from "../global/react-select";
 
 const PropertyDetails: React.FC = () => {
-  const { currentStepIndex, setCurrentStepIndex, steps } = ValuationStepper();
+  const { currentStepIndex, setCurrentStepIndex, steps } = useStepperStore();
   const { propertyDetailValues, setPropertyDetailValues } =
     useValuationFormStore();
 

@@ -186,19 +186,17 @@ const ReactSelect: React.FC<SelectProps> = ({
       width: "100%",
       height: "100%",
       borderRadius: "0.375rem",
-      background: state.isFocused ? "#FFFFFF" : "#FFFFFF",
+      background: "#FFFFFF",
       cursor: "pointer",
-      border: state.isFocused
-        ? "0.080rem solid #E2E8F0"
-        : "0.080rem solid #E2E8F0",
-      boxShadow: state.isFocused ? "0.094rem #f97316" : "none",
+      border: state.isFocused ? "1.5px solid #E2E8F0" : "1px solid #E2E8F0",
+      boxShadow: state.isFocused ? "0.094rem #F97316" : "none",
       "&:hover": {
-        boxShadow: "0.094rem solid #f97316",
-        borderColor: "#10b981",
-        borderWidth: "0.080rem",
+        boxShadow: "0.094rem solid #F97316",
+        borderColor: "#10B981",
+        borderWidth: "1px",
       },
       "&:active": {
-        background: "#ecfdf5",
+        background: "#ECFDF5",
       },
     }),
     input: (baseInputStyle: CSSObjectWithLabel) => ({
@@ -239,17 +237,17 @@ const ReactSelect: React.FC<SelectProps> = ({
       state: OptionProps<unknown, boolean, GroupBase<unknown>>,
     ) => ({
       ...provided,
-      background: state.isFocused ? "#f3f4f6" : "#FFFFFF",
+      background: state.isFocused ? "#F3F4F6" : "#FFFFFF",
       color: state.isFocused ? "#272E35" : "#272E35",
       marginTop: "3px",
       borderRadius: "0.25rem",
       "&:hover": {
         cursor: "pointer",
-        background: "#f3f4f6",
+        background: "#F3F4F6",
       },
       "&:active": {
         color: "#272E35",
-        background: "#f3f4f6",
+        background: "#F3F4F6",
       },
     }),
   };

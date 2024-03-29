@@ -2,7 +2,7 @@
 import z from "zod";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import ValuationStepper from "@/store/useStepperStore";
+import useStepperStore from "@/store/useStepperStore";
 import PropertyDetails from "./property-details";
 import PersonalDetails from "./personal-details";
 import ValuationResult from "./valuation-result";
@@ -14,7 +14,7 @@ const componentsMap = {
 };
 
 const PropertyValuation: React.FC = () => {
-  const { steps, currentStepIndex, markStepAsComplete } = ValuationStepper();
+  const { steps, currentStepIndex, markStepAsComplete } = useStepperStore();
 
   const ComponentToRender =
     componentsMap[
