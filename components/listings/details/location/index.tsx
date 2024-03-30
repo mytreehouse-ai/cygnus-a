@@ -1,26 +1,24 @@
-import ReactMapGL, { Marker, type MapRef } from "react-map-gl";
+import { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { env } from "@/env.mjs";
 import { Home } from "lucide-react";
+import Map from "@/components/global/map";
 
 const Location = () => {
   return (
     <div className="h-full w-full">
-      <ReactMapGL
-        mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_PUBLIC_ACCESS_TOKEN}
-        style={{ width: "100%", height: "100%" }}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
-        attributionControl={false}
+      <Map
         initialViewState={{
           latitude: 14.567197,
           longitude: 121.092265,
           zoom: 15,
+          bearing: 0,
+          pitch: 0,
         }}
       >
         <Marker anchor="top" longitude={121.092265} latitude={14.567197}>
           <PinnedLocationMarker />
         </Marker>
-      </ReactMapGL>
+      </Map>
     </div>
   );
 };
