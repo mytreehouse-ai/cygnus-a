@@ -2,24 +2,40 @@ import { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Home } from "lucide-react";
 import Map from "@/components/global/map";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
-const Location = () => {
+interface ILocation {
+  latitude: number;
+  longitude: number;
+  address?: string;
+}
+
+const Location = ({ latitude, longitude, address }: ILocation) => {
   return (
-    <div className="h-full w-full">
-      <Map
-        initialViewState={{
-          latitude: 14.567197,
-          longitude: 121.092265,
-          zoom: 15,
-          bearing: 0,
-          pitch: 0,
-        }}
-      >
-        <Marker anchor="top" longitude={121.092265} latitude={14.567197}>
-          <PinnedLocationMarker />
-        </Marker>
-      </Map>
-    </div>
+    <Card className="border-none shadow xl:col-span-2">
+      <CardHeader className="space-y-5">
+        <CardTitle className="text-lg font-bold text-gray-950">
+          Address{address ? `:${address}}` : ""}
+        </CardTitle>
+        <Separator className="bg-slate-200" />
+      </CardHeader>
+      <CardContent className="h-96 w-full">
+        <Map
+          initialViewState={{
+            latitude,
+            longitude,
+            zoom: 14,
+            bearing: 0,
+            pitch: 0,
+          }}
+        >
+          <Marker anchor="top" longitude={longitude} latitude={latitude}>
+            <PinnedLocationMarker />
+          </Marker>
+        </Map>
+      </CardContent>
+    </Card>
   );
 };
 

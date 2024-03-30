@@ -68,8 +68,11 @@ function PropertyDetails(props: PropertyDetailsProps) {
             </div>
           </section>
           <section>
-            <div className="h-96 border">
-              <Location />
+            <div className="h-96 ">
+              <Location
+                latitude={data?.estate?.latitude!}
+                longitude={data?.estate?.longitude!}
+              />
             </div>
           </section>
         </div>

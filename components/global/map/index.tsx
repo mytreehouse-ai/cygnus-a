@@ -1,6 +1,7 @@
 import ReactMapGL, { type MapRef, type ViewState } from "react-map-gl";
 import { env } from "@/env.mjs";
 
+//TODO: ADDITIONAL MAP TYPES HERE
 interface IMap {
   children?: React.ReactNode;
   initialViewState?: Partial<ViewState>;
