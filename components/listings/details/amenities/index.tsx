@@ -17,7 +17,7 @@ function Amenities({
     <Card className="border-none shadow xl:col-span-2">
       <CardHeader className="space-y-5">
         <CardTitle className="text-lg font-bold text-gray-950">
-          Property Ameneties
+          Property Amenities
         </CardTitle>
         <Separator className="bg-slate-200" />
       </CardHeader>
