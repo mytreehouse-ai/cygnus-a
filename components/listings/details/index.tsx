@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
-import Galery from "./galery";
+import Galery from "./gallery";
 import Overview from "./overview";
 import Description from "./description";
 import Broker from "./broker";
@@ -10,6 +10,7 @@ import Amenities from "./amenities";
 import ContactForm from "./contact-form";
 import usePropertyQuery from "@/hooks/usePropertyQuery";
 import { PropertyListing } from "@/types";
+import Location from "./location";
 
 interface PropertyDetailsProps {
   slug: string;
@@ -67,7 +68,9 @@ function PropertyDetails(props: PropertyDetailsProps) {
             </div>
           </section>
           <section>
-            <div className="h-96 border">Address and map</div>
+            <div className="h-96 border">
+              <Location />
+            </div>
           </section>
         </div>
         <div className="hidden h-full space-y-4 py-10 lg:block">
