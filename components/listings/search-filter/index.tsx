@@ -21,6 +21,7 @@ import { listingTypes } from "@/static_data/listing-types";
 import { MultiSlider } from "@/components/global/multi-slider";
 import useCitiesQuery from "@/hooks/useCitiesQuery";
 import usePropertyListingFilterStore from "@/store/usePropertyListingFilterStore";
+import { Toggle } from "@/components/ui/toggle";
 
 interface FilterDrawerProps extends Modal {
   searchParams: ReadonlyURLSearchParams;
@@ -538,9 +539,29 @@ function SearchFilter() {
             >
               <SearchIcon className="h-4 w-4" />
             </Button>
-            <Button className="order-3 w-full rounded-lg" variant="outline">
+            <Toggle
+              className="order-3 w-full rounded-lg "
+              variant="outline"
+              type="button"
+              onPressedChange={(isActive) => {
+                const updatedSearchParams = createSearchParams({
+                  map: isActive,
+                });
+
+                if (updatedSearchParams) {
+                  router.replace(
+                    window.location.pathname +
+                      "?" +
+                      updatedSearchParams.toString(),
+                    {
+                      scroll: false,
+                    },
+                  );
+                }
+              }}
+            >
               <Map className="h-4 w-4 text-slate-500" />
-            </Button>
+            </Toggle>
           </div>
         </form>
       </Form>
