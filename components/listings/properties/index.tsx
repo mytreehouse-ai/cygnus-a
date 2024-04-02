@@ -52,7 +52,7 @@ const Properties = () => {
                 "space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0",
                 isMapVisible &&
                   media === "desktop" &&
-                  "overflow-y-auto lg:h-[calc(809px)] lg:grid-cols-2",
+                  "w-1/2 overflow-y-auto lg:h-[calc(809px)] lg:grid-cols-2",
               )}
             >
               {propertiesData?.results?.map((property) => (
@@ -70,7 +70,7 @@ const Properties = () => {
             {isMapVisible && media === "desktop" && (
               <PropertiesLocation
                 properties={propertiesData?.results!}
-                className="col-start-3 row-span-4 row-start-1 h-[calc(809px)] w-full"
+                className="col-start-3 row-span-4 row-start-1 h-[calc(809px)] w-1/2 rounded-2xl"
               />
             )}
           </ul>

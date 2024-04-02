@@ -9,8 +9,6 @@ import { HoverCardTrigger } from "@radix-ui/react-hover-card";
 import PropertyCard from "@/components/property-card";
 import { formatCurrency } from "@/lib/utils";
 import { Home, Building, Building2, Warehouse, Trees } from "lucide-react";
-
-//TODO: FIX OVERLAPPING HOVER CARD ON MARKERS
 interface IPropertiesLocation {
   properties: PropertyListing[];
   className?: string;
@@ -63,6 +61,7 @@ const PropertiesLocation = ({ properties, className }: IPropertiesLocation) => {
   return (
     <div className={cn(className)}>
       <Map
+        style={{ borderRadius: "14px" }}
         initialViewState={{
           latitude: 14.609054,
           longitude: 121.022257,
