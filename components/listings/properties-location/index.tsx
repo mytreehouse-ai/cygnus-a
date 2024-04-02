@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import Map from "@/components/global/map";
 import { Marker } from "react-map-gl";
 import type { PropertyListing } from "@/types";
-import { Home } from "lucide-react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { cn } from "@/lib/utils";
 import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
@@ -41,6 +40,7 @@ const PropertiesLocation = ({ properties, className }: IPropertiesLocation) => {
           longitude: 121.022257,
           zoom: 7,
         }}
+        onZoom={(e) => console.log(e)}
       >
         {pins}
       </Map>
@@ -52,7 +52,7 @@ export default PropertiesLocation;
 
 const PinnedLocationMarker = ({ property }: { property: PropertyListing }) => {
   return (
-    <div className="flex flex-col items-center hover:cursor-pointer">
+    <div className="  flex flex-col items-center  hover:cursor-pointer">
       <HoverCard>
         <HoverCardTrigger className="rounded-3xl bg-white p-2 shadow-sm">
           <p className="text-xs font-medium hover:underline">
@@ -60,7 +60,7 @@ const PinnedLocationMarker = ({ property }: { property: PropertyListing }) => {
           </p>
         </HoverCardTrigger>
 
-        <HoverCardContent className="rounded-xl border-none p-0 shadow-none">
+        <HoverCardContent className=" rounded-xl border-none p-0 shadow-none">
           <PropertyCard property={property} />
         </HoverCardContent>
       </HoverCard>
