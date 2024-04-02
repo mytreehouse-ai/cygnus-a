@@ -4,12 +4,14 @@ import { Marker } from "react-map-gl";
 import type { PropertyListing } from "@/types";
 import { Home } from "lucide-react";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { cn } from "@/lib/utils";
 
 interface IPropertiesLocation {
   properties: PropertyListing[];
+  className?: string;
 }
 
-const PropertiesLocation = ({ properties }: IPropertiesLocation) => {
+const PropertiesLocation = ({ properties, className }: IPropertiesLocation) => {
   const pins = useMemo(
     () =>
       properties?.map((property) => {
@@ -18,7 +20,7 @@ const PropertiesLocation = ({ properties }: IPropertiesLocation) => {
             key={property.estate.id}
             longitude={Number(property.estate.longitude)}
             latitude={Number(property.estate.latitude)}
-            anchor="center"
+            anchor="top"
           >
             <PinnedLocationMarker />
           </Marker>
@@ -29,7 +31,7 @@ const PropertiesLocation = ({ properties }: IPropertiesLocation) => {
   );
 
   return (
-    <div className="absolute left-0 top-44 z-20 h-screen w-screen py-4">
+    <div className={cn(className)}>
       <Map
         initialViewState={{
           latitude: 14.609054,
@@ -47,7 +49,7 @@ export default PropertiesLocation;
 
 const PinnedLocationMarker = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center hover:cursor-pointer">
       <div className="rounded-full bg-emerald-600 p-2">
         <Home className="h-3 w-3 text-white" />
       </div>

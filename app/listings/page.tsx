@@ -19,15 +19,6 @@ function Listings() {
         </Suspense>
         <Separator className="my-6" />
         <section className="mt-8 px-4">
-          {/* <div className="md:flex md:w-full md:justify-between">
-            <div>
-              <h3 className="text-3xl font-bold">Property listing</h3>
-              <p className="py-2 text-sm text-slate-500">
-                There are currently 10000 properties.
-              </p>
-            </div>
-            <PropertySort />
-          </div> */}
           <Suspense fallback={<div>Loading...</div>}>
             <Properties />
           </Suspense>

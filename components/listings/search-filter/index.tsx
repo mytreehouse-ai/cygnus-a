@@ -488,7 +488,7 @@ function SearchFilter() {
             data={propertyTypes}
             name="property_type"
             placeholder="Property Type"
-            className="hidden md:block"
+            className="z-50 hidden md:block"
             onClear={() => {
               const params = new URLSearchParams(getParams(searchParams));
               params.delete("property_type");
@@ -511,7 +511,7 @@ function SearchFilter() {
             }
             name="location"
             placeholder="Location"
-            className="hidden lg:block"
+            className="z-50 hidden lg:block"
             onClear={() => {
               const params = new URLSearchParams(getParams(searchParams));
               params.delete("location");
