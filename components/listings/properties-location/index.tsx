@@ -9,6 +9,8 @@ import { HoverCardTrigger } from "@radix-ui/react-hover-card";
 import PropertyCard from "@/components/property-card";
 import { formatCurrency } from "@/lib/utils";
 import { Home, Building, Building2, Warehouse, Trees } from "lucide-react";
+
+//TODO: FIX OVERLAPPING HOVER CARD ON MARKERS
 interface IPropertiesLocation {
   properties: PropertyListing[];
   className?: string;
@@ -99,7 +101,6 @@ interface PropertyIconProps {
 }
 
 const PropertyIcon: React.FC<PropertyIconProps> = ({ typeId }) => {
-  console.log(typeId);
   const propertyTypeIcons = {
     "1": <Building2 className="h-3 w-3 text-white" />,
     "2": <Home className="h-3 w-3 text-white" />,

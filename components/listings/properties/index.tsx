@@ -46,19 +46,26 @@ const Properties = () => {
             </div>
             <PropertySort />
           </div>
-          <ul
-            className={cn(
-              "space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0",
-            )}
-          >
-            {propertiesData?.results?.map((property) => (
-              <li key={property.id}>
-                <PropertyCard
-                  property={property}
-                  onClick={() => void router.push(`/listings/${property.slug}`)}
-                />
-              </li>
-            ))}
+          <ul className="flex gap-x-4">
+            <div
+              className={cn(
+                "space-y-6 md:grid md:grid-cols-3 md:gap-6 md:space-y-0",
+                isMapVisible &&
+                  media === "desktop" &&
+                  "overflow-y-auto lg:h-[calc(809px)] lg:grid-cols-2",
+              )}
+            >
+              {propertiesData?.results?.map((property) => (
+                <li key={property.id}>
+                  <PropertyCard
+                    property={property}
+                    onClick={() =>
+                      void router.push(`/listings/${property.slug}`)
+                    }
+                  />
+                </li>
+              ))}
+            </div>
 
             {isMapVisible && media === "desktop" && (
               <PropertiesLocation
