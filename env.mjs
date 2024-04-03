@@ -24,6 +24,7 @@ export const env = createEnv({
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "production"]),
     NEXT_PUBLIC_OPENRED_BASEAPI_URL: z.string().url(),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+		NEXT_PUBLIC_MAPBOX_PUBLIC_ACCESS_TOKEN: z.string().min(1)
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -42,5 +43,6 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_OPENRED_BASEAPI_URL,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+		NEXT_PUBLIC_MAPBOX_PUBLIC_ACCESS_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_PUBLIC_ACCESS_TOKEN
   },
 });
