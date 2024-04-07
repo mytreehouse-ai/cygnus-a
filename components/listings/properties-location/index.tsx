@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Map from "@/components/global/map";
-import { Marker } from "react-map-gl";
+import { Marker, Popup } from "react-map-gl";
 import type { PropertyListing } from "@/types";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { HoverCardTrigger } from "@radix-ui/react-hover-card";
 import PropertyCard from "@/components/property-card";
 import { formatCurrency } from "@/lib/utils";
 import { Home, Building, Building2, Warehouse, Trees } from "lucide-react";
+
 interface IPropertiesLocation {
   properties: PropertyListing[];
   className?: string;
@@ -16,19 +17,26 @@ interface IPropertiesLocation {
 
 const PropertiesLocation = ({ properties, className }: IPropertiesLocation) => {
   const [zoomLevel, setZoomLevel] = useState<number>(9);
+  const [showPopupInfo, setShowPopupInfo] = useState<PropertyListing | null>(
+    null,
+  );
 
   const PriceMarkers = useMemo(
     () =>
       properties?.map((property) => {
         return (
-          <Marker
+          <div
             key={property.estate.id}
-            longitude={Number(property.estate.longitude)}
-            latitude={Number(property.estate.latitude)}
-            anchor="top"
+            onMouseEnter={() => setShowPopupInfo(property)}
           >
-            <PinnedLocationMarker property={property} />
-          </Marker>
+            <Marker
+              longitude={Number(property.estate.longitude)}
+              latitude={Number(property.estate.latitude)}
+              anchor="top"
+            >
+              <PinnedLocationMarker property={property} />
+            </Marker>
+          </div>
         );
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,6 +78,21 @@ const PropertiesLocation = ({ properties, className }: IPropertiesLocation) => {
         onZoom={(e) => setZoomLevel(e.viewState.zoom)}
       >
         {zoomLevel >= 9 ? PriceMarkers : IconMarkers}
+        {showPopupInfo && (
+          <Popup
+            anchor="bottom"
+            longitude={Number(showPopupInfo.estate.longitude)}
+            latitude={Number(showPopupInfo.estate.latitude)}
+            onClose={() => setShowPopupInfo(null)}
+            closeButton={false}
+            className="rounded-lg"
+          >
+            <PropertyCard
+              property={showPopupInfo}
+              className="border-none p-0"
+            />
+          </Popup>
+        )}
       </Map>
     </div>
   );
@@ -87,9 +110,9 @@ const PinnedLocationMarker = ({ property }: { property: PropertyListing }) => {
           </p>
         </HoverCardTrigger>
 
-        <HoverCardContent className=" rounded-xl border-none p-0 shadow-none">
+        {/* <HoverCardContent className=" rounded-xl border-none p-0 shadow-none">
           <PropertyCard property={property} />
-        </HoverCardContent>
+        </HoverCardContent> */}
       </HoverCard>
     </div>
   );
