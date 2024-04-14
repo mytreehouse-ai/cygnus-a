@@ -13,16 +13,6 @@ const ValuationResult: React.FC = () => {
 
   const { propertyDetailValues } = useValuationFormStore();
 
-  // const { data: valuationData } = useGetValuationResultHook({
-  //   sqm: propertyDetailValues.sqm,
-  //   yearBuilt: parseInt(propertyDetailValues.yearBuilt),
-  //   location: propertyDetailValues.location,
-  //   propertyType: propertyDetailValues.propertyType,
-  // });
-
-  // const forSaleValue = valuationData?.phpFormat.withoutClosedTransaction.forSale;
-  // const forRentValue = valuationData?.phpFormat.withoutClosedTransaction.forRent
-
   const forSaleValue = {
     pricePerSqm: 1460000,
     appraisalValue: 1460000,

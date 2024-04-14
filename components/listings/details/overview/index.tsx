@@ -11,12 +11,7 @@ import {
   LinkIcon,
   Shrink,
 } from "lucide-react";
-import type {
-  PropertyEstate,
-  ListingType,
-  PropertyType,
-  PropertyListing,
-} from "@/types";
+import type { PropertyListing } from "@/types";
 import Link from "next/link";
 
 interface OverviewProps {
@@ -24,6 +19,16 @@ interface OverviewProps {
 }
 
 function Overview({ data }: OverviewProps) {
+  const propertyTypeId = data?.property_type?.id;
+
+  enum PropertyType {
+    Condominium = 1,
+    House = 2,
+    Apartment = 3,
+    Warehouse = 4,
+    Land = 5,
+  }
+
   return (
     <Card className="border-none shadow">
       <CardHeader className="space-y-5">
@@ -34,12 +39,15 @@ function Overview({ data }: OverviewProps) {
       </CardHeader>
       <CardContent>
         <dl className="flex flex-col gap-y-5">
-          <div className="flex justify-between text-slate-500">
-            <dt className="inline-flex items-center gap-x-2">
-              <Shrink className="h-4 w-4" /> <span>Floor Area</span>
-            </dt>
-            <dd className="font-bold">{data?.estate?.floor_size} sqm</dd>
-          </div>
+          {propertyTypeId !== PropertyType.Land &&
+            propertyTypeId !== PropertyType.Warehouse && (
+              <div className="flex justify-between text-slate-500">
+                <dt className="inline-flex items-center gap-x-2">
+                  <Shrink className="h-4 w-4" /> <span>Floor Area</span>
+                </dt>
+                <dd className="font-bold">{data?.estate?.floor_size} sqm</dd>
+              </div>
+            )}
 
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
@@ -48,39 +56,37 @@ function Overview({ data }: OverviewProps) {
             <dd className="font-bold">{data?.estate?.lot_size} sqm</dd>
           </div>
 
-          <div className="flex justify-between text-slate-500">
-            <dt className="inline-flex items-center gap-x-2">
-              <Bed className="h-4 w-4" /> <span>Bedroom</span>
-            </dt>
-            <dd className="font-bold">
-              {data?.estate?.num_bedrooms} Bedroom(s)
-            </dd>
-          </div>
+          {propertyTypeId !== PropertyType.Land &&
+            propertyTypeId !== PropertyType.Warehouse && (
+              <>
+                <div className="flex justify-between text-slate-500">
+                  <dt className="inline-flex items-center gap-x-2">
+                    <Bed className="h-4 w-4" /> <span>Bedroom</span>
+                  </dt>
+                  <dd className="font-bold">
+                    {data?.estate?.num_bedrooms} Bedroom(s)
+                  </dd>
+                </div>
 
-          <div className="flex justify-between text-slate-500">
-            <dt className="inline-flex items-center gap-x-2">
-              <Bath className="h-4 w-4" /> <span>Bathroom</span>
-            </dt>
-            <dd className="font-bold">
-              {data?.estate?.num_bathrooms} Bathroom(s)
-            </dd>
-          </div>
+                <div className="flex justify-between text-slate-500">
+                  <dt className="inline-flex items-center gap-x-2">
+                    <Bath className="h-4 w-4" /> <span>Bathroom</span>
+                  </dt>
+                  <dd className="font-bold">
+                    {data?.estate?.num_bathrooms} Bathroom(s)
+                  </dd>
+                </div>
 
-          {/* <div className="flex items-center justify-between text-slate-500">
-            <dt className="inline-flex items-center gap-x-2 ">
-              <Flag className="h-4 w-4" /> <span>Turn Over Status</span>
-            </dt>
-            <dd className="font-bold">Fully Furnished</dd>
-          </div> */}
-
-          <div className="flex justify-between text-slate-500">
-            <dt className="inline-flex items-center gap-x-2">
-              <Car className="h-4 w-4" /> <span>Parking Lot</span>
-            </dt>
-            <dd className="font-bold">
-              {data?.estate?.num_carspaces} Parking Lot(s)
-            </dd>
-          </div>
+                <div className="flex justify-between text-slate-500">
+                  <dt className="inline-flex items-center gap-x-2">
+                    <Car className="h-4 w-4" /> <span>Parking Lot</span>
+                  </dt>
+                  <dd className="font-bold">
+                    {data?.estate?.num_carspaces} Parking Lot(s)
+                  </dd>
+                </div>
+              </>
+            )}
 
           <div className="flex justify-between text-slate-500">
             <dt className="inline-flex items-center gap-x-2">
