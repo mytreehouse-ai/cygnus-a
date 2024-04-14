@@ -5,7 +5,7 @@ interface GaleryProps {
   propertyImages: string[];
 }
 
-function Galery({ propertyMainImage, propertyImages }: GaleryProps) {
+function Gallery({ propertyMainImage, propertyImages }: GaleryProps) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="relative h-[24rem] md:h-[30rem]">
@@ -59,4 +59,4 @@ function Galery({ propertyMainImage, propertyImages }: GaleryProps) {
   );
 }
 
-export default Galery;
+export default Gallery;
