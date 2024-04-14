@@ -45,7 +45,7 @@ function PropertyDetails(props: PropertyDetailsProps) {
               propertyImages={[]}
             />
             <div className="block lg:hidden">
-              <Overview />
+              <Overview data={data!} />
             </div>
           </section>
           <section className="grid gap-y-4">
@@ -77,7 +77,7 @@ function PropertyDetails(props: PropertyDetailsProps) {
           </section>
         </div>
         <div className="hidden h-full space-y-4 py-10 lg:block">
-          <Overview />
+          <Overview data={data!} />
           <Broker />
           <ContactForm />
         </div>
