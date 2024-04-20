@@ -11,9 +11,9 @@ import { Separator } from "@/components/ui/separator";
 const ValuationResult: React.FC = () => {
   const { setCurrentStepIndex } = useStepperStore();
 
-  const { propertyDetailValues } = useValuationFormStore();
+  const { propertyDetails } = useValuationFormStore();
 
-  console.log("detail values", propertyDetailValues);
+  console.log("detail values", propertyDetails);
 
   const forSaleValue = {
     pricePerSqm: 1460000,

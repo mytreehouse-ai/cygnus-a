@@ -20,9 +20,10 @@ export const personalDetailsFormSchema = z.object({
 
 export const propertyDetailsValuationSchema = z.object({
 	property_type: z.string(),
-	listing_type: z.string(),
+	// listing_type: z.string(),
 	area: z.string(),
 	sqm: z.preprocess((val) => Number(val), z.number().positive()),
+	address: z.string().optional()
 })
 
 export const personalDetailsValuationSchema = z.object({

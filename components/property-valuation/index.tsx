@@ -16,10 +16,6 @@ const componentsMap = {
 const PropertyValuation: React.FC = () => {
   const { steps, currentStepIndex, markStepAsComplete } = useStepperStore();
 
-  const { data: valuation } = usePropertyValuationQuery();
-
-  console.log(valuation);
-
   const ComponentToRender =
     componentsMap[
       steps[currentStepIndex]?.name as keyof typeof componentsMap

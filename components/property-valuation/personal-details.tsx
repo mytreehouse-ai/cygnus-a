@@ -15,14 +15,21 @@ import useStepperStore from "@/store/useStepperStore";
 import { personalDetailsFormSchema } from "@/schema/valuation";
 import { Checkbox } from "@/components/ui/checkbox";
 import useValuationFormStore from "@/store/useValuationFormStore";
+import { usePropertyValuationQuery } from "@/hooks/usePropertyValuationQuery";
 
 const PersonalDetails: React.FC = () => {
   const { currentStepIndex, setCurrentStepIndex, steps } = useStepperStore();
-  const {
-    personalDetailValues,
-    propertyDetailValues,
-    setPersonalDetailValues,
-  } = useValuationFormStore();
+  const { personalDetailValues, propertyDetails, setPersonalDetailValues } =
+    useValuationFormStore();
+
+  const { data: valuation, isSuccess: valuationIsSuccess } =
+    usePropertyValuationQuery({
+      params: {
+        propertyDetails,
+      },
+    });
+
+  console.log("result", valuation?.data?.valuation);
 
   // useGetValuationResultHook({
   //   sqm: propertyDetailValues.sqm,
