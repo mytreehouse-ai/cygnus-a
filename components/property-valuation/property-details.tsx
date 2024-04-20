@@ -8,37 +8,46 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import useStepperStore from "@/store/useStepperStore";
-import { propertyValuationFormSchema } from "@/schema/valuation";
 import useValuationFormStore from "@/store/useValuationFormStore";
 import { propertyTypes } from "@/static_data/property-types";
-import { yearBuilt } from "@/static_data/year-built";
-import { listingDuration } from "@/static_data/listing-duration";
 import ReactSelect from "../global/react-select";
+import {
+  propertyValuationSchema,
+  type PropertyValuation,
+} from "@/schema/valuation";
+import useCitiesQuery from "@/hooks/useCitiesQuery";
 
 const PropertyDetails: React.FC = () => {
   const { currentStepIndex, setCurrentStepIndex, steps } = useStepperStore();
-  const { propertyDetailValues, setPropertyDetailValues } =
-    useValuationFormStore();
+  const { setPropertyDetailValues, propertyDetails } = useValuationFormStore();
 
-  const form = useForm<z.infer<typeof propertyValuationFormSchema>>({
-    resolver: zodResolver(propertyValuationFormSchema),
-    values: propertyDetailValues,
+  const { data: cities, isFetching: citiesIsFetching } = useCitiesQuery();
+
+  const form = useForm<PropertyValuation>({
+    resolver: zodResolver(
+      propertyValuationSchema.pick({
+        propertyDetails: true,
+      }),
+    ),
+    values: {
+      propertyDetails,
+      personalDetails: {
+        email_address: "",
+        first_name: "",
+        last_name: "",
+        phone_number: "099",
+        termsAndConditions: false,
+        offers: false,
+      },
+    },
   });
 
-  const onSubmit = (values: z.infer<typeof propertyValuationFormSchema>) => {
+  const onSubmit = (values: PropertyValuation) => {
     setPropertyDetailValues(values);
-    console.log("values set", values);
+
     if (currentStepIndex < steps.length - 1) {
       setCurrentStepIndex(+1);
     }
@@ -53,14 +62,14 @@ const PropertyDetails: React.FC = () => {
       >
         <ReactSelect
           data={propertyTypes}
-          name="propertyType"
-          placeholder="fs"
+          name="propertyDetails.property_type"
+          placeholder="Select property type"
           label="Property type"
         />
 
         <FormField
           control={form.control}
-          name="address"
+          name="propertyDetails.address"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Address</FormLabel>
@@ -76,58 +85,31 @@ const PropertyDetails: React.FC = () => {
         />
 
         <ReactSelect
-          data={[
-            {
-              value: "Makati",
-              label: "Makati",
-            },
-            {
-              value: "Taguig",
-              label: "Taguig",
-            },
-          ]}
-          name="location"
-          placeholder="fs"
+          data={
+            cities?.map((city) => ({
+              value: city.name,
+              label: city.name,
+            })) ?? []
+          }
+          name="propertyDetails.area"
           label="Location"
+          disabled={citiesIsFetching}
         />
 
         <FormField
           control={form.control}
-          name="sqm"
+          name="propertyDetails.sqm"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Sqm </FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} value={field.value ?? ""} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <ReactSelect
-          data={[
-            {
-              value: "2019",
-              label: "2019",
-            },
-            {
-              value: "2020",
-              label: "2020",
-            },
-          ]}
-          name="yearBuilt"
-          placeholder="AF"
-          label="Year built"
-        />
-
-        <FormField
-          control={form.control}
-          name="whenAreyouLookingToSell"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>When are you looking to sell? </FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field} value={field.value ?? ""} />
+                <Input
+                  placeholder=""
+                  {...field}
+                  value={field.value ?? ""}
+                  type="number"
+                  min={4}
+                />
               </FormControl>
             </FormItem>
           )}

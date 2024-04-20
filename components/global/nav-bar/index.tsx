@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 
 const menus = [
@@ -40,11 +40,15 @@ const menus = [
 function Navbar() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 shadow-sm">
       <div className="flex w-full items-center justify-between">
-        <TreeDeciduous className="text-emerald-500" />
+        <TreeDeciduous
+          className="text-emerald-500 hover:cursor-pointer"
+          onClick={() => router.push("/")}
+        />
         <div className="hidden items-center gap-x-8 md:inline-flex">
           <div className="space-x-8 font-semibold tracking-wide">
             {menus.map((item) => (

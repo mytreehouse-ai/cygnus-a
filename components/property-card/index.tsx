@@ -13,12 +13,16 @@ import { PropertyListing } from "@/types";
 interface PropertyCardProps {
   onClick?: () => void;
   property: PropertyListing;
+  className?: string;
 }
 
-function PropertyCard({ property, onClick }: PropertyCardProps) {
+function PropertyCard({ property, onClick, className }: PropertyCardProps) {
   return (
     <Card
-      className="rounded-xl p-1 shadow-none hover:cursor-pointer"
+      className={cn(
+        "rounded-xl p-1 shadow-none hover:cursor-pointer",
+        className,
+      )}
       onClick={onClick}
     >
       <CardHeader className="p-2">

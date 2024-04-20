@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
-import Galery from "./gallery";
+import Gallery from "./gallery";
 import Overview from "./overview";
 import Description from "./description";
 import Broker from "./broker";
@@ -40,12 +40,12 @@ function PropertyDetails(props: PropertyDetailsProps) {
       <div className="px-4 lg:grid lg:grid-cols-3 lg:gap-x-4">
         <div className="w-full space-y-4 py-10 lg:col-span-2">
           <section className="grid gap-4">
-            <Galery
+            <Gallery
               propertyMainImage={data?.estate.image_url!}
               propertyImages={[]}
             />
             <div className="block lg:hidden">
-              <Overview />
+              <Overview data={data!} />
             </div>
           </section>
           <section className="grid gap-y-4">
@@ -77,7 +77,7 @@ function PropertyDetails(props: PropertyDetailsProps) {
           </section>
         </div>
         <div className="hidden h-full space-y-4 py-10 lg:block">
-          <Overview />
+          <Overview data={data!} />
           <Broker />
           <ContactForm />
         </div>

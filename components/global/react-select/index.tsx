@@ -256,7 +256,7 @@ const ReactSelect: React.FC<SelectProps> = ({
     <div className={cn("w-full ", className)}>
       <label
         className={cn(
-          " block text-sm font-medium  text-gray-900",
+          " mb-2 block text-sm  font-medium text-gray-900",
           labelClassName,
         )}
       >

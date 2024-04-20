@@ -1,31 +1,43 @@
 import { create } from "zustand";
 import { z } from "zod";
-import { propertyValuationFormSchema, personalDetailsFormSchema } from "@/schema/valuation";
 
-type PropertyFormType = z.infer<typeof propertyValuationFormSchema>;
-type PersonalFormType = z.infer<typeof personalDetailsFormSchema>;
+import type { PropertyValuation } from "@/schema/valuation";
+import { ValuationResult } from "@/types/valuation-result";
 
-interface FormStore {
-  propertyDetailValues: PropertyFormType;
-  personalDetailValues: PersonalFormType;
-  setPropertyDetailValues: (values: PropertyFormType) => void;
-  setPersonalDetailValues: (values: PersonalFormType) => void;
+interface FormStore extends Pick<PropertyValuation, "propertyDetails" | "personalDetails"> {
+	valuationResult: ValuationResult | null;
+  setPropertyDetailValues: (values: Pick<PropertyValuation, "propertyDetails">) => void;
+  setPersonalDetailValues: (values: Pick<PropertyValuation, "personalDetails">) => void;
+	setValuationResult: (result: ValuationResult) => void; 
 }
 
 const useValuationFormStore = create<FormStore>((set) => ({
-  propertyDetailValues: {
-    propertyType: "",
-    address: "",
-    location: "",
-    sqm: 0,
-    yearBuilt: "",
-    whenAreyouLookingToSell: "",
-  } as PropertyFormType,
-  personalDetailValues: {} as PersonalFormType,
+	valuationResult: null,
+	propertyDetails: {
+	area: "",
+	listing_type: "",
+	property_type: "",
+	sqm: 0,
+	address: ""
+},
+  personalDetails: {
+		email_address: "",
+		first_name: "",
+		last_name: "",
+		phone_number: "09",
+		termsAndConditions: false,
+		offers: false,
+	},
   setPropertyDetailValues: (values) =>
-    set(() => ({ propertyDetailValues: values })),
+    set(() => ({ propertyDetails: {
+			...values.propertyDetails
+		} })),
   setPersonalDetailValues: (values) =>
-    set(() => ({ personalDetailValues: values })),
+    set(() => ({ personalDetails: {
+			...values.personalDetails
+		} })),
+	setValuationResult: (result) =>
+    set(() => ({ valuationResult: result })), // 
 }));
 
 export default useValuationFormStore;
