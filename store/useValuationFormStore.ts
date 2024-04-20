@@ -1,32 +1,43 @@
 import { create } from "zustand";
 import { z } from "zod";
-import { propertyValuationFormSchema, personalDetailsFormSchema } from "@/schema/valuation";
+
 import type { PropertyValuation } from "@/schema/valuation";
+import { ValuationResult } from "@/types/valuation-result";
 
-type PropertyFormType = z.infer<typeof propertyValuationFormSchema>;
-type PersonalFormType = z.infer<typeof personalDetailsFormSchema>;
-
-interface FormStore extends Pick<PropertyValuation, "propertyDetails"> {
-  personalDetailValues: PersonalFormType;
+interface FormStore extends Pick<PropertyValuation, "propertyDetails" | "personalDetails"> {
+	valuationResult: ValuationResult | null;
   setPropertyDetailValues: (values: Pick<PropertyValuation, "propertyDetails">) => void;
-  setPersonalDetailValues: (values: PersonalFormType) => void;
+  setPersonalDetailValues: (values: Pick<PropertyValuation, "personalDetails">) => void;
+	setValuationResult: (result: ValuationResult) => void; 
 }
 
 const useValuationFormStore = create<FormStore>((set) => ({
-propertyDetails: {
+	valuationResult: null,
+	propertyDetails: {
 	area: "",
 	listing_type: "",
 	property_type: "",
 	sqm: 0,
 	address: ""
 },
-  personalDetailValues: {} as PersonalFormType,
+  personalDetails: {
+		email_address: "",
+		first_name: "",
+		last_name: "",
+		phone_number: 0,
+		termsAndConditions: false,
+		offers: false,
+	},
   setPropertyDetailValues: (values) =>
     set(() => ({ propertyDetails: {
 			...values.propertyDetails
 		} })),
   setPersonalDetailValues: (values) =>
-    set(() => ({ personalDetailValues: values })),
+    set(() => ({ personalDetails: {
+			...values.personalDetails
+		} })),
+	setValuationResult: (result) =>
+    set(() => ({ valuationResult: result })), // 
 }));
 
 export default useValuationFormStore;

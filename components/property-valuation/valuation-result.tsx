@@ -5,25 +5,19 @@ import useValuationFormStore from "@/store/useValuationFormStore";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
-
 import { Separator } from "@/components/ui/separator";
 
 const ValuationResult: React.FC = () => {
   const { setCurrentStepIndex } = useStepperStore();
 
-  const { propertyDetails } = useValuationFormStore();
+  const { valuationResult } = useValuationFormStore();
 
-  console.log("detail values", propertyDetails);
+  console.log("detail values", valuationResult);
 
   const forSaleValue = {
     pricePerSqm: 1460000,
     appraisalValue: 1460000,
   };
-  const forRentValue = {
-    pricePerSqm: 1460000,
-    appraisalValue: 1460000,
-  };
-
   return (
     <div className="space-y-3">
       <Card>

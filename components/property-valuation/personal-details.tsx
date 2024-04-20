@@ -12,14 +12,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import useStepperStore from "@/store/useStepperStore";
-import { personalDetailsFormSchema } from "@/schema/valuation";
 import { Checkbox } from "@/components/ui/checkbox";
 import useValuationFormStore from "@/store/useValuationFormStore";
 import { usePropertyValuationQuery } from "@/hooks/usePropertyValuationQuery";
+import { useEffect } from "react";
+import {
+  propertyValuationSchema,
+  type PropertyValuation,
+} from "@/schema/valuation";
 
 const PersonalDetails: React.FC = () => {
   const { currentStepIndex, setCurrentStepIndex, steps } = useStepperStore();
-  const { personalDetailValues, propertyDetails, setPersonalDetailValues } =
+  const { propertyDetails, setPersonalDetailValues, setValuationResult } =
     useValuationFormStore();
 
   const { data: valuation, isSuccess: valuationIsSuccess } =
@@ -29,18 +33,30 @@ const PersonalDetails: React.FC = () => {
       },
     });
 
-  console.log("result", valuation?.data?.valuation);
+  useEffect(() => {
+    if (valuationIsSuccess && valuation && valuation?.data) {
+      setValuationResult({
+        valuation: valuation?.data.valuation,
+      });
+    }
+  }, [valuation, setValuationResult, valuationIsSuccess]);
 
-  // useGetValuationResultHook({
-  //   sqm: propertyDetailValues.sqm,
-  //   yearBuilt: parseInt(propertyDetailValues.yearBuilt),
-  //   location: propertyDetailValues.location,
-  //   propertyType: propertyDetailValues.propertyType,
-  // });
-
-  const form = useForm<z.infer<typeof personalDetailsFormSchema>>({
-    resolver: zodResolver(personalDetailsFormSchema),
-    values: personalDetailValues,
+  const form = useForm<Pick<PropertyValuation, "personalDetails">>({
+    resolver: zodResolver(
+      propertyValuationSchema.pick({
+        personalDetails: true,
+      }),
+    ),
+    values: {
+      personalDetails: {
+        email_address: "",
+        first_name: "",
+        last_name: "",
+        phone_number: 0,
+        termsAndConditions: false,
+        offers: false,
+      },
+    },
   });
 
   const onSubmit = () => {
@@ -69,7 +85,7 @@ const PersonalDetails: React.FC = () => {
       >
         <FormField
           control={form.control}
-          name="firstName"
+          name="personalDetails.first_name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>First Name</FormLabel>
@@ -85,7 +101,7 @@ const PersonalDetails: React.FC = () => {
         />
         <FormField
           control={form.control}
-          name="lastName"
+          name="personalDetails.last_name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Last Name</FormLabel>
@@ -102,7 +118,7 @@ const PersonalDetails: React.FC = () => {
 
         <FormField
           control={form.control}
-          name="phoneNumber"
+          name="personalDetails.phone_number"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Phone number</FormLabel>
@@ -120,7 +136,7 @@ const PersonalDetails: React.FC = () => {
         />
         <FormField
           control={form.control}
-          name="emailAddress"
+          name="personalDetails.email_address"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email Address</FormLabel>
@@ -137,7 +153,7 @@ const PersonalDetails: React.FC = () => {
 
         <FormField
           control={form.control}
-          name="termsAndConditions"
+          name="personalDetails.termsAndConditions"
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -157,7 +173,7 @@ const PersonalDetails: React.FC = () => {
         />
 
         <div className="flex space-x-2">
-          <Checkbox id="offers" />
+          <Checkbox id="personalDetails.offers" />
           <label
             htmlFor="offers"
             className="text-xs leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -177,7 +193,7 @@ const PersonalDetails: React.FC = () => {
             Previous
           </Button>
           <Button
-            className="order-2 mt-3 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
+            className="order-2 w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-600 active:bg-emerald-600 md:order-1"
             type="submit"
           >
             Next

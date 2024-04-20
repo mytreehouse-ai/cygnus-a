@@ -22,7 +22,7 @@ import useCitiesQuery from "@/hooks/useCitiesQuery";
 
 const PropertyDetails: React.FC = () => {
   const { currentStepIndex, setCurrentStepIndex, steps } = useStepperStore();
-  const { setPropertyDetailValues } = useValuationFormStore();
+  const { setPropertyDetailValues, propertyDetails } = useValuationFormStore();
 
   const { data: cities, isFetching: citiesIsFetching } = useCitiesQuery();
 
@@ -32,6 +32,17 @@ const PropertyDetails: React.FC = () => {
         propertyDetails: true,
       }),
     ),
+    values: {
+      propertyDetails,
+      personalDetails: {
+        email_address: "",
+        first_name: "",
+        last_name: "",
+        phone_number: 0,
+        termsAndConditions: false,
+        offers: false,
+      },
+    },
   });
 
   const onSubmit = (values: PropertyValuation) => {
@@ -97,7 +108,7 @@ const PropertyDetails: React.FC = () => {
                   {...field}
                   value={field.value ?? ""}
                   type="number"
-                  min={0}
+                  min={4}
                 />
               </FormControl>
             </FormItem>
