@@ -13,7 +13,7 @@ export const propertyDetailsValuationSchema = z.object({
 export const personalDetailsValuationSchema = z.object({
 	first_name: z.string(),
 	last_name: z.string(),
-	phone_number: z.number(),
+	phone_number: z.string().optional(),
 	email_address: z.string().email(),
 	termsAndConditions: z.boolean().refine((val) => val === true),
   offers: z.boolean().optional(),

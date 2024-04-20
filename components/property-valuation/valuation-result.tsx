@@ -12,12 +12,17 @@ const ValuationResult: React.FC = () => {
 
   const { valuationResult } = useValuationFormStore();
 
-  console.log("detail values", valuationResult);
+  const propertyValuationResult = valuationResult?.valuation;
 
   const forSaleValue = {
-    pricePerSqm: 1460000,
-    appraisalValue: 1460000,
+    average_price: propertyValuationResult?.sale.average_price,
+    price_per_sqm: propertyValuationResult?.sale?.price_per_sqm,
   };
+  const forRentValue = {
+    average_price: propertyValuationResult?.rent?.average_price,
+    price_per_sqm: propertyValuationResult?.rent?.price_per_sqm,
+  };
+
   return (
     <div className="space-y-3">
       <Card>
@@ -40,16 +45,16 @@ const ValuationResult: React.FC = () => {
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.pricePerSqm)}
+              {forSaleValue.price_per_sqm}
             </p>
-            <p className="text-sm text-slate-500">Estimated value</p>
+            <p className="text-sm text-slate-500">Price per sqm</p>
           </div>
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.appraisalValue)}
+              {forSaleValue.average_price}
             </p>
-            <p className="text-sm text-slate-500">Appraisal value</p>
+            <p className="text-sm text-slate-500">Average price</p>
           </div>
         </CardContent>
       </Card>
@@ -74,16 +79,16 @@ const ValuationResult: React.FC = () => {
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.pricePerSqm)}
+              {forRentValue?.price_per_sqm}
             </p>
-            <p className="text-sm text-slate-500">Estimated value</p>
+            <p className="text-sm text-slate-500">Price per sqm</p>
           </div>
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.appraisalValue)}
+              {forRentValue?.average_price}
             </p>
-            <p className="text-sm text-slate-500">Appraisal value</p>
+            <p className="text-sm text-slate-500">Average price</p>
           </div>
         </CardContent>
       </Card>

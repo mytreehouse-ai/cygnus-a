@@ -38,7 +38,7 @@ const PropertyDetails: React.FC = () => {
         email_address: "",
         first_name: "",
         last_name: "",
-        phone_number: 0,
+        phone_number: "099",
         termsAndConditions: false,
         offers: false,
       },

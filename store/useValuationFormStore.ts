@@ -24,7 +24,7 @@ const useValuationFormStore = create<FormStore>((set) => ({
 		email_address: "",
 		first_name: "",
 		last_name: "",
-		phone_number: 0,
+		phone_number: "09",
 		termsAndConditions: false,
 		offers: false,
 	},

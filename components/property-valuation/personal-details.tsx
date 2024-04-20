@@ -52,12 +52,14 @@ const PersonalDetails: React.FC = () => {
         email_address: "",
         first_name: "",
         last_name: "",
-        phone_number: 0,
+        phone_number: "0",
         termsAndConditions: false,
         offers: false,
       },
     },
   });
+
+  console.log(form.getValues());
 
   const onSubmit = () => {
     if (currentStepIndex < steps.length - 1) {
