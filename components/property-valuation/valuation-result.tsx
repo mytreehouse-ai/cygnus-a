@@ -15,12 +15,12 @@ const ValuationResult: React.FC = () => {
   const propertyValuationResult = valuationResult?.valuation;
 
   const forSaleValue = {
-    average_price: propertyValuationResult?.sale.average_price,
-    price_per_sqm: propertyValuationResult?.sale?.price_per_sqm,
+    average_price: propertyValuationResult?.sale.average_price ?? 0,
+    price_per_sqm: propertyValuationResult?.sale?.price_per_sqm ?? 0,
   };
   const forRentValue = {
-    average_price: propertyValuationResult?.rent?.average_price,
-    price_per_sqm: propertyValuationResult?.rent?.price_per_sqm,
+    average_price: propertyValuationResult?.rent?.average_price ?? 0,
+    price_per_sqm: propertyValuationResult?.rent?.price_per_sqm ?? 0,
   };
 
   return (

@@ -59,8 +59,6 @@ const PersonalDetails: React.FC = () => {
     },
   });
 
-  console.log(form.getValues());
-
   const onSubmit = () => {
     if (currentStepIndex < steps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
