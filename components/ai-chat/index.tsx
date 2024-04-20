@@ -18,6 +18,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const DUMMY_CHAT_HISTORY = [
   {
@@ -46,24 +47,6 @@ const AIChat = () => {
         onClose={() => setShowChatHistory(false)}
       />
       <div className="space-y-4">
-        {/* <div className="flex flex-col items-start gap-y-5 md:flex-row md:items-start md:justify-between">
-          <div>
-            <h3 className=" text-3xl font-bold ">AI Chatbot</h3>
-            <p className="tex-sm text-slate-500 ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
-              tristique.
-            </p>
-          </div>
-
-          <Button
-            variant="outline"
-            className="flex gap-x-1 text-xs text-slate-500"
-          >
-            <HelpCircle className="h-4 w-4" />
-            FAQs
-          </Button>
-        </div> */}
-
         <Card className="h-full border-none shadow-none md:flex md:items-stretch">
           <CardHeader className=" flex  flex-col justify-between md:h-[calc(100vh)] md:w-2/5 md:p-0 lg:w-[20%] ">
             <div className="flex shrink-0 items-center justify-between md:p-4">
@@ -170,7 +153,11 @@ const ChatBody = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { isLoading, isSuccess, data } = useAiChatQuery({
+  const {
+    isLoading: chatResponseIsLoading,
+    isSuccess: chatResponseIsSuccess,
+    data: chatResponse,
+  } = useAiChatQuery({
     query: message,
     collection_name: "property_listings",
     thread_id: threadId,
@@ -199,9 +186,13 @@ const ChatBody = () => {
     return () => clearTimeout(timeout);
   }, [messages.length]);
 
-  if (isSuccess) {
+  if (chatResponseIsSuccess) {
     setMessage("");
-    addMessage({ id: Date.now(), type: "AI", content: data.ai_suggestion });
+    addMessage({
+      id: Date.now(),
+      type: "AI",
+      content: chatResponse.ai_suggestion,
+    });
   }
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
@@ -219,9 +210,25 @@ const ChatBody = () => {
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-between gap-y-8 md:pt-12 lg:px-32">
+    <div className="relative flex min-h-full flex-col justify-between gap-y-8 md:pt-12 lg:px-32">
+      {chatResponseIsLoading && (
+        <div className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center space-x-2 ">
+          <div className="bounce-fade-in-out h-4 w-4 rounded-full bg-emerald-600"></div>
+          <div
+            className="bounce-fade-in-out h-4 w-4 rounded-full bg-emerald-600"
+            style={{ animationDelay: "-0.3s" }}
+          ></div>
+          <div
+            className="bounce-fade-in-out h-4 w-4 rounded-full bg-emerald-600"
+            style={{ animationDelay: "-0.6s" }}
+          ></div>
+        </div>
+      )}
       <div
-        className="h-[calc(100vh-15rem)] space-y-4 overflow-y-auto"
+        className={cn(
+          "relative h-[calc(100vh-15rem)] space-y-4 overflow-y-auto",
+          chatResponseIsLoading && "opacity-40",
+        )}
         ref={messageParentRef}
       >
         {messages.map((message) => (
@@ -266,14 +273,14 @@ const ChatBody = () => {
                           placeholder="Message MyTreeHouseAI..."
                           className="w-full rounded-lg border-none text-sm focus:border-none focus:outline-none focus-visible:ring-0 md:w-full "
                           {...field}
-                          disabled={isLoading}
+                          disabled={chatResponseIsLoading}
                         />
                       </div>
                     </FormControl>
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading}>
+              <Button type="submit" disabled={chatResponseIsLoading}>
                 <Send />
               </Button>
             </form>

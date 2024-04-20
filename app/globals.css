@@ -57,3 +57,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Add this to your global CSS file */
+@keyframes bounceFadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-25%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bounce-fade-in-out {
+  animation: bounceFadeInOut 2s ease-in-out infinite;
+}

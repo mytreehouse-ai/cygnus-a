@@ -5,31 +5,22 @@ import useValuationFormStore from "@/store/useValuationFormStore";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
-
 import { Separator } from "@/components/ui/separator";
 
 const ValuationResult: React.FC = () => {
   const { setCurrentStepIndex } = useStepperStore();
 
-  const { propertyDetailValues } = useValuationFormStore();
+  const { valuationResult } = useValuationFormStore();
 
-  // const { data: valuationData } = useGetValuationResultHook({
-  //   sqm: propertyDetailValues.sqm,
-  //   yearBuilt: parseInt(propertyDetailValues.yearBuilt),
-  //   location: propertyDetailValues.location,
-  //   propertyType: propertyDetailValues.propertyType,
-  // });
-
-  // const forSaleValue = valuationData?.phpFormat.withoutClosedTransaction.forSale;
-  // const forRentValue = valuationData?.phpFormat.withoutClosedTransaction.forRent
+  const propertyValuationResult = valuationResult?.valuation;
 
   const forSaleValue = {
-    pricePerSqm: 1460000,
-    appraisalValue: 1460000,
+    average_price: propertyValuationResult?.sale.average_price ?? 0,
+    price_per_sqm: propertyValuationResult?.sale?.price_per_sqm ?? 0,
   };
   const forRentValue = {
-    pricePerSqm: 1460000,
-    appraisalValue: 1460000,
+    average_price: propertyValuationResult?.rent?.average_price ?? 0,
+    price_per_sqm: propertyValuationResult?.rent?.price_per_sqm ?? 0,
   };
 
   return (
@@ -54,16 +45,16 @@ const ValuationResult: React.FC = () => {
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.pricePerSqm)}
+              {forSaleValue.price_per_sqm}
             </p>
-            <p className="text-sm text-slate-500">Estimated value</p>
+            <p className="text-sm text-slate-500">Price per sqm</p>
           </div>
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.appraisalValue)}
+              {forSaleValue.average_price}
             </p>
-            <p className="text-sm text-slate-500">Appraisal value</p>
+            <p className="text-sm text-slate-500">Average price</p>
           </div>
         </CardContent>
       </Card>
@@ -88,16 +79,16 @@ const ValuationResult: React.FC = () => {
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.pricePerSqm)}
+              {forRentValue?.price_per_sqm}
             </p>
-            <p className="text-sm text-slate-500">Estimated value</p>
+            <p className="text-sm text-slate-500">Price per sqm</p>
           </div>
           <Separator />
           <div>
             <p className="text-lg font-semibold text-emerald-600">
-              {formatCurrency(forSaleValue.appraisalValue)}
+              {forRentValue?.average_price}
             </p>
-            <p className="text-sm text-slate-500">Appraisal value</p>
+            <p className="text-sm text-slate-500">Average price</p>
           </div>
         </CardContent>
       </Card>
