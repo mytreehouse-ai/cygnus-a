@@ -17,3 +17,24 @@ export const personalDetailsFormSchema = z.object({
   termsAndConditions: z.boolean().refine((val) => val === true),
   offers: z.boolean().optional(),
 });
+
+export const propertyDetailsValuationSchema = z.object({
+	property_type: z.string(),
+	listing_type: z.string(),
+	area: z.string(),
+	sqm: z.preprocess((val) => Number(val), z.number().positive()),
+})
+
+export const personalDetailsValuationSchema = z.object({
+	first_name: z.string(),
+	last_name: z.string(),
+	phone_number: z.number(),
+	email_address: z.string().email()
+})
+
+export const propertyValuationSchema = z.object({
+	propertyDetails: propertyDetailsValuationSchema,
+	personalDetails: personalDetailsValuationSchema
+})
+
+export type PropertyValuation = z.infer<typeof propertyValuationSchema>

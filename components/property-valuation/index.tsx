@@ -1,11 +1,11 @@
 "use client";
-import z from "zod";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import useStepperStore from "@/store/useStepperStore";
 import PropertyDetails from "./property-details";
 import PersonalDetails from "./personal-details";
 import ValuationResult from "./valuation-result";
+import { usePropertyValuationQuery } from "@/hooks/usePropertyValuationQuery";
 
 const componentsMap = {
   Property: PropertyDetails,
@@ -15,6 +15,10 @@ const componentsMap = {
 
 const PropertyValuation: React.FC = () => {
   const { steps, currentStepIndex, markStepAsComplete } = useStepperStore();
+
+  const { data: valuation } = usePropertyValuationQuery();
+
+  console.log(valuation);
 
   const ComponentToRender =
     componentsMap[
@@ -63,8 +67,8 @@ const PropertyValuation: React.FC = () => {
               Tell us about your property
             </h3>
             <p className="tex-sm mt-4 text-center text-slate-500 ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
-              tristique.
+              Begin your journey to discovering the true market value of your
+              property with our easy-to-use valuation tool.
             </p>
           </CardHeader>
           <CardContent className="px-0">

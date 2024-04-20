@@ -22,7 +22,6 @@ import useStepperStore from "@/store/useStepperStore";
 import { propertyValuationFormSchema } from "@/schema/valuation";
 import useValuationFormStore from "@/store/useValuationFormStore";
 import { propertyTypes } from "@/static_data/property-types";
-import { yearBuilt } from "@/static_data/year-built";
 import { listingDuration } from "@/static_data/listing-duration";
 import ReactSelect from "../global/react-select";
 

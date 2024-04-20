@@ -13,6 +13,8 @@ const ValuationResult: React.FC = () => {
 
   const { propertyDetailValues } = useValuationFormStore();
 
+  console.log("detail values", propertyDetailValues);
+
   const forSaleValue = {
     pricePerSqm: 1460000,
     appraisalValue: 1460000,
