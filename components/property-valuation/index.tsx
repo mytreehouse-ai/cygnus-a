@@ -16,6 +16,8 @@ const componentsMap = {
 const PropertyValuation: React.FC = () => {
   const { steps, currentStepIndex, markStepAsComplete } = useStepperStore();
 
+  console.log(currentStepIndex);
+
   const ComponentToRender =
     componentsMap[
       steps[currentStepIndex]?.name as keyof typeof componentsMap
@@ -39,11 +41,13 @@ const PropertyValuation: React.FC = () => {
       </div>
       <div className="px-4 pb-4 pt-10  md:pt-12">
         <h3 className="text-center text-3xl font-bold md:hidden">
-          Tell us about your property
+          {currentStepIndex === 2
+            ? "Your valuation result"
+            : "Tell us about your property"}
         </h3>
         <p className="tex-sm mt-4 text-center text-slate-500 md:hidden">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed
-          tristique.
+          Begin your journey to discovering the true market value of your
+          property with our easy-to-use valuation tool.
         </p>
         <Progress
           className="mt-8 md:mx-auto md:max-w-2xl md:rounded-b-none"
@@ -60,7 +64,9 @@ const PropertyValuation: React.FC = () => {
         <Card className="relative mx-auto mt-4 w-full min-w-[320px] max-w-[1000px] overflow-y-auto rounded-xl border-none shadow-none md:mt-0 md:min-w-[480px] md:max-w-2xl md:rounded-xl md:rounded-t-none md:border md:p-6 md:shadow-lg">
           <CardHeader className="hidden md:block">
             <h3 className="text-center text-3xl font-bold ">
-              Tell us about your property
+              {currentStepIndex === 2
+                ? "Your valuation result"
+                : "Tell us about your property"}
             </h3>
             <p className="tex-sm mt-4 text-center text-slate-500 ">
               Begin your journey to discovering the true market value of your

@@ -1,7 +1,5 @@
 import z from 'zod'
 
-
-
 export const propertyDetailsValuationSchema = z.object({
 	property_type: z.string(),
 	// listing_type: z.string(),
