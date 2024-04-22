@@ -12,7 +12,7 @@ interface PropertyValuationProps extends Partial<UseQueryOptions<any, any, any, 
 
 const getPropertyValuationQuery = async (params: Pick<PropertyValuation, "propertyDetails">) => {
   try {
-    const response = await axios.get(`${env.NEXT_PUBLIC_AZURE_BASEAPI_URL}/property-valuation`, {	
+    const response = await axios.get(`${env.NEXT_PUBLIC_AZURE_BASEAPI_URL}/api/property-valuation`, {	
 			params: params.propertyDetails
 		});
     return response.data; 
