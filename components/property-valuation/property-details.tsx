@@ -91,7 +91,7 @@ const PropertyDetails: React.FC = () => {
               label: city.name,
             })) ?? []
           }
-          name="propertyDetails.area"
+          name="propertyDetails.city"
           label="Location"
           disabled={citiesIsFetching}
         />
@@ -108,7 +108,7 @@ const PropertyDetails: React.FC = () => {
                   {...field}
                   value={field.value ?? ""}
                   type="number"
-                  min={4}
+                  min={10}
                 />
               </FormControl>
             </FormItem>
