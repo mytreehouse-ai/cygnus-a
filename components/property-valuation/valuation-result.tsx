@@ -14,7 +14,16 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 
 const ValuationResult: React.FC = () => {
-  const [showSimilarProperties, setShowSimilarProperties] = useState(false);
+  const [showSimilarProperties, setShowSimilarProperties] = useState<{
+    open: boolean;
+    properties: Pick<
+      PropertyListing,
+      "id" | "listing_title" | "listing_url" | "price_formatted"
+    >[];
+  }>({
+    open: false,
+    properties: [],
+  });
   const { setCurrentStepIndex } = useStepperStore();
 
   const { valuationResult } = useValuationFormStore();
@@ -38,10 +47,18 @@ const ValuationResult: React.FC = () => {
   return (
     <>
       <SimilarProperties
-        open={showSimilarProperties}
-        properties={forSaleSimilarProperties ?? []}
+        open={showSimilarProperties.open}
+        properties={showSimilarProperties.properties}
         onOpenChange={(e) =>
-          e ? setShowSimilarProperties(true) : setShowSimilarProperties(false)
+          e
+            ? setShowSimilarProperties({
+                open: true,
+                properties: showSimilarProperties.properties,
+              })
+            : setShowSimilarProperties({
+                open: false,
+                properties: [],
+              })
         }
       />
       <div className="space-y-3">
@@ -68,7 +85,12 @@ const ValuationResult: React.FC = () => {
 
                     <span
                       className="text-emerald-600 hover:cursor-pointer hover:text-emerald-700 hover:underline"
-                      onClick={() => setShowSimilarProperties(true)}
+                      onClick={() =>
+                        setShowSimilarProperties({
+                          open: true,
+                          properties: forSaleSimilarProperties,
+                        })
+                      }
                     >
                       Click here to view
                     </span>
@@ -113,7 +135,15 @@ const ValuationResult: React.FC = () => {
                   <p className="text-sm text-slate-500">
                     {`      There are ${forRentSimilarProperties?.length} properties similar to yours, `}
 
-                    <span className="text-emerald-600 hover:cursor-pointer hover:text-emerald-700 hover:underline">
+                    <span
+                      className="text-emerald-600 hover:cursor-pointer hover:text-emerald-700 hover:underline"
+                      onClick={() =>
+                        setShowSimilarProperties({
+                          open: true,
+                          properties: forRentSimilarProperties,
+                        })
+                      }
+                    >
                       Click here to view
                     </span>
                   </p>
@@ -166,7 +196,6 @@ const SimilarProperties = ({
   properties,
   onOpenChange,
 }: SimilarPropertiesProps) => {
-  console.log(properties);
   return (
     <Drawer open={open} onOpenChange={(e) => onOpenChange(e)}>
       <DrawerContent className="h-3/4">
