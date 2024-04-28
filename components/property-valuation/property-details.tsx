@@ -108,7 +108,7 @@ const PropertyDetails: React.FC = () => {
                   {...field}
                   value={field.value ?? ""}
                   type="number"
-                  min={10}
+                  min={20}
                 />
               </FormControl>
             </FormItem>
