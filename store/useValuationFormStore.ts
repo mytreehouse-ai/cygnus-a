@@ -11,14 +11,16 @@ interface FormStore extends Pick<PropertyValuation, "propertyDetails" | "persona
 	setValuationResult: (result: ValuationResult) => void; 
 }
 
+
 const useValuationFormStore = create<FormStore>((set) => ({
 	valuationResult: null,
 	propertyDetails: {
-	area: "",
+	city: "",
 	listing_type: "",
 	property_type: "",
 	sqm: 0,
-	address: ""
+	address: "",
+
 },
   personalDetails: {
 		email_address: "",
@@ -30,7 +32,8 @@ const useValuationFormStore = create<FormStore>((set) => ({
 	},
   setPropertyDetailValues: (values) =>
     set(() => ({ propertyDetails: {
-			...values.propertyDetails
+			...values.propertyDetails,
+
 		} })),
   setPersonalDetailValues: (values) =>
     set(() => ({ personalDetails: {
